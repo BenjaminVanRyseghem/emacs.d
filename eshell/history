@@ -1,0 +1,9 @@
+sudo -s
+sudo -s
+exit
+ssh nico@smalltalkhub.com
+exit
+. ~/.bashrc
+ssh nico@objectfusion.fr
+cd ..
+./bin/server 
