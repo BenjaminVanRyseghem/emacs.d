@@ -12,22 +12,15 @@
 (require 'cl)
 
 (setq 
- hooks-dir "~/.emacs.d/hooks"
+ modules-dir "~/.emacs.d/modules"
  site-lisp-dir "~/.emacs.d/site-lisp")
 
 
 ;; load path
-(add-to-list 'load-path hooks-dir)
+(add-to-list 'load-path modules-dir)
 (add-to-list 'load-path site-lisp-dir)
 
 (mapc 'load (directory-files hooks-dir nil "^[^#].*el$"))
-
-
-;; Custom keybindings
-(global-set-key (kbd "C-M-y") 'clipboard-yank)
-(global-set-key (kbd "C-M-k") 'clipboard-kill-region)
-(global-set-key [f11] 'toggle-fullscreen)
-
 
 ;; icomplete-mode & ido-mode
 (require 'ido)
