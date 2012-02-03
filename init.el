@@ -20,7 +20,7 @@
 (add-to-list 'load-path modules-dir)
 (add-to-list 'load-path site-lisp-dir)
 
-(mapc 'load (directory-files hooks-dir nil "^[^#].*el$"))
+(mapc 'load (directory-files modules-dir nil "^[^#].*el$"))
 
 ;; icomplete-mode & ido-mode
 (require 'ido)
