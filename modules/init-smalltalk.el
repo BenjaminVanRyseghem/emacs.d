@@ -10,7 +10,6 @@
       auto-mode-alist)
 
 (push '("\\.st\\'" . smalltalk-mode) auto-mode-alist)
-(push "\\.star\\'" inhibit-first-line-modes-regexps)
 
 (autoload 'smalltalk-mode "/usr/local/share/emacs/site-lisp/smalltalk-mode.elc" "" t)
 (autoload 'gst "/usr/local/share/emacs/site-lisp/gst-mode.elc" "" t)

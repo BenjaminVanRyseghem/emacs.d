@@ -7,7 +7,7 @@
 
 (defun set-font ()
   (interactive)
-  (set-face-attribute 'default nil :font "Monospace-10"))
+  (set-face-attribute 'default nil :font "Monaco-12"))
 
 (defun setup-color-theme ()
   (interactive)
