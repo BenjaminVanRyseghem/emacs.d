@@ -38,6 +38,7 @@
 (setf jump-bookmarks-alist '())
 
 ;; read from file at start-up
-(load-file jump-file)
+(if (file-exists-p jump-file)
+    (load-file jump-file))
 
 (provide 'jump)
