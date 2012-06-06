@@ -1,7 +1,10 @@
 ;; Quick cd between bookmarks 
 
-;; Jump bookmarks file
-(setf jump-file "~/.emacs.d/jump-bookmarks.el")
+(defcustom jump-file "~/.emacs.d/jump-bookmarks.el"
+  "Jump bookmarks file")
+
+;; default bookmarks alist
+(defvar jump-bookmarks-alist '())
 
 ;; eshell commands
 (defun eshell/jump (path)
@@ -33,9 +36,6 @@
 
 (defun bookmarks (path)
   (cdr (assoc path jump-bookmarks-alist)))
-
-;; default bookmarks alist
-(setf jump-bookmarks-alist '())
 
 ;; read from file at start-up
 (if (file-exists-p jump-file)

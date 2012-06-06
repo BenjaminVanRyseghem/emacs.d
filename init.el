@@ -15,14 +15,21 @@
  modules-dir "~/.emacs.d/modules"
  site-lisp-dir "~/.emacs.d/site-lisp")
 
-
 ;; load path
 (add-to-list 'load-path modules-dir)
 (add-to-list 'load-path site-lisp-dir)
 
+(let ((default-directory site-lisp-dir))
+      (normal-top-level-add-subdirs-to-load-path))
+
+(require 'package)
+
 (mapc 'load (directory-files modules-dir nil "^[^#].*el$"))
 
-;; icomplete-mode & ido-mode
+;; Load some stuff
+(require 'jabber)
+(require 'google-translate)
+
 (require 'ido)
 (require 'icomplete)
 (icomplete-mode 99)
@@ -56,15 +63,3 @@
 
 ;; Paren mode
 (show-paren-mode t)
-(custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(org-agenda-files (quote ("~/org/work.org" "~/org/index.org" "~/org/meetings.org" "~/org/home.org"))))
-(custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- )

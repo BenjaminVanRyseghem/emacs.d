@@ -14,6 +14,10 @@
       eshell-buffer-shorthand t
       eshell-cmpl-dir-ignore "\\`\\(\\.\\.?\\|CVS\\|\\.svn\\|\\.git\\)/\\'")
 
+;; Normal scrolling
+(setq eshell-scroll-show-maximum-output nil)
+(setq eshell-scroll-to-bottom-on-output nil)
+
 
 (eval-after-load 'esh-opt
   '(progn
