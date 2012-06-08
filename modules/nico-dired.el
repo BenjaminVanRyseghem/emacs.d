@@ -6,6 +6,9 @@
 ;; ls flags
 (setq dired-listing-switches "-ahl")
 
+;; Try to guess the target directory for copying
+(setq dired-dwim-target t)
+
 ;; Hide hidden files
 (setq dired-omit-files "^\\...+$")
 
@@ -32,3 +35,5 @@
   (interactive)
   (save-window-excursion
     (dired-do-shell-command "open" nil (dired-get-marked-files))))
+
+(provide 'nico-dired)

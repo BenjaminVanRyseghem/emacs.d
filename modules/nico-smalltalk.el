@@ -13,3 +13,5 @@
 
 (autoload 'smalltalk-mode "/usr/local/share/emacs/site-lisp/smalltalk-mode.elc" "" t)
 (autoload 'gst "/usr/local/share/emacs/site-lisp/gst-mode.elc" "" t)
+
+(provide 'nico-smalltalk)

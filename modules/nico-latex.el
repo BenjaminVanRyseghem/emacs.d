@@ -5,3 +5,5 @@
     (progn
       (setq TeX-view-program-list '(("open" "open %o")))
       (setq TeX-view-program-selection '((output-pdf "open")))))
+
+(provide 'nico-latex)

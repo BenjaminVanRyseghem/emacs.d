@@ -47,3 +47,5 @@
 
 (defun eshell/emacs (file)
   (find-file file))
+
+(provide 'nico-eshell)

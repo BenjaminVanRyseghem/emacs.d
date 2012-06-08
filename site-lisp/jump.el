@@ -1,4 +1,10 @@
-;; Quick cd between bookmarks 
+;; jump.el -- Fast cd between bookmarks 
+;;
+;; Copyright (c) 2012 Nicolas Petton <petton.nicolas@gmail.com>
+;; Licensed under MIT
+;;
+;; This file is NOT part of GNU Emacs.
+
 
 (defcustom jump-file "~/.emacs.d/jump-bookmarks.el"
   "Jump bookmarks file")
@@ -19,7 +25,7 @@
   ((lambda (mark path)
      (if mark
 	 (eshell/cd mark)
-       (message (concat "No bookmark for " path)))) (bookmarks path) path))
+       (message (concat "No bookmark for " path)))) (jump-bookmarks path) path))
 
 (defun jump-add (path bookmark)
   (setf jump-bookmarks-alist (cons (list bookmark path) jump-bookmarks-alist))
@@ -27,14 +33,14 @@
 
 (defun jump-remove (bookmark)
   (setf jump-bookmarks-alist (assoc bookmark jump-bookmarks-alist))
-  (dump-bookmarks))
+  (jump-dump-bookmarks))
 
-(defun dump-bookmarks ()
+(defun jump-dump-bookmarks ()
   (write-region (concat "(setq jump-bookmarks-alist '" (prin1-to-string jump-bookmarks-alist) ")") 
 		nil 
 		jump-file))
 
-(defun bookmarks (path)
+(defun jump-bookmarks (path)
   (cdr (assoc path jump-bookmarks-alist)))
 
 ;; read from file at start-up

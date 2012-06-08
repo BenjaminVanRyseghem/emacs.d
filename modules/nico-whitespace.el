@@ -1,3 +1,4 @@
+(require 'whitespace)
 ; make whitespace-mode use just basic coloring
 (setq whitespace-style (quote
   ( spaces tabs newline space-mark tab-mark newline-mark)))
@@ -15,3 +16,5 @@
    (newline-mark 10 [182 10]) ; newlne, ¶
    (tab-mark 9 [9655 9] [92 9]) ; tab, ▷
 ))
+
+(provide 'nico-whitespace)

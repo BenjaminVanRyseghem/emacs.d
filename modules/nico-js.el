@@ -7,3 +7,5 @@
 			   ;;(setq js-indent-level 4)
 			   (setq tab-width 4)
 			   (setq indent-tabs-mode nil)))
+
+(provide 'nico-js)

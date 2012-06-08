@@ -6,3 +6,4 @@
       w3m-output-coding-system 'utf-8
       w3m-terminal-coding-system 'utf-8)
 
+(provide 'nico-w3m)

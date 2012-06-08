@@ -95,3 +95,5 @@
 	       (vertical 60 (group 1.0))
 	       (vertical 1.0 (summary 1.0 point)))))
 
+
+(provide 'nico-gnus)

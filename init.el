@@ -11,9 +11,8 @@
 ;; Behave sanely
 (require 'cl)
 
-(setq 
- modules-dir "~/.emacs.d/modules"
- site-lisp-dir "~/.emacs.d/site-lisp")
+(defvar modules-dir "~/.emacs.d/modules")
+(defvar site-lisp-dir "~/.emacs.d/site-lisp")
 
 ;; load path
 (add-to-list 'load-path modules-dir)
@@ -22,14 +21,11 @@
 (let ((default-directory site-lisp-dir))
       (normal-top-level-add-subdirs-to-load-path))
 
+;;(mapc 'load (directory-files modules-dir nil "^[^#].*el$"))
+
 (require 'package)
-
-(mapc 'load (directory-files modules-dir nil "^[^#].*el$"))
-
-;; Load some stuff
-(require 'jabber)
+(require 'nico-modules)
 (require 'google-translate)
-
 (require 'ido)
 (require 'icomplete)
 (icomplete-mode 99)

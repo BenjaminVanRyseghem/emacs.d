@@ -17,4 +17,4 @@
 (global-set-key (kbd "C-c C-s") 'sudo-edit)
 (global-set-key [f11] 'toggle-fullscreen)
 
-
+(provide 'nico-misc)

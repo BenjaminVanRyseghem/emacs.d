@@ -11,10 +11,9 @@
 
 (defun setup-color-theme ()
   (interactive)
-  (require 'color-theme)
-  (load-file "~/.emacs.d/color-themes/color-theme-twilight.el")
-  (load-file "~/.emacs.d/color-themes/blackboard.el")
-  (color-theme-twilight))
+  ;;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/emacs-color-theme-solarized")
+  (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/twilight-theme")
+  (load-theme 'twilight t))
 
 (defun setup-window-system ()
   (if (window-system) (progn 
@@ -27,3 +26,4 @@
 
 (setup-window-system)
 
+(provide 'nico-window-system)

@@ -46,15 +46,6 @@
 ;; Disabled as I don't use it currently
 ;; (add-hook 'after-save-hook 'automatic-org-export-as-ical)
 
-
-;; Org-capture
-(setq org-default-notes-file "~/org/notes.org")
-(define-key global-map "\C-cc" 'org-capture)
-
-(setq org-capture-templates
-      '(("t" "Todo" entry (file+headline "~/org/notes.org" "Tasks")
-             "* TODO %?\n  %i\n  %a")))
-
 ;; My blog settings. Jekyll + org-mode
 (defun nico/automatic-org-blog-export-as-html ()
   (if (string-match "^/Users/nico/work/nicolas-petton.fr/org/.*" (buffer-file-name))
@@ -62,9 +53,18 @@
 
 (add-hook 'after-save-hook 'nico/automatic-org-blog-export-as-html)
 
+
+;; Org-capture
+(setf org-default-notes-file "~/org/notes.org")
+(define-key global-map "\C-cc" 'org-capture)
+
+(setq org-capture-templates
+      '(("t" "Todo" entry (file+headline "~/org/notes.org" "Tasks")
+             "* TODO %i %? \n  %a")))
+
 ;;Org-contacts
 (require 'org-contacts)
-(setq org-contacts-files '("~/org/contacts.org"))
+(defvar org-contacts-files '("~/org/contacts.org"))
 (add-to-list 'org-capture-templates
              '("c" "Contacts" entry (file (car org-contacts-files))
                "* %(org-contacts-template-name)
@@ -72,6 +72,17 @@
                   :EMAIL: %(org-contacts-template-email)
                   :END:"))
 
+;; Other org-capture templates
+(setq nico/org-email-file '("~/org/emails.org"))
+(add-to-list 'org-capture-templates
+	     '("a" "Email Action" entry (file+headline (car nico/org-email-file) "Actions")
+	       "* TODO %i %?   :email:action:\n  %a\n  %U"))
+(add-to-list 'org-capture-templates
+	     '("i" "Email Tickler" entry (file (car nico/org-email-file) "Tickler")
+	       "* TODO %i %?   :email:answer:\n  %a\n  %U"))
+(add-to-list 'org-capture-templates
+	     '("w" "Email Waiting Answer" entry (file+headline (car nico/org-email-file) "Waiting")
+	       "* TODO %i %?   :email:waiting:\n  %a\n  %U"))
 
 ;; Use Google-weather in agenda view
 ;; (require 'google-weather)
@@ -87,3 +98,5 @@
 
 ;; Start emacs with my agenda list
 (org-agenda-list)
+
+(provide 'nico-org)
