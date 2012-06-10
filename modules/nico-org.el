@@ -24,7 +24,8 @@
        '((sequence "TODO(t)" "|" "DONE(d)")
        (sequence "FEATURE(f)" "|" "COMPLETED(c)")
        (sequence "BUG(b)" "|" "FIXED(x)")
-       (sequence "APPT(p)" "|" "CANCELED(a)")))
+       (sequence "APPT(p)" "|" "CANCELED(a)")
+       (sequence "WAITING(w)" "|")))
 
 
 ;; Automatic export in ~/Public for org files. 
@@ -35,12 +36,12 @@
 ;; Automatic iCal export
 (defun nico/automatic-org-export-as-ical ()
   (if (string-match "^/Users/nico/org/.*" (buffer-file-name))
-      (org-export-icalendar-this-file)))
+      (progn
+	(org-export-icalendar-this-file)
+	(org-export-icalendar-all-agenda-files))))
 
 ;; Export TODO items in iCal too
 (setq org-icalendar-include-todo t)
-
-
 
 (add-hook 'after-save-hook 'nico/automatic-org-export-as-html)
 ;; Disabled as I don't use it currently
@@ -54,35 +55,40 @@
 (add-hook 'after-save-hook 'nico/automatic-org-blog-export-as-html)
 
 
-;; Org-capture
-(setf org-default-notes-file "~/org/notes.org")
-(define-key global-map "\C-cc" 'org-capture)
-
-(setq org-capture-templates
-      '(("t" "Todo" entry (file+headline "~/org/notes.org" "Tasks")
-             "* TODO %i %? \n  %a")))
-
 ;;Org-contacts
 (require 'org-contacts)
 (defvar org-contacts-files '("~/org/contacts.org"))
+
+;; Org-capture
+(define-key global-map "\C-cc" 'org-capture)
+
+(setf org-default-notes-file "~/org/notes.org")
+(defvar nico/org-email-file "~/org/emails.org")
+
 (add-to-list 'org-capture-templates
              '("c" "Contacts" entry (file (car org-contacts-files))
                "* %(org-contacts-template-name)
                   :PROPERTIES:
                   :EMAIL: %(org-contacts-template-email)
                   :END:"))
-
-;; Other org-capture templates
-(setq nico/org-email-file '("~/org/emails.org"))
 (add-to-list 'org-capture-templates
-	     '("a" "Email Action" entry (file+headline (car nico/org-email-file) "Actions")
+	     '("t" "Todo" entry (file+headline org-default-notes-file "Tasks")
+	       "* TODO %i %? \n  %a"))
+(add-to-list 'org-capture-templates
+	     '("h" "Home" entry (file "~/org/home.org")
+	       "* %i %?  \n  %a\n"))
+(add-to-list 'org-capture-templates
+	     '("s" "Cool stuff" entry (file+headline org-default-notes-file "Cool stuff")
+	       "* %i %?   :cool:\n  %a\n"))
+(add-to-list 'org-capture-templates
+	     '("a" "Email Action" entry (file+headline nico/org-email-file "Actions")
 	       "* TODO %i %?   :email:action:\n  %a\n  %U"))
 (add-to-list 'org-capture-templates
-	     '("i" "Email Tickler" entry (file (car nico/org-email-file) "Tickler")
-	       "* TODO %i %?   :email:answer:\n  %a\n  %U"))
+	     '("i" "Email Tickler" entry (file nico/org-email-file "Tickler")
+	       "* TODO %i %?   :email:tickler:\n  %a\n  %U"))
 (add-to-list 'org-capture-templates
-	     '("w" "Email Waiting Answer" entry (file+headline (car nico/org-email-file) "Waiting")
-	       "* TODO %i %?   :email:waiting:\n  %a\n  %U"))
+	     '("w" "Email Waiting Answer" entry (file+headline nico/org-email-file "Waiting")
+	       "* WAITING %i %?   :email:waiting:\n  %a\n  %U"))
 
 ;; Use Google-weather in agenda view
 ;; (require 'google-weather)

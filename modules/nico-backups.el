@@ -1,7 +1,11 @@
 ;; Put backup and auto-save files in /tmp
+
+(defcustom nico/backup-directory "~/.tmp/"
+  "The directory to put autosave and backup files")
+
 (setq backup-directory-alist
-      `((".*" . ,temporary-file-directory)))
+      `((".*" . ,nico/backup-directory)))
 (setq auto-save-file-name-transforms
-      `((".*" ,temporary-file-directory t)))
+      `((".*" ,nico/backup-directory t)))
 
 (provide 'nico-backups)

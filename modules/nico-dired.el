@@ -17,6 +17,7 @@
 			     (nico/dired-set-keys)))
 
 (defun nico/dired-set-keys ()
+  (local-set-key (kbd "M-s") 'find-name-dired)
   (local-set-key (kbd "o") 'nico/dired-open-files))
 
 
