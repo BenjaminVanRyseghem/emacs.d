@@ -6,8 +6,24 @@
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
 
+;;Org-contacts
+(require 'org-contacts)
+(setq org-contacts-files '("~/org/contacts.org"))
+
+;; Org-capture
+(define-key global-map "\C-cc" 'org-capture)
+
+(setf org-default-notes-file "~/org/notes.org")
+(defvar nico/org-email-file "~/org/emails.org")
+
+
+(setq org-directory "~/org")
+;; (setq org-mobile-inbox-for-pull "~/org/flagged.org")
+;; (setq org-mobile-directory "~/Dropbox/MobileOrg")
+
 (setq org-agenda-files (list
-			"~/org/notes.org"
+			nico/org-email-file
+			org-default-notes-file
 			"~/org/work.org"
 			"~/org/calendar.org" 
 			"~/org/home.org"))
@@ -54,23 +70,13 @@
 
 (add-hook 'after-save-hook 'nico/automatic-org-blog-export-as-html)
 
-
-;;Org-contacts
-(require 'org-contacts)
-(defvar org-contacts-files '("~/org/contacts.org"))
-
-;; Org-capture
-(define-key global-map "\C-cc" 'org-capture)
-
-(setf org-default-notes-file "~/org/notes.org")
-(defvar nico/org-email-file "~/org/emails.org")
-
-(add-to-list 'org-capture-templates
-             '("c" "Contacts" entry (file (car org-contacts-files))
+;; org-capture
+(setq org-capture-templates
+             '(("c" "Contacts" entry (file (car org-contacts-files))
                "* %(org-contacts-template-name)
                   :PROPERTIES:
                   :EMAIL: %(org-contacts-template-email)
-                  :END:"))
+                  :END:")))
 (add-to-list 'org-capture-templates
 	     '("t" "Todo" entry (file+headline org-default-notes-file "Tasks")
 	       "* TODO %i %? \n  %a"))
@@ -85,7 +91,7 @@
 	       "* TODO %i %?   \n  %a\n  %U"))
 (add-to-list 'org-capture-templates
 	     '("i" "Email Tickler" entry (file nico/org-email-file "Tickler")
-	       "* TODO %i %?   \n  %a\n  %U"))
+	       "* %i %?   \n  %a\n  %U"))
 (add-to-list 'org-capture-templates
 	     '("w" "Email Waiting Answer" entry (file+headline nico/org-email-file "Waiting")
 	       "* WAITING %i %?   \n  %a\n  %U"))
