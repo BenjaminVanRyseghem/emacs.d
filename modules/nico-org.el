@@ -13,7 +13,7 @@
 ;; Org-capture
 (define-key global-map "\C-cc" 'org-capture)
 
-(setf org-default-notes-file "~/org/notes.org")
+(setf org-default-notes-file "~/org/inbox.org")
 (defvar nico/org-email-file "~/org/emails.org")
 
 
@@ -33,7 +33,7 @@
 
 (defun nico/find-notes-file ()
   (interactive)
-  (find-file "~/org/notes.org"))
+  (find-file org-default-notes-file))
 
 ;; My own todo keywords and their shortcuts
 (setq org-todo-keywords
@@ -78,7 +78,7 @@
                   :EMAIL: %(org-contacts-template-email)
                   :END:")))
 (add-to-list 'org-capture-templates
-	     '("t" "Todo" entry (file+headline org-default-notes-file "Tasks")
+	     '("t" "Todo [inbox]" entry (file+headline org-default-notes-file "Tasks")
 	       "* TODO %i %? \n  %a"))
 (add-to-list 'org-capture-templates
 	     '("h" "Home" entry (file "~/org/home.org")
@@ -87,13 +87,13 @@
 	     '("s" "Cool stuff" entry (file+headline org-default-notes-file "Cool stuff")
 	       "* %i %?   \n  %a\n"))
 (add-to-list 'org-capture-templates
-	     '("a" "Email Action" entry (file+headline nico/org-email-file "Actions")
+	     '("a" "Action [email]" entry (file+headline nico/org-email-file "Actions")
 	       "* TODO %i %?   \n  %a\n  %U"))
 (add-to-list 'org-capture-templates
-	     '("i" "Email Tickler" entry (file nico/org-email-file "Tickler")
+	     '("i" "Tickler [email]" entry (file nico/org-email-file "Tickler")
 	       "* %i %?   \n  %a\n  %U"))
 (add-to-list 'org-capture-templates
-	     '("w" "Email Waiting Answer" entry (file+headline nico/org-email-file "Waiting")
+	     '("w" "Waiting Answer [email]" entry (file+headline nico/org-email-file "Waiting")
 	       "* WAITING %i %?   \n  %a\n  %U"))
 
 ;; Use Google-weather in agenda view
