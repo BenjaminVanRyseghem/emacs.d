@@ -79,16 +79,16 @@
 	       "* %i %?  \n  %a\n"))
 (add-to-list 'org-capture-templates
 	     '("s" "Cool stuff" entry (file+headline org-default-notes-file "Cool stuff")
-	       "* %i %?   :cool:\n  %a\n"))
+	       "* %i %?   \n  %a\n"))
 (add-to-list 'org-capture-templates
 	     '("a" "Email Action" entry (file+headline nico/org-email-file "Actions")
-	       "* TODO %i %?   :email:action:\n  %a\n  %U"))
+	       "* TODO %i %?   \n  %a\n  %U"))
 (add-to-list 'org-capture-templates
 	     '("i" "Email Tickler" entry (file nico/org-email-file "Tickler")
-	       "* TODO %i %?   :email:tickler:\n  %a\n  %U"))
+	       "* TODO %i %?   \n  %a\n  %U"))
 (add-to-list 'org-capture-templates
 	     '("w" "Email Waiting Answer" entry (file+headline nico/org-email-file "Waiting")
-	       "* WAITING %i %?   :email:waiting:\n  %a\n  %U"))
+	       "* WAITING %i %?   \n  %a\n  %U"))
 
 ;; Use Google-weather in agenda view
 ;; (require 'google-weather)
