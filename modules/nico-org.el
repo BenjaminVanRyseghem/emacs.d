@@ -28,6 +28,10 @@
 			"~/org/calendar.org" 
 			"~/org/home.org"))
 
+(setq org-refile-targets '(("~/org/work.org" :maxlevel . 3) 
+			   ("~/org/home.org" :maxlevel . 3)
+			   ("~/org/someday.org" :level . 1)))
+
 ;; Open notes (notes.org) file
 (global-set-key (kbd "C-M-n") 'nico/find-notes-file)
 
@@ -90,7 +94,7 @@
 	     '("a" "Action [email]" entry (file+headline nico/org-email-file "Actions")
 	       "* TODO %i %?   \n  %a\n  %U"))
 (add-to-list 'org-capture-templates
-	     '("i" "Tickler [email]" entry (file nico/org-email-file "Tickler")
+	     '("i" "Tickler [email]" entry (file+headline nico/org-email-file "Tickler")
 	       "* %i %?   \n  %a\n  %U"))
 (add-to-list 'org-capture-templates
 	     '("w" "Waiting Answer [email]" entry (file+headline nico/org-email-file "Waiting")
