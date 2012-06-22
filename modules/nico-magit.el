@@ -1,5 +1,5 @@
 (require 'magit)
 
-(define-key global-map (kbd "C-M-m") 'magit-status)
+(define-key global-map (kbd "C-x g") 'magit-status)
 
 (provide 'nico-magit)

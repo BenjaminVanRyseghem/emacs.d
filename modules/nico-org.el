@@ -95,7 +95,7 @@
 	       "* TODO %i %?   \n  %a\n  %U"))
 (add-to-list 'org-capture-templates
 	     '("i" "Tickler [email]" entry (file+headline nico/org-email-file "Tickler")
-	       "* %i %?   \n  %a\n  %U"))
+	       "* %i %?   \n  %a"))
 (add-to-list 'org-capture-templates
 	     '("w" "Waiting Answer [email]" entry (file+headline nico/org-email-file "Waiting")
 	       "* WAITING %i %?   \n  %a\n  %U"))
