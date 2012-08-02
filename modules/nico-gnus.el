@@ -7,6 +7,10 @@
 (add-hook 'gnus-group-mode-hook 'nico/setup-gnus)
 
 (defun nico/setup-gnus () 
+  ;; notmuch goodness
+  (require 'notmuch)
+  (nico/setup-notmuch)
+
   (require 'offlineimap)
   (offlineimap)
   (gnus-topic-mode)
@@ -35,7 +39,6 @@
 		(nnimap-server-port 993)
 		(nnir-search-engine imap)
 		(nnimap-stream ssl))))
-
 
 ;; Use msmtp
 (setq message-send-mail-function 'message-send-mail-with-sendmail)
@@ -95,5 +98,37 @@
 	       (vertical 60 (group 1.0))
 	       (vertical 1.0 (summary 1.0 point)))))
 
+(defun nico/setup-notmuch ()
+  (define-key gnus-group-mode-map "GG" 'notmuch-search)
+  (define-key notmuch-show-mode-map (kbd "C-c C-c") 'nico/notmuch-goto-gnus))
+  
+
+;;
+;; notmuch and gnus integration
+;;
+
+(defun nico/notmuch-file-to-group (file)
+  "Calculate the Gnus group name from the given file name."
+  (let ((group (file-name-directory (directory-file-name (file-name-directory file)))))
+    (setq group (replace-regexp-in-string ".*/Maildir/." "nnimap+Mail:" group))
+    (setq group (replace-regexp-in-string "/$" "" group))
+    (if (string-match ":$" group)
+	(concat group "INBOX")
+      (replace-regexp-in-string ":\\." ":" group))))
+
+(defun nico/notmuch-goto-gnus ()
+  "Open a summary buffer containing the current notmuch article."
+  (interactive)
+  (unless (gnus-alive-p) (with-temp-buffer (gnus)))
+  (let ((group (nico/notmuch-file-to-group (notmuch-show-get-filename)))
+	(message-id
+	 (replace-regexp-in-string "\"" ""
+				   (replace-regexp-in-string "^id:" ""
+							     (notmuch-show-get-message-id)))))
+    (if (and group message-id)
+	(progn
+	  (gnus-summary-read-group group 1) ; have to show at least one old message
+	  (gnus-summary-refer-article message-id)) ; simpler than org-gnus method?
+      (message "Couldn't get relevant infos for switching to Gnus."))))
 
 (provide 'nico-gnus)

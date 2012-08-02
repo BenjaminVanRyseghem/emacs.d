@@ -29,7 +29,7 @@
 
 (defun jump-add (path bookmark)
   (setf jump-bookmarks-alist (cons (list bookmark path) jump-bookmarks-alist))
-  (dump-bookmarks))
+  (jump-dump-bookmarks))
 
 (defun jump-remove (bookmark)
   (setf jump-bookmarks-alist (assoc bookmark jump-bookmarks-alist))

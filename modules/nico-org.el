@@ -10,6 +10,9 @@
 (require 'org-contacts)
 (setq org-contacts-files '("~/org/contacts.org"))
 
+;;Org-notmuch
+(require 'org-notmuch)
+
 ;; Org-capture
 (define-key global-map "\C-cc" 'org-capture)
 
