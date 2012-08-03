@@ -7,9 +7,6 @@
 (add-hook 'gnus-group-mode-hook 'nico/setup-gnus)
 
 (defun nico/setup-gnus () 
-  ;; notmuch goodness
-  (require 'notmuch)
-  (nico/setup-notmuch)
 
   (require 'offlineimap)
   (offlineimap)
@@ -98,37 +95,58 @@
 	       (vertical 60 (group 1.0))
 	       (vertical 1.0 (summary 1.0 point)))))
 
+;;
+;; notmuch configuration
+;;
+
+(require 'notmuch)
+
+(add-hook 'notmuch-hello-mode-hook 'nico/setup-notmuch)
+
 (defun nico/setup-notmuch ()
-  (define-key gnus-group-mode-map "GG" 'notmuch-search)
-  (define-key notmuch-show-mode-map (kbd "C-c C-c") 'nico/notmuch-goto-gnus))
+  (require 'offlineimap)
+  (offlineimap)
   
-
-;;
-;; notmuch and gnus integration
-;;
-
-(defun nico/notmuch-file-to-group (file)
-  "Calculate the Gnus group name from the given file name."
-  (let ((group (file-name-directory (directory-file-name (file-name-directory file)))))
-    (setq group (replace-regexp-in-string ".*/Maildir/." "nnimap+Mail:" group))
-    (setq group (replace-regexp-in-string "/$" "" group))
-    (if (string-match ":$" group)
-	(concat group "INBOX")
-      (replace-regexp-in-string ":\\." ":" group))))
-
-(defun nico/notmuch-goto-gnus ()
-  "Open a summary buffer containing the current notmuch article."
+  (define-key notmuch-hello-mode-map (kbd "C-c C-c") 'nico/notmuch-update-all)
+  (define-key notmuch-hello-mode-map (kbd "C-c C-u") 'nico/notmuch-update)
+  
+  (define-key notmuch-search-mode-map "d" 'nico/notmuch-search-tag-all-read)
+  (define-key notmuch-search-mode-map "u" 'nico/notmuch-search-tag-unread)
+  (define-key notmuch-search-mode-map "i" 'nico/notmuch-search-tag-important))
+  
+(defun nico/notmuch-search-tag-all-read ()
   (interactive)
-  (unless (gnus-alive-p) (with-temp-buffer (gnus)))
-  (let ((group (nico/notmuch-file-to-group (notmuch-show-get-filename)))
-	(message-id
-	 (replace-regexp-in-string "\"" ""
-				   (replace-regexp-in-string "^id:" ""
-							     (notmuch-show-get-message-id)))))
-    (if (and group message-id)
-	(progn
-	  (gnus-summary-read-group group 1) ; have to show at least one old message
-	  (gnus-summary-refer-article message-id)) ; simpler than org-gnus method?
-      (message "Couldn't get relevant infos for switching to Gnus."))))
+  (notmuch-search-tag-all '("-unread"))
+  (notmuch-search-quit))
+
+(defun nico/notmuch-search-tag-unread ()
+  (interactive)
+  (notmuch-search-tag '("+unread")))
+
+
+(defun nico/notmuch-search-tag-important ()
+  (interactive)
+  (notmuch-search-tag '("+important")))
+
+
+(defun nico/notmuch-update-all ()
+  (interactive)
+  (offlineimap-resync)
+  (nico/notmuch-update))
+
+(defun nico/notmuch-update ()
+  (interactive)
+  (notmuch-poll)
+  (notmuch-hello-update))
+
+;; notmuch searches
+(setq notmuch-saved-searches '(
+			       ("inbox" . "tag:inbox") 
+			       ("important" . "tag:important")
+			       ("unread" . "tag:unread") 
+			       ("sent" . "from:petton.nicolas@gmail.com or from:nico@objectfusion.fr")
+			       ("Pharo" . "folder:Smalltalk.Pharo AND tag:unread") 
+			       ("Amber" . "folder:Smalltalk.Amber AND tag:unread") 
+			       ("RMoD" . "folder:rmod AND tag:unread")))
 
 (provide 'nico-gnus)
