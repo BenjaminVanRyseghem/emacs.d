@@ -1,10 +1,10 @@
-(setq send-mail-function 'smtpmail-send-it
-      user-full-name "Nicolas Petton"
-      user-mail-address "petton.nicolas@gmail.com"
-      message-send-mail-function 'smtpmail-send-it
-      mail-from-style nil)
+;; (setq send-mail-function 'smtpmail-send-it
+;;       user-full-name "Nicolas Petton"
+;;       user-mail-address "petton.nicolas@gmail.com"
+;;       message-send-mail-function 'smtpmail-send-it
+;;       mail-from-style nil)
 
-(add-hook 'gnus-group-mode-hook 'nico/setup-gnus)
+;; (add-hook 'gnus-group-mode-hook 'nico/setup-gnus)
 
 (defun nico/setup-gnus () 
 
@@ -94,59 +94,5 @@
    (horizontal 1.0
 	       (vertical 60 (group 1.0))
 	       (vertical 1.0 (summary 1.0 point)))))
-
-;;
-;; notmuch configuration
-;;
-
-(require 'notmuch)
-
-(add-hook 'notmuch-hello-mode-hook 'nico/setup-notmuch)
-
-(defun nico/setup-notmuch ()
-  (require 'offlineimap)
-  (offlineimap)
-  
-  (define-key notmuch-hello-mode-map (kbd "C-c C-c") 'nico/notmuch-update-all)
-  (define-key notmuch-hello-mode-map (kbd "C-c C-u") 'nico/notmuch-update)
-  
-  (define-key notmuch-search-mode-map "d" 'nico/notmuch-search-tag-all-read)
-  (define-key notmuch-search-mode-map "u" 'nico/notmuch-search-tag-unread)
-  (define-key notmuch-search-mode-map "i" 'nico/notmuch-search-tag-important))
-  
-(defun nico/notmuch-search-tag-all-read ()
-  (interactive)
-  (notmuch-search-tag-all '("-unread"))
-  (notmuch-search-quit))
-
-(defun nico/notmuch-search-tag-unread ()
-  (interactive)
-  (notmuch-search-tag '("+unread")))
-
-
-(defun nico/notmuch-search-tag-important ()
-  (interactive)
-  (notmuch-search-tag '("+important")))
-
-
-(defun nico/notmuch-update-all ()
-  (interactive)
-  (offlineimap-resync)
-  (nico/notmuch-update))
-
-(defun nico/notmuch-update ()
-  (interactive)
-  (notmuch-poll)
-  (notmuch-hello-update))
-
-;; notmuch searches
-(setq notmuch-saved-searches '(
-			       ("inbox" . "tag:inbox") 
-			       ("important" . "tag:important")
-			       ("unread" . "tag:unread") 
-			       ("sent" . "from:petton.nicolas@gmail.com or from:nico@objectfusion.fr")
-			       ("Pharo" . "folder:Smalltalk.Pharo AND tag:unread") 
-			       ("Amber" . "folder:Smalltalk.Amber AND tag:unread") 
-			       ("RMoD" . "folder:rmod AND tag:unread")))
 
 (provide 'nico-gnus)

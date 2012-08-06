@@ -6,8 +6,7 @@
 ;; 		(eshell/pwd)
 ;; 		(if (= (user-uid) 0) " # " " => "))))
 
-(load "jump.el")
-
+(require 'eshelbmk)
 
 (setq eshell-cmpl-cycle-completions nil
       eshell-save-history-on-exit t
@@ -30,7 +29,6 @@
                '(lambda () (define-key eshell-mode-map "\C-a" 'eshell-bol)))
      (add-to-list 'eshell-output-filter-functions 'eshell-handle-ansi-color)
 
-     ;; TODO: submit these via M-x report-emacs-bug
      (add-to-list 'eshell-visual-commands "ssh")
      (add-to-list 'eshell-visual-commands "htop")
      (add-to-list 'eshell-visual-commands "tail")
@@ -43,7 +41,7 @@
 ;; aliases
 
 (defun eshell/j (path)
-  (eshell/jump path))
+  (eshell/bmk path))
 
 (defun eshell/emacs (file)
   (find-file file))

@@ -21,7 +21,6 @@
 (let ((default-directory site-lisp-dir))
       (normal-top-level-add-subdirs-to-load-path))
 
-;;(mapc 'load (directory-files modules-dir nil "^[^#].*el$"))
 
 (require 'package)
 (require 'nico-modules)
@@ -35,11 +34,7 @@
 ;; Start server
 (server-start)
 
-;; Git
-;(require 'git)
-;(require 'git-blame)
-
-;; tramp -- transparent remote file access
+;; tramp
 (require 'tramp)
 
 ;; enable some disabled commands
@@ -59,16 +54,7 @@
 
 ;; Paren mode
 (show-paren-mode t)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(LaTeX-command "latex -synctex=1")
- '(notmuch-saved-searches (quote (("inbox" . "tag:inbox") ("unread" . "tag:unread") ("Pharo" . "folder:Smalltalk.Pharo AND tag:unread") ("Amber" . "folder: Smalltalk.Amber AND tag:unread") ("RMoD" . "folder:rmod AND tag:unread") ("sent" . "from:petton.nicolas@gmail.com or from:nico@objectfusion.fr")))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
+;; Turn off the nnoying bell
+(setq ring-bell-function 'ignore)
+
