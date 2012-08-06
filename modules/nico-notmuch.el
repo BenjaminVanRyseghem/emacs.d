@@ -21,9 +21,9 @@
 
 (setq nico/email-accounts
   '(("petton.nicolas@gmail.com" . ((signature . "~/.signature-gmail")
-				   (smtp "gmail")))
+				   (smtp . "gmail")))
     ("nico@objectfusion.fr" . ((signature . "~/.signature-objectfusion")
-			       (smtp "objectfusion")))))
+			       (smtp . "objectfusion")))))
 
 
 (defun nico/select-email-account (name)
@@ -123,6 +123,7 @@
 			       ("Pharo" . "folder:Smalltalk.Pharo AND tag:unread") 
 			       ("Amber" . "folder:Smalltalk.Amber AND tag:unread") 
 			       ("RMoD" . "folder:rmod AND tag:unread")
+			       ("smalltalkhub" . "smalltalkhub and tag:unread")
 			       ("gst" . "from:help-smalltalk@gnu.org and tag:unread")
 			       ("squeak" . "to:squeak-dev@lists.squeakfoundation.org and tag:unread") 
 			       ("riak" . "to:riak-users <riak-users@lists.basho.com> and tag:unread") 
