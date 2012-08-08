@@ -4,5 +4,6 @@ eshell
 *.elc
 tramp
 url
+bookmarks
 auto-save-list
 jump-bookmarks.el
