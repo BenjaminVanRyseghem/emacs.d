@@ -1,7 +1,7 @@
 elpa
 eshell
 .org-id-locations
-.elc
+*.elc
 tramp
 url
 auto-save-list
