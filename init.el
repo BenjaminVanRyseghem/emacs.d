@@ -1,12 +1,10 @@
 ;; Hide toolbar, menubar and scrollbar, just because I don't like them
 (tool-bar-mode 0)
-;; (menu-bar-mode 0)
+;; (menu-bar-mode 0) ;; the menubar on OSX is ok
 (scroll-bar-mode 0)
 
-;; Display line numbers
-;; (global-linum-mode t)
-
 (setq inhibit-startup-screen t)
+(defalias 'yes-or-no-p 'y-or-n-p)
 
 ;; Behave sanely
 (require 'cl)
@@ -57,4 +55,3 @@
 
 ;; Turn off the nnoying bell
 (setq ring-bell-function 'ignore)
-

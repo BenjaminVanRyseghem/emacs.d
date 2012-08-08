@@ -1,17 +1,17 @@
 (require 'bookmark)
 
-(defun pcomplete/eshell-mode/bmk ()
-  "Completion for `bmk'"
+(defun pcomplete/eshell-mode/jump ()
+  "Completion for `jump'"
   (pcomplete-here (bookmark-all-names)))
 
-(defun eshell/bmk (&rest args)
+(defun eshell/jump (&rest args)
   "Integration between EShell and bookmarks.
 For usage, execute without arguments."
   (setq args (eshell-flatten-list args))
   (let ((bookmark (car args))
         filename name)
     (if (eq nil args)
-	(eshell/bmk-usage)
+	(eshell/jump-usage)
       ;; Check whether an existing bookmark has been specified
       (if (setq filename (cdr (car (bookmark-get-bookmark-record bookmark))))
 	  ;; If it points to a directory, change to it.
@@ -21,18 +21,22 @@ For usage, execute without arguments."
 	    (bookmark-jump bookmark))
 	(error "%s is not a bookmark" bookmark)))))
 
-(defun eshell/bmk-usage ()
+
+;;;###autoload
+(defun eshell/jump-usage ()
   	(format "Usage: 
-bmk BOOKMARK
+jump BOOKMARK
 
 either change directory pointed to by BOOKMARK
 or bookmark-jump to the BOOKMARK if it is not a directory.
 
-Use bmk-add BOOKMARK to add bookmarks.
+Use bmk BOOKMARK to add bookmarks.
 
 Completion is available."))
-	
-(defun eshell/bmk-add (&rest args)
+
+
+;;;###autoload
+(defun eshell/bmk (&rest args)
   (if (setq name (car args))
       (progn
 	(bookmark-set name)

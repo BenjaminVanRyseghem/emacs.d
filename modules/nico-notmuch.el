@@ -1,17 +1,8 @@
 (require 'notmuch)
-(require 'offlineimap)
-(require 'gnus-art)
-(offlineimap)
 
 (setq send-mail-function 'smtpmail-send-it
-      user-full-name "Nicolas Petton"
-      user-mail-address "petton.nicolas@gmail.com"
       sendmail-program "/usr/local/bin/msmtp"
       message-send-mail-function 'message-send-mail-with-sendmail
-      ;; These 3 lines make notmuch switch msmtp accounts based on the from header
-      mail-specify-envelope-from t
-      message-sendmail-envelope-from 'header
-      mail-envelope-from 'header
       mail-from-style nil)
 
 
@@ -20,9 +11,11 @@
   "Email SMTP Accounts. Each account is an alist.")
 
 (setq nico/email-accounts
-  '(("petton.nicolas@gmail.com" . ((signature . "~/.signature-gmail")
+  '(("petton.nicolas@gmail.com" . ((name . "Nicolas Petton")
+				   (signature . "~/.signature-gmail")
 				   (smtp . "gmail")))
-    ("nico@objectfusion.fr" . ((signature . "~/.signature-objectfusion")
+    ("nico@objectfusion.fr" . ((name . "Nicolas Petton")
+			       (signature . "~/.signature-objectfusion")
 			       (smtp . "objectfusion")))))
 
 
@@ -39,6 +32,7 @@
     (message (concat "Using email account " (car account)))
     (if account
 	(setq user-email-address (car account)
+	      user-full-name (cdr (assoc 'name account))
 	      message-signature-file (cdr (assoc 'signature account))
 	      message-sendmail-extra-arguments (list "-a" (cdr (assoc 'smtp account)))))))
     
@@ -67,11 +61,18 @@
 	(delete-region position (point)))
       (message-insert-signature)))
 
+(defun nico/add-mode-line-account ()
+  (add-to-list 'mode-line-buffer-identification 
+	       '(:propertize (" " user-email-address " ") face user-email-address)))
+
 (add-hook 'message-setup-hook 'nico/automatic-account)
+(add-hook 'message-mode-hook 'nico/add-mode-line-account)
+
 (add-hook 'notmuch-hello-mode-hook 'nico/setup-notmuch)
 
 (defun nico/setup-notmuch ()
   (require 'offlineimap)
+  (require 'gnus-art)
   (offlineimap)
   
   (define-key notmuch-hello-mode-map (kbd "C-c C-c") 'nico/notmuch-update-all)
@@ -90,12 +91,12 @@
   (interactive)
   (nico/notmuch-search-tag '("-unread")))
 
-(defun nico/notmuch-search-tag-all-read (confirmation)
-  (interactive (list (read-string "Mark all threads as read? y/(n) ")))
-  (if (string-equal confirmation "y")
+(defun nico/notmuch-search-tag-all-read ()
+  (interactive)
+  (if (y-or-n-p "Mark all threads as read? ")
       (progn
-       (notmuch-search-tag-all '("-unread"))
-       (notmuch-search-quit))))
+	(notmuch-search-tag-all '("-unread"))
+	(notmuch-search-quit))))
 
 (defun nico/notmuch-search-tag-unread ()
   (interactive)

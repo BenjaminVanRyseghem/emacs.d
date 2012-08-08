@@ -1,6 +1,6 @@
 ;; Put backup and auto-save files in /tmp
 
-(defcustom nico/backup-directory "~/.tmp/"
+(defvar nico/backup-directory "~/.tmp/"
   "The directory to put autosave and backup files")
 
 (setq backup-directory-alist

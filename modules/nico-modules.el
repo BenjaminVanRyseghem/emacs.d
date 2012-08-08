@@ -10,10 +10,12 @@
 (require 'nico-jabber)
 (require 'nico-js)
 (require 'nico-latex)
+(require 'nico-smalltalk)
+(require 'nico-elisp)
 (require 'nico-misc)
 (require 'nico-org)
 (require 'nico-window-system)
-(require 'nico-smalltalk)
+(require 'nico-mode-line)
 (require 'nico-w3m)
 (require 'nico-whitespace)
 
