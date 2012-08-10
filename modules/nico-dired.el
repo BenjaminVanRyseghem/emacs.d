@@ -37,4 +37,13 @@
   (save-window-excursion
     (dired-do-shell-command "open" nil (dired-get-marked-files))))
 
+;; faces
+(set-face-attribute 'dired-directory nil
+		    :foreground "SkyBlue")
+
+(set-face-attribute 'dired-header nil
+		    :weight 'bold
+		    :foreground "SkyBlue")
+
+
 (provide 'nico-dired)

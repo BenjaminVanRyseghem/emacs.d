@@ -24,10 +24,11 @@
           (t " RW ")))
    "    "
    ;; directory and buffer/file name
-   (:propertize (:eval (shorten-directory default-directory 30))
+   (:propertize (:eval (nico/shorten-directory default-directory 30))
                 face mode-line-folder-face)
    (:propertize "%b"
                 face mode-line-filename-face)
+
    ;; narrow [default -- keep?]
    " %n "
    ;; mode indicators: vc, recursive edit, major mode, minor modes, process, global
@@ -39,17 +40,56 @@
    (:eval (propertize (format-mode-line minor-mode-alist)
                       'face 'mode-line-minor-mode-face))
    "  "
-   (:propertize mode-line-process
-                face mode-line-process-face)
-   "  "
    (global-mode-string global-mode-string)
    "  "
    ;; nyan-mode uses nyan cat as an alternative to %p
    (:eval (when nyan-mode (list (nyan-create))))
    ))
 
+
+;; Eshell mode-line
+(defun nico/eshell-mode-line ()
+  (setq mode-line-format 
+	'(
+	  (:propertize "%4l:" face mode-line-position-face)
+
+	  ;; emacsclient [default -- keep?]
+	  mode-line-client
+	  "  "
+	  ;; directory name
+	  (:propertize (:eval default-directory)
+		       face mode-line-folder-face)
+
+	  ;; narrow [default -- keep?]
+	  " %n "
+	  ;; mode indicators: vc, recursive edit, major mode, minor modes, process, global
+	  (vc-mode vc-mode)
+	  "  %["
+	  (:propertize mode-name
+		       face mode-line-mode-face)
+	  "%] "
+	  (:eval (propertize (format-mode-line minor-mode-alist)
+			     'face 'mode-line-minor-mode-face))
+	  "  "
+	  (:propertize mode-line-process
+		       face mode-line-process-face)
+	  "  ["
+	  (:propertize (:eval (eshell-previous-input-string 0))
+		       face mode-line-process-face)
+	  "] "
+
+	  (:eval (propertize (concat user-login-name "@" system-name)
+			     'face 'mode-line-system-face))
+	  ""
+	  (global-mode-string global-mode-string))))
+
+
+;; major mode hooks
+(add-hook 'eshell-mode-hook 'nico/eshell-mode-line)
+
+
 ;; Helper function
-(defun shorten-directory (dir max-length)
+(defun nico/shorten-directory (dir max-length)
   "Show up to `max-length' characters of a directory name `dir'."
   (let ((path (reverse (split-string (abbreviate-file-name dir) "/")))
         (output ""))
@@ -71,6 +111,7 @@
 (make-face 'mode-line-mode-face)
 (make-face 'mode-line-minor-mode-face)
 (make-face 'mode-line-process-face)
+(make-face 'mode-line-system-face)
 (make-face 'mode-line-80col-face)
 
 (set-face-attribute 'mode-line nil
@@ -97,6 +138,10 @@
 (set-face-attribute 'mode-line-filename-face nil
 		    :inherit 'mode-line-face
 		    :foreground "#eab700"
+		    :weight 'bold)
+(set-face-attribute 'mode-line-system-face nil
+		    :inherit 'mode-line-face
+		    :foreground "green"
 		    :weight 'bold)
 (set-face-attribute 'mode-line-position-face nil
 		    :inherit 'mode-line-face

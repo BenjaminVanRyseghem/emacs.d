@@ -4,6 +4,9 @@
 
 (setq shell-switcher-mode t)
 
+(setq eshell-banner-message (concat " Welcome to Eshell, "
+				    user-login-name
+				    "!\n       _\n     _|_|_\n     (o o)\n ooO--(_)--Ooo-\n\n Oh, Nice hat.\n\n"))
 
 ;; Prompt
 (setq eshell-prompt-function
