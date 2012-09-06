@@ -145,7 +145,7 @@
 		    :weight 'bold)
 (set-face-attribute 'mode-line-position-face nil
 		    :inherit 'mode-line-face
-		    :family "Menlo" :height 100)
+		    :family "Monospace" :height 100)
 (set-face-attribute 'mode-line-mode-face nil
 		    :inherit 'mode-line-face
 		    :foreground "gray80")

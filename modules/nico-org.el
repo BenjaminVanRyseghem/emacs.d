@@ -70,7 +70,7 @@
 
 ;; My blog settings. Jekyll + org-mode
 (defun nico/automatic-org-blog-export-as-html ()
-  (if (string-match "^/Users/nico/work/nicolas-petton.fr/org/.*" (buffer-file-name))
+  (if (string-match "^/home/nico/work/nicolas-petton.fr/org/.*" (buffer-file-name))
       (org-export-as-html 3 nil nil nil t "~/work/nicolas-petton.fr/jekyll/_posts/")))
 
 (add-hook 'after-save-hook 'nico/automatic-org-blog-export-as-html)

@@ -3,7 +3,8 @@
 (setq send-mail-function 'smtpmail-send-it
       sendmail-program "msmtp"
       message-send-mail-function 'message-send-mail-with-sendmail
-      mail-from-style nil)
+      mail-from-style nil
+      message-kill-buffer-on-exit t)
 
 
 (defvar nico/email-accounts 
