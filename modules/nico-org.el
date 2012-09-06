@@ -1,5 +1,3 @@
-;; org-mode
-
 (require 'org-install)
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (define-key global-map "\C-cl" 'org-store-link)
@@ -102,6 +100,23 @@
 (add-to-list 'org-capture-templates
 	     '("w" "Waiting Answer [email]" entry (file+headline nico/org-email-file "Waiting")
 	       "* WAITING %i %?   \n  %a\n  %U"))
+
+(defvar french-holiday
+      '((holiday-fixed 1 1 "Jour de l'an")
+        (holiday-fixed 5 1 "Fête du travail")
+        (holiday-fixed 5 8 "Victoire 45")
+        (holiday-fixed 7 14 "Fête nationale")
+        (holiday-fixed 8 15 "Assomption")
+        (holiday-fixed 11 1 "Toussaint")
+        (holiday-fixed 11 11 "Armistice 18")
+        (holiday-fixed 12 25 "Noël")
+        (holiday-easter-etc 1 "Lundi de Pâques")
+        (holiday-easter-etc 39 "Ascension")
+        (holiday-easter-etc 50 "Lundi de Pentecôte")))
+
+(setq calendar-date-style 'european
+      calendar-holidays (append french-holiday)
+      calendar-mark-holidays-flag t)
 
 ;; Use Google-weather in agenda view
 ;; (require 'google-weather)

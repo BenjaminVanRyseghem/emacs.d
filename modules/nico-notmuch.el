@@ -1,7 +1,7 @@
 (require 'notmuch)
 
 (setq send-mail-function 'smtpmail-send-it
-      sendmail-program "/usr/local/bin/msmtp"
+      sendmail-program "msmtp"
       message-send-mail-function 'message-send-mail-with-sendmail
       mail-from-style nil)
 
@@ -84,27 +84,27 @@
   (define-key notmuch-search-mode-map "i" 'nico/notmuch-search-tag-important))
   
 (defun nico/notmuch-search-tag (tags)
-  (notmuch-search-tag tags)
+  (notmuch-search-tag-thread tags)
   (next-line))
 
 (defun nico/notmuch-search-tag-read ()
   (interactive)
-  (nico/notmuch-search-tag '("-unread")))
+  (nico/notmuch-search-tag "-unread"))
 
 (defun nico/notmuch-search-tag-all-read ()
   (interactive)
   (if (y-or-n-p "Mark all threads as read? ")
       (progn
-	(notmuch-search-tag-all '("-unread"))
+	(notmuch-search-tag-all "-unread")
 	(notmuch-search-quit))))
 
 (defun nico/notmuch-search-tag-unread ()
   (interactive)
-  (nico/notmuch-search-tag '("+unread")))
+  (nico/notmuch-search-tag "+unread"))
 
 (defun nico/notmuch-search-tag-important ()
   (interactive)
-  (nico/notmuch-search-tag '("+important")))
+  (nico/notmuch-search-tag "+important"))
 
 (defun nico/notmuch-update-all ()
   (interactive)

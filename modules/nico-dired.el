@@ -35,7 +35,7 @@
 (defun nico/dired-open-files () 
   (interactive)
   (save-window-excursion
-    (dired-do-shell-command "open" nil (dired-get-marked-files))))
+    (dired-do-shell-command "xdg-open" nil (dired-get-marked-files))))
 
 ;; faces
 (set-face-attribute 'dired-directory nil
