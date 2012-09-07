@@ -20,6 +20,8 @@
   (local-set-key (kbd "M-s") 'find-name-dired)
   (local-set-key (kbd "o") 'nico/dired-open-files))
 
+(global-set-key (kbd "C-x C-j") 'dired-jump)
+
 
 ;; On linux, use the following script as 'open'
 ;;#! /bin/bash

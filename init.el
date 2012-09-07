@@ -25,6 +25,8 @@
 (require 'google-translate)
 (require 'ido)
 (require 'icomplete)
+(require 'switch-window)
+
 (icomplete-mode 99)
 (ido-mode)
 
