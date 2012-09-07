@@ -2,7 +2,6 @@
 (require 'nico-backups)
 (require 'nico-darwin)
 (require 'nico-magit)
-(require 'nico-dired)
 (require 'nico-erc)
 (require 'nico-eshell)
 (require 'nico-gnus)
@@ -18,5 +17,7 @@
 (require 'nico-mode-line)
 (require 'nico-w3m)
 (require 'nico-whitespace)
+(require 'nico-dired)
+(require 'nico-tramp)
 
 (provide 'nico-modules)

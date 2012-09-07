@@ -1,11 +1,11 @@
 ;; misc functions and keybindings
 
-(defun sudo-edit ()
+(defun sudo-file ()
   (interactive)
   (find-file (concat "/sudo:root@localhost:" (ido-read-file-name "Sudo file: "))))
 
 
-(defun sudo-file ()
+(defun sudo-edit ()
   (interactive)
   (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name)))
 
