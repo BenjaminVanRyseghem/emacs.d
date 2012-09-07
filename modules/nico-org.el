@@ -1,12 +1,13 @@
 (require 'org-install)
+(require 'org)
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
 
-;;Org-contacts
-(require 'org-contacts)
-(setq org-contacts-files '("~/org/contacts.org"))
+;; Org-contacts
+;;  (require 'org-contacts)
+;;  (setq org-contacts-files '("~/org/contacts.org"))
 
 ;;Org-notmuch
 (require 'org-notmuch)
@@ -76,12 +77,12 @@
 (add-hook 'after-save-hook 'nico/automatic-org-blog-export-as-html)
 
 ;; org-capture
-(setq org-capture-templates
-             '(("c" "Contacts" entry (file (car org-contacts-files))
-               "* %(org-contacts-template-name)
-                  :PROPERTIES:
-                  :EMAIL: %(org-contacts-template-email)
-                  :END:")))
+(setq org-capture-templates '())
+             ;; '(("c" "Contacts" entry (file (car org-contacts-files))
+             ;;   "* %(org-contacts-template-name)
+             ;;      :PROPERTIES:
+             ;;      :EMAIL: %(org-contacts-template-email)
+             ;;      :END:")))
 (add-to-list 'org-capture-templates
 	     '("t" "Todo [inbox]" entry (file+headline org-default-notes-file "Tasks")
 	       "* TODO %i %? \n  %a"))

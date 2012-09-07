@@ -1,4 +1,7 @@
 (require 'notmuch)
+(require 'bbdb)
+(require 'bbdb-vcard)
+(bbdb-initialize 'message)
 
 (setq send-mail-function 'smtpmail-send-it
       sendmail-program "msmtp"
