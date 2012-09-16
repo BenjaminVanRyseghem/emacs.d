@@ -1,3 +1,4 @@
+(require 'nico-el-get)
 (require 'nico-package)
 (require 'nico-backups)
 (require 'nico-darwin)

@@ -12,8 +12,6 @@
 
 (defun setup-color-theme ()
   (interactive)
-  ;;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/emacs-color-theme-solarized")
-  (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/twilight-theme")
   (load-theme 'twilight t))
 
 (defun setup-window-system ()

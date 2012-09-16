@@ -19,10 +19,8 @@
 (let ((default-directory site-lisp-dir))
       (normal-top-level-add-subdirs-to-load-path))
 
-
 (require 'package)
 (require 'nico-modules)
-(require 'google-translate)
 (require 'ido)
 (require 'icomplete)
 (require 'switch-window)
