@@ -1,7 +1,9 @@
 elpa
+el-get
 eshell
 .org-id-locations
 *.elc
+*.el~
 tramp
 url
 bookmarks
