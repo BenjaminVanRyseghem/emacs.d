@@ -18,26 +18,17 @@
 
 (defun nico/dired-set-keys ()
   (local-set-key (kbd "M-s") 'find-name-dired)
+  (local-set-key (kbd "K") 'dired-kill-subdir)
   (local-set-key (kbd "o") 'nico/dired-open-files))
 
 (global-set-key (kbd "C-x C-j") 'dired-jump)
 
-
-;; On linux, use the following script as 'open'
-;;#! /bin/bash
-;;
-;; OSX-like open 
-;; 
-;;for file in "$@"
-;;do
-;;  nohup xdg-open "$file" &
-;;done
-;;sleep 1
-
 (defun nico/dired-open-files () 
   (interactive)
-  (save-window-excursion
-    (dired-do-shell-command "o" nil (dired-get-marked-files))))
+  (dolist (each (dired-get-marked-files t current-prefix-arg)
+		(dired-smart-shell-command (concat "xdg-open " each)))))
+;;  (dired-do-shell-command "o" nil (dired-get-marked-files t current-prefix-arg)))
+
 
 ;; faces
 (set-face-attribute 'dired-directory nil

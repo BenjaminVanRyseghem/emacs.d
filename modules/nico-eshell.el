@@ -1,6 +1,7 @@
 (require 'eshellbmk)
 (require 'shell-switcher)
 (require 'eshell-enhanced-ls)
+(require 'pcmpl-apt)
 
 (setq shell-switcher-mode t)
 
@@ -37,13 +38,13 @@
      (set-face-attribute 'eshell-prompt nil :foreground "green2")
      (add-hook 'eshell-mode-hook ;; for some reason this needs to be a hook
                '(lambda () (define-key eshell-mode-map "\C-a" 'eshell-bol)))
-     (add-to-list 'eshell-output-filter-functions 'eshell-handle-ansi-color)
 
      (add-to-list 'eshell-visual-commands "ssh")
      (add-to-list 'eshell-visual-commands "htop")
      (add-to-list 'eshell-visual-commands "top")
      (add-to-list 'eshell-visual-commands "tail")
      (add-to-list 'eshell-visual-commands "vim")
+
      (add-to-list 'eshell-command-completions-alist
                   '("gunzip" "gz\\'"))
      (add-to-list 'eshell-command-completions-alist

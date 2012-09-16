@@ -2,6 +2,7 @@
 (require 'bbdb)
 (require 'bbdb-vcard)
 (bbdb-initialize 'message)
+(setq bbdb-north-american-phone-numbers-p nil)
 
 (setq send-mail-function 'smtpmail-send-it
       sendmail-program "msmtp"
@@ -128,6 +129,7 @@
 			       ("Pharo" . "folder:Smalltalk.Pharo AND tag:unread") 
 			       ("Amber" . "folder:Smalltalk.Amber AND tag:unread") 
 			       ("RMoD" . "folder:rmod AND tag:unread")
+			       ("Launchpad" . "from:launchpad AND tag:unread")
 			       ("smalltalkhub" . "smalltalkhub and tag:unread")
 			       ("gst" . "from:help-smalltalk@gnu.org and tag:unread")
 			       ("squeak" . "to:squeak-dev@lists.squeakfoundation.org and tag:unread") 

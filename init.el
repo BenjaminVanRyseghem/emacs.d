@@ -55,5 +55,5 @@
 ;; Paren mode
 (show-paren-mode t)
 
-;; Turn off the nnoying bell
+;; Turn off the annoying bell
 (setq ring-bell-function 'ignore)
