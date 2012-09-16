@@ -12,6 +12,8 @@
 			  browse-kill-ring 
 			  bbdb
 			  bbdb-vcard
+			  dvc
+			  nyan-mode
 			  magit 
 			  paredit 
 			  slime 

@@ -1,6 +1,0 @@
-[submodule "site-lisp/nyan-mode"]
-	path = site-lisp/nyan-mode
-	url = git://github.com/TeMPOraL/nyan-mode.git
-[submodule "site-lisp/emacs-pcomplete-plugins"]
-	path = site-lisp/emacs-pcomplete-plugins
-	url = git://github.com/DamienCassou/emacs-pcomplete-plugins.git
