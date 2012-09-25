@@ -1,7 +1,7 @@
 (require 'eshellbmk)
 (require 'shell-switcher)
 (require 'eshell-enhanced-ls)
-(require 'pcmpl-apt)
+;;(require 'pcmpl-apt)
 
 (setq shell-switcher-mode t)
 

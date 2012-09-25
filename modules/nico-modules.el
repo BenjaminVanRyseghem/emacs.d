@@ -20,5 +20,6 @@
 (require 'nico-whitespace)
 (require 'nico-dired)
 (require 'nico-tramp)
+(require 'nico-ido)
 
 (provide 'nico-modules)

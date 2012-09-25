@@ -11,7 +11,6 @@
 (defvar nico/get-packages '(auctex 
 			  browse-kill-ring 
 			  bbdb
-			  bbdb-vcard
 			  dvc
 			  nyan-mode
 			  magit 

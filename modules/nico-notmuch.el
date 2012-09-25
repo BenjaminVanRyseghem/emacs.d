@@ -1,8 +1,9 @@
 (require 'notmuch)
 (require 'bbdb)
-(require 'bbdb-vcard)
 (bbdb-initialize 'message)
 (setq bbdb-north-american-phone-numbers-p nil)
+
+(define-key global-map (kbd "M-N") 'notmuch)
 
 (setq send-mail-function 'smtpmail-send-it
       sendmail-program "msmtp"
@@ -79,7 +80,12 @@
   (require 'offlineimap)
   (require 'gnus-art)
   (offlineimap)
-  
+
+  (setq offlineimap-enable-mode-line-p '(member
+					 major-mode
+					 '(offlineimap-mode
+					   notmuch-hello-mode)))
+ 
   (define-key notmuch-hello-mode-map (kbd "C-c C-c") 'nico/notmuch-update-all)
   (define-key notmuch-hello-mode-map (kbd "C-c C-u") 'nico/notmuch-update)
   
