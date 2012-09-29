@@ -8,23 +8,25 @@
      (eval-print-last-sexp))))
 
 
+(push "~/.emacs.d/el-get-recipes" el-get-recipe-path)
+
 (defvar nico/get-packages '(auctex 
-			  browse-kill-ring 
-			  bbdb
-			  dvc
-			  nyan-mode
-			  magit 
-			  paredit 
-			  slime 
-			  htmlize 
-			  offlineimap
-			  twilight-anti-bright-theme
-			  shell-switcher
-			  switch-window
-			  expand-region
+			    pcomplete-plugins
+			    browse-kill-ring 
+			    bbdb
+			    dvc
+			    nyan-mode
+			    magit 
+			    paredit 
+			    slime 
+			    htmlize 
+			    offlineimap
+			    twilight-anti-bright-theme
+			    shell-switcher
+			    switch-window
+			    expand-region
 					;drag-stuff    ;; see later
-			  emacs-jabber
-			  )
+			    emacs-jabber)
   "A list of packages to ensure are installed at launch.")
 
 (el-get 'sync nico/get-packages)
