@@ -1,21 +1,17 @@
 ;; AUCTeX
 (add-hook 'LaTeX-mode-hook 'tex-pdf-mode)
 
-(setq LaTeX-command "latex -synctex=1")
-
-(if (system-type-is-darwin)
-    (progn
-      (setq TeX-view-program-list '(("open" "open %o")))
-      (setq TeX-view-program-selection '((output-pdf "open")))))
+;; synctex
+(tex-source-correlate-mode)
 
 ;; Synctex with evince using DBus
 (defadvice raise-frame (after make-it-work (&optional frame) activate)
-    "Work around some bug? in raise-frame/Emacs/GTK/Metacity/something.
+  "Work around some bug? in raise-frame/Emacs/GTK/Metacity/something.
      Katsumi Yamaoka <yamaoka@jpl.org> posted this in 
      http://article.gmane.org/gmane.emacs.devel:39702"
-     (call-process
-     "wmctrl" nil nil nil "-i" "-R"
-     (frame-parameter (or frame (selected-frame)) 'outer-window-id)))
+  (call-process
+   "wmctrl" nil nil nil "-i" "-R"
+   (frame-parameter (or frame (selected-frame)) 'outer-window-id)))
 
 ;; Forward/inverse search with evince using D-bus.
 (if (require 'dbus "dbus" t)
@@ -30,38 +26,38 @@
       ;; Adapted from http://dud.inf.tu-dresden.de/~ben/evince_synctex.tar.gz
       (defun auctex-evince-forward-sync (pdffile texfile line)
         (let ((dbus-name
-           (dbus-call-method :session
-                     "org.gnome.evince.Daemon"  ; service
-                     "/org/gnome/evince/Daemon" ; path
-                     "org.gnome.evince.Daemon"  ; interface
-                     "FindDocument"
-                     (concat "file://" pdffile)
-                     t     ; Open a new window if the file is not opened.
-                     )))
+	       (dbus-call-method :session
+				 "org.gnome.evince.Daemon"  ; service
+				 "/org/gnome/evince/Daemon" ; path
+				 "org.gnome.evince.Daemon"  ; interface
+				 "FindDocument"
+				 (concat "file://" pdffile)
+				 t     ; Open a new window if the file is not opened.
+				 )))
           (dbus-call-method :session
-                dbus-name
-                "/org/gnome/evince/Window/0"
-                "org.gnome.evince.Window"
-                "SyncView"
-                texfile
-                (list :struct :int32 line :int32 1)
-		(utime))))
+			    dbus-name
+			    "/org/gnome/evince/Window/0"
+			    "org.gnome.evince.Window"
+			    "SyncView"
+			    texfile
+			    (list :struct :int32 line :int32 1)
+			    (utime))))
 
       (defun auctex-evince-view ()
         (let ((pdf (file-truename (concat default-directory
-                          (TeX-master-file (TeX-output-extension)))))
-          (tex (buffer-file-name))
-          (line (line-number-at-pos)))
+					  (TeX-master-file (TeX-output-extension)))))
+	      (tex (buffer-file-name))
+	      (line (line-number-at-pos)))
           (auctex-evince-forward-sync pdf tex line)))
-
+      
       ;; New view entry: Evince via D-bus.
-      (setq TeX-view-program-list 
-	    '(("EvinceDbus" auctex-evince-view)))
+      (add-to-list 'TeX-view-program-list 
+		   '("EvinceDbus" auctex-evince-view))
 
       ;; Prepend Evince via D-bus to program selection list
       ;; overriding other settings for PDF viewing.
-      (setq TeX-view-program-selection
-	    '((output-pdf "EvinceDbus")))
+      (add-to-list 'TeX-view-program-selection
+		   '(output-pdf "EvinceDbus"))
 
       ;; Inverse search.
       ;; Adapted from: http://www.mail-archive.com/auctex@gnu.org/msg04175.html
@@ -75,7 +71,7 @@
 	    (goto-line (car linecol))
 	    (unless (= col -1)
 	      (move-to-column col))
-              (raise-frame))))  ;; pop the emacs window
+	    (raise-frame))))  ;; pop the emacs window
 
       (dbus-register-signal
        :session nil "/org/gnome/evince/Window/0"
