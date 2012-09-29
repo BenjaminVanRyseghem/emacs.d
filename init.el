@@ -1,6 +1,6 @@
 ;; Hide toolbar, menubar and scrollbar, just because I don't like them
 (tool-bar-mode 0)
-;; (menu-bar-mode 0) ;; the menubar on OSX is ok
+(menu-bar-mode 0) ;; the menubar on OSX is ok
 (scroll-bar-mode 0)
 
 (setq inhibit-startup-screen t)

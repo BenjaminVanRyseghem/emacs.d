@@ -25,6 +25,7 @@
 			    shell-switcher
 			    switch-window
 			    expand-region
+			    dired-details
 					;drag-stuff    ;; see later
 			    emacs-jabber)
   "A list of packages to ensure are installed at launch.")
