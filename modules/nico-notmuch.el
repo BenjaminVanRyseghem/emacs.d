@@ -1,7 +1,4 @@
 (require 'notmuch)
-(require 'bbdb)
-(bbdb-initialize 'message)
-(setq bbdb-north-american-phone-numbers-p nil)
 
 (define-key global-map (kbd "M-N") 'notmuch)
 
@@ -17,12 +14,12 @@
   "Email SMTP Accounts. Each account is an alist.")
 
 (setq nico/email-accounts
-  '(("petton.nicolas@gmail.com" . ((name . "Nicolas Petton")
-				   (signature . "~/.signature-gmail")
-				   (smtp . "gmail")))
-    ("nico@objectfusion.fr" . ((name . "Nicolas Petton")
-			       (signature . "~/.signature-objectfusion")
-			       (smtp . "objectfusion")))))
+      '(("petton.nicolas@gmail.com" . ((name . "Nicolas Petton")
+				       (signature . "~/.signature-gmail")
+				       (smtp . "gmail")))
+	("nico@objectfusion.fr" . ((name . "Nicolas Petton")
+				   (signature . "~/.signature-objectfusion")
+				   (smtp . "objectfusion")))))
 
 
 (defun nico/select-email-account (name)
@@ -41,8 +38,8 @@
 	      user-full-name (cdr (assoc 'name account))
 	      message-signature-file (cdr (assoc 'signature account))
 	      message-sendmail-extra-arguments (list "-a" (cdr (assoc 'smtp account)))))))
-    
-  
+
+
 ;; Default email account
 (nico/select-email-account "petton.nicolas@gmail.com")
 
@@ -51,21 +48,21 @@
   (if (message-mail-p)
       (save-excursion
 	(let ((from
-		(save-restriction
-		  (message-narrow-to-headers)
-		  (message-fetch-field "from"))))
+	       (save-restriction
+		 (message-narrow-to-headers)
+		 (message-fetch-field "from"))))
 	  (nico/select-email-account from)
 	  (nico/update-message)))))
 
 (defun nico/update-message ()
   "Update the signature from the current account"
   (save-excursion
-      (message-goto-signature)
-      (previous-line)
-      (let ((position (point)))
-	(end-of-buffer)
-	(delete-region position (point)))
-      (message-insert-signature)))
+    (message-goto-signature)
+    (previous-line)
+    (let ((position (point)))
+      (end-of-buffer)
+      (delete-region position (point)))
+    (message-insert-signature)))
 
 (defun nico/add-mode-line-account ()
   (add-to-list 'mode-line-buffer-identification 
@@ -81,11 +78,17 @@
   (require 'gnus-art)
   (offlineimap)
 
+  ;; Email addresses autocomptetion based on motmuch db itself
+  (require 'notmuch-address)
+  (setq notmuch-address-command "~/.emacs.d/bin/nottoomuch-addresses.sh")
+  (notmuch-address-message-insinuate)
+
+
   (setq offlineimap-enable-mode-line-p '(member
 					 major-mode
 					 '(offlineimap-mode
 					   notmuch-hello-mode)))
- 
+  
   (define-key notmuch-hello-mode-map (kbd "C-c C-c") 'nico/notmuch-update-all)
   (define-key notmuch-hello-mode-map (kbd "C-c C-u") 'nico/notmuch-update)
   
@@ -93,9 +96,9 @@
   (define-key notmuch-search-mode-map "c" 'nico/notmuch-search-tag-all-read)
   (define-key notmuch-search-mode-map "u" 'nico/notmuch-search-tag-unread)
   (define-key notmuch-search-mode-map "i" 'nico/notmuch-search-tag-important))
-  
+
 (defun nico/notmuch-search-tag (tags)
-  (notmuch-search-tag-thread tags)
+  (notmuch-search-tag tags)
   (next-line))
 
 (defun nico/notmuch-search-tag-read ()
@@ -106,7 +109,7 @@
   (interactive)
   (if (y-or-n-p "Mark all threads as read? ")
       (progn
-	(notmuch-search-tag-all "-unread")
+	(notmuch-search-tag-all '("-unread"))
 	(notmuch-search-quit))))
 
 (defun nico/notmuch-search-tag-unread ()
@@ -142,4 +145,13 @@
 			       ("riak" . "to:riak-users <riak-users@lists.basho.com> and tag:unread") 
 			       ("seaside" . "to:seaside@lists.squeakfoundation.org and tag:unread")))
 
+;; notmuch-labeler
+(require 'notmuch-labeler)
+(notmuch-labeler-image-tag "unread")
+(notmuch-labeler-image "unread" "~/.emacs.d/el-get/notmuch-labeler/resources/star.svg" 'svg)
+
+(notmuch-labeler-image-tag "important")
+(notmuch-labeler-image "important" "~/.emacs.d/el-get/notmuch-labeler/resources/tag.svg" 'svg)
+
 (provide 'nico-notmuch)
+

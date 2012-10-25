@@ -1,0 +1,4 @@
+(:name notmuch-labeler
+       :description "Notmuch labeler"
+       :type github
+       :pkgname "DamienCassou/notmuch-labeler")

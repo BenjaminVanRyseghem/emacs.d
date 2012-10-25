@@ -1,4 +1,5 @@
 (require 'dired-x)
+(require 'dired-details)
 
 ;;Enable some commands
 (put 'dired-find-alternate-file 'disabled nil)
@@ -37,6 +38,34 @@
 (set-face-attribute 'dired-header nil
 		    :weight 'bold
 		    :foreground "SkyBlue")
+
+(let ((dired-guessing
+       '(
+	 ("\\.avi" "totem")
+	 ("\\.docx?" "libreoffice")
+	 ("\\.flv" "vlc")
+	 ("\\.html?" "firefox")
+	 ("\\.image" "pharo-vm")
+	 ("\\.jar" "java -jar")
+	 ("\\.jpg" "eog")
+	 ("\\.mkv" "totem")
+	 ("\\.mp4" "totem")
+	 ("\\.od[pt]" "libreoffice")
+	 ("\\.ogv" "totem")
+	 ("\\.pdf" "acroread")
+	 ("\\.png" "eog")
+	 ("\\.pptx?" "libreoffice")
+	 ("\\.sh" "bash")
+	 ("\\.svg" "inkscape")
+	 ("\\.uxf" "~/Downloads/Umlet/umlet.sh")
+	 ("\\.webm" "totem")
+	 ("\\.xlsx?" "libreoffice")
+	 )))
+  (mapcar (lambda (pair)
+	    (add-to-list 'dired-guess-shell-alist-user
+			 (list (first pair) (concat "nohup " (second pair)))))
+	  dired-guessing))
+
 
 
 (provide 'nico-dired)

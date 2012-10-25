@@ -10,24 +10,25 @@
 
 (push "~/.emacs.d/el-get-recipes" el-get-recipe-path)
 
-(defvar nico/get-packages '(auctex 
-			    pcomplete-plugins
-			    browse-kill-ring 
+(defvar nico/get-packages '(					;drag-stuff    ;; see later
 			    bbdb
-			    dvc
-			    nyan-mode
-			    magit 
-			    paredit 
-			    slime 
-			    htmlize 
-			    offlineimap
-			    twilight-anti-bright-theme
-			    shell-switcher
-			    switch-window
-			    expand-region
+			    browse-kill-ring 
 			    dired-details
-					;drag-stuff    ;; see later
-			    emacs-jabber)
+			    emacs-jabber
+			    expand-region
+			    google-maps
+			    htmlize 
+			    magit 
+			    notmuch-labeler
+			    nyan-mode
+			    offlineimap
+			    paredit 
+			    pcomplete-plugins
+			    rainbow-mode
+			    shell-switcher
+			    slime 
+			    switch-window
+			    twilight-anti-bright-theme)
   "A list of packages to ensure are installed at launch.")
 
 (el-get 'sync nico/get-packages)

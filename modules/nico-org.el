@@ -6,8 +6,9 @@
 (setq org-log-done t)
 
 ;; Org-contacts
-;;  (require 'org-contacts)
-;;  (setq org-contacts-files '("~/org/contacts.org"))
+(require 'org-contacts)
+(setq org-contacts-files '("~/org/contacts.org")
+      org-contacts-vcard-file "~/org/contacts.vcf")
 
 ;;Org-notmuch
 (require 'org-notmuch)
