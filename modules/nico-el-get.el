@@ -15,10 +15,12 @@
 			    browse-kill-ring 
 			    dired-details
 			    emacs-jabber
+			    epresent
 			    expand-region
 			    google-maps
 			    htmlize 
 			    magit 
+			    multiple-cursors
 			    notmuch-labeler
 			    nyan-mode
 			    offlineimap
@@ -28,7 +30,8 @@
 			    shell-switcher
 			    slime 
 			    switch-window
-			    twilight-anti-bright-theme)
+			    twilight-anti-bright-theme
+			    undo-tree)
   "A list of packages to ensure are installed at launch.")
 
 (el-get 'sync nico/get-packages)

@@ -7,4 +7,6 @@
 
 (add-hook 'after-save-hook 'byte-compile-current-buffer)
 
+(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+
 (provide 'nico-elisp)

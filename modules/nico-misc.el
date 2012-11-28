@@ -17,4 +17,7 @@
 (global-set-key (kbd "C-c j") 'bookmark-jump)
 (global-set-key [f11] 'toggle-fullscreen)
 
+(global-undo-tree-mode)
+(global-set-key (kbd "C-c u") 'undo-tree-visualize)
+
 (provide 'nico-misc)
