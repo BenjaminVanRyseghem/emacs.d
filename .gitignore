@@ -4,6 +4,7 @@ eshell
 .org-id-locations
 *.elc
 *.el~
+image-dired/
 tramp
 url
 bookmarks
