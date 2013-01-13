@@ -6,6 +6,11 @@
 (setq inhibit-startup-screen t)
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+;; customize file
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file)
+
+
 ;; Behave sanely
 (require 'cl)
 
@@ -27,7 +32,10 @@
 
 (icomplete-mode 99)
 (ido-mode)
+(cua-selection-mode 1)
 
+;; Change the behavior of M-f and co to properly handle camel case
+(global-subword-mode 1)
 
 ;; Start server
 (server-start)
@@ -52,6 +60,3 @@
 
 ;; Paren mode
 (show-paren-mode t)
-
-;; Turn off the annoying bell
-(setq ring-bell-function 'ignore)

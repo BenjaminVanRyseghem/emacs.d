@@ -1,10 +1,12 @@
 ;;; org-notmuch.el --- Support for links to notmuch messages from within Org-mode
 
-;; Copyright (C) 2010  Matthieu Lemerre
+;; Copyright (C) 2010-2012  Matthieu Lemerre
 
 ;; Author: Matthieu Lemerre <racin@free.fr>
 ;; Keywords: outlines, hypermedia, calendar, wp
 ;; Homepage: http://orgmode.org
+
+;; This file is not part of GNU Emacs.
 
 ;; This file is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -30,7 +32,7 @@
 
 ;; Links have one the following form
 ;; notmuch:<search terms>
-;; notmuch-search:<search terms>. 
+;; notmuch-search:<search terms>.
 
 ;; The first form open the queries in notmuch-show mode, whereas the
 ;; second link open it in notmuch-search mode. Note that queries are
@@ -38,6 +40,8 @@
 ;; different from whet the link was stored.
 
 ;;; Code:
+
+(require 'org)
 
 ;; Install the link type
 (org-add-link-type "notmuch" 'org-notmuch-open)
@@ -54,16 +58,16 @@
       (org-store-link-props :type "notmuch" :from from :to to
        			    :subject subject :message-id message-id)
       (setq desc (org-email-link-description))
-      (setq link (org-make-link "notmuch:"  "id:" message-id))
+      (setq link (concat "notmuch:"  "id:" message-id))
       (org-add-link-props :link link :description desc)
       link)))
-  
+
 (defun org-notmuch-open (path)
   "Follow a notmuch message link specified by PATH."
   (org-notmuch-follow-link path))
 
 (defun org-notmuch-follow-link (search)
-  "Follow a notmuch link to SEARCH. 
+  "Follow a notmuch link to SEARCH.
 
 Can link to more than one message, if so all matching messages are shown."
   (require 'notmuch)
@@ -78,10 +82,10 @@ Can link to more than one message, if so all matching messages are shown."
 (defun org-notmuch-search-store-link ()
   "Store a link to a notmuch search or message."
   (when (eq major-mode 'notmuch-search-mode)
-    (let ((link (org-make-link "notmuch-search:" 
-			       (org-link-escape notmuch-search-query-string)))
+    (let ((link (concat "notmuch-search:"
+			(org-link-escape notmuch-search-query-string)))
 	  (desc (concat "Notmuch search: " notmuch-search-query-string)))
-      (org-store-link-props :type "notmuch-search" 
+      (org-store-link-props :type "notmuch-search"
 			    :link link
 			    :description desc)
       link)))

@@ -75,4 +75,8 @@
                          (".*" "echo 'Could not extract the file:'")))))
     (eshell-command-result (concat command " " file))))
 
+;;;###autoload
+(defun eshell/tunnel (port host)
+  (tunnel (number-to-string port) host))
+
 (provide 'nico-eshell)

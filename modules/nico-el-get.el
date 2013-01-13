@@ -21,6 +21,7 @@
 			    htmlize 
 			    magit 
 			    multiple-cursors
+			    notify
 			    notmuch-labeler
 			    nyan-mode
 			    offlineimap

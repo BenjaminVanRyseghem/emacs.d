@@ -1,14 +1,58 @@
-(require 'org-install)
 (require 'org)
+(require 'org-mobile)
+
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
 
+;; MobileOrg
+(setq org-mobile-directory "~/Dropbox/MobileOrg")
+(org-mobile-pull) ;; run org-mobile-pull at startup
+
+
+(defvar org-mobile-push-timer nil
+  "Timer that `org-mobile-push-timer' used to reschedule itself, or nil.")
+
+(defun org-mobile-push-with-delay (secs)
+  (when org-mobile-push-timer
+    (cancel-timer org-mobile-push-timer))
+  (setq org-mobile-push-timer
+        (run-with-idle-timer
+         (* 1 secs) nil 'org-mobile-push)))
+
+(add-hook 'after-save-hook 
+	  (lambda () 
+	    (when (eq major-mode 'org-mode)
+	      (dolist (file (org-mobile-files-alist))
+		(if (string= (expand-file-name (car file)) (buffer-file-name))
+		    (org-mobile-push-with-delay 30))))))
+
+(run-at-time nil 3600 '(lambda () (org-mobile-push-with-delay 1)))
+
+(defun install-monitor (file secs)
+  (run-with-timer
+   0 secs
+   (lambda (f p)
+     (unless (< p (second (time-since (elt (file-attributes f) 5))))
+       (org-mobile-pull)))
+   file secs))
+
+(install-monitor (file-truename
+                  (concat
+                   (file-name-as-directory org-mobile-directory)
+		   org-mobile-capture-file))
+                 5)
+
+;; Do a pull every 5 minutes to circumvent problems with timestamping
+;; (ie. dropbox bugs)
+(run-with-timer 0 (* 5 60) 'org-mobile-pull)
+
+
 ;; Org-contacts
-(require 'org-contacts)
-(setq org-contacts-files '("~/org/contacts.org")
-      org-contacts-vcard-file "~/org/contacts.vcf")
+;; (require 'org-contacts)
+;; (setq org-contacts-files '("~/org/contacts.org")
+;;       org-contacts-vcard-file "~/org/contacts.vcf")
 
 ;;Org-notmuch
 (require 'org-notmuch)
@@ -18,6 +62,7 @@
 
 (setf org-default-notes-file "~/org/inbox.org")
 (defvar nico/org-email-file "~/org/emails.org")
+(defvar nico/org-calendar-file "~/org/calendar.org")
 
 
 (setq org-directory "~/org")
@@ -27,9 +72,10 @@
 (setq org-agenda-files (list
 			nico/org-email-file
 			org-default-notes-file
+			nico/org-calendar-file
 			"~/org/work.org"
-			"~/org/calendar.org" 
-			"~/org/home.org"))
+			"~/org/home.org"
+			"~/org/stuff.org"))
 
 (setq org-refile-targets '(("~/org/work.org" :maxlevel . 3) 
 			   ("~/org/home.org" :maxlevel . 3)
@@ -44,24 +90,33 @@
 
 ;; My own todo keywords and their shortcuts
 (setq org-todo-keywords
-       '((sequence "TODO(t)" "|" "DONE(d)")
-       (sequence "FEATURE(f)" "|" "COMPLETED(c)")
-       (sequence "BUG(b)" "|" "FIXED(x)")
-       (sequence "APPT(p)" "|" "CANCELED(a)")
-       (sequence "WAITING(w)" "|")))
-
+      '((sequence "TODO(t)" "|" "DONE(d)")
+	(sequence "FEATURE(f)" "|" "COMPLETED(c)")
+	(sequence "BUG(b)" "|" "FIXED(x)")
+	(sequence "APPT(p)" "|" "CANCELED(a)")
+	(sequence "WAITING(w)" "|")))
 
 ;; Automatic export in ~/Public for org files. 
 (defun nico/automatic-org-export-as-html ()
-  (if (string-match "^/Users/nico/org/.*" (buffer-file-name))
+  (if (string-match "^/home/nico/org/.*" (buffer-file-name))
       (org-export-as-html 3 nil nil nil nil "~/Public/org/")))
 
 ;; Automatic iCal export
 (defun nico/automatic-org-export-as-ical ()
-  (if (string-match "^/Users/nico/org/.*" (buffer-file-name))
+  (if (string-match "^/home/nico/org/.*" (buffer-file-name))
       (progn
 	(org-export-icalendar-this-file)
 	(org-export-icalendar-all-agenda-files))))
+
+(defun nico/org-export-agenda ()
+  (org-agenda-write "~/Public/org/agenda.html"))
+
+;; Agenda custom commands
+(setq org-agenda-custom-commands
+      '(("X" agenda "" nil ("~/Public/org/agenda.html"))))
+
+;; Export the agenda
+;; (run-at-time nil 3600 'nico/org-export-agenda)
 
 ;; Export TODO items in iCal too
 (setq org-icalendar-include-todo t)
@@ -103,6 +158,11 @@
 	     '("w" "Waiting Answer [email]" entry (file+headline nico/org-email-file "Waiting")
 	       "* WAITING %i %?   \n  %a\n  %U"))
 
+(add-to-list 'org-capture-templates
+	     '("p" "Appointment" entry (file+headline nico/org-calendar-file "Appointment")
+	       "* APPT %i %?   \n  %a\n  %U"))
+
+
 (defvar french-holiday
       '((holiday-fixed 1 1 "Jour de l'an")
         (holiday-fixed 5 1 "Fête du travail")
@@ -120,6 +180,26 @@
       calendar-holidays (append french-holiday)
       calendar-mark-holidays-flag t)
 
+
+;; Org-agenda and Emacs appointments
+
+(defun nico/notify-appt (time-to-appt new-time msg)
+  (notify "Appt. Reminder" msg))
+
+(setq appt-audible nil
+      appt-message-warning-time 30
+      appt-display-format 'window
+      appt-disp-window-function 'nico/notify-appt)
+
+;; Run once, activate and schedule refresh
+(defun nico/check-appt ()
+  (org-agenda-to-appt t '((headline "APPT"))))
+(nico/check-appt)
+
+(run-at-time nil 3600 'nico/check-appt)
+(appt-activate t)
+
+
 ;; Use Google-weather in agenda view
 ;; (require 'google-weather)
 ;; (require 'org-google-weather)
@@ -131,8 +211,5 @@
 ;; 	("work" "~/.emacs.d/icons/work.png" nil nil :ascent center)
 ;; 	("contacts" "~/.emacs.d/icons/cake.png" nil nil :ascent center)
 ;; 	("calendar" "~/.emacs.d/icons/calendar.png" nil nil :ascent center)))
-
-;; Start emacs with my agenda list
-(org-agenda-list)
 
 (provide 'nico-org)
