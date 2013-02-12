@@ -10,7 +10,7 @@
 
 (push "~/.emacs.d/el-get-recipes" el-get-recipe-path)
 
-(defvar nico/get-packages '(					;drag-stuff    ;; see later
+(defvar nico/get-packages '(drag-stuff
 			    bbdb
 			    browse-kill-ring 
 			    dired-details
@@ -19,6 +19,7 @@
 			    expand-region
 			    google-maps
 			    htmlize 
+			    ido-ubiquitous
 			    magit 
 			    multiple-cursors
 			    notify

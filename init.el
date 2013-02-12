@@ -32,7 +32,7 @@
 
 (icomplete-mode 99)
 (ido-mode)
-(cua-selection-mode 1)
+;; (cua-selection-mode 1)
 
 ;; Change the behavior of M-f and co to properly handle camel case
 (global-subword-mode 1)

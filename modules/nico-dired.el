@@ -20,7 +20,8 @@
 (defun nico/dired-set-keys ()
   (local-set-key (kbd "M-s") 'find-name-dired)
   (local-set-key (kbd "K") 'dired-kill-subdir)
-  (local-set-key (kbd "o") 'nico/dired-open-files))
+  ;;(local-set-key (kbd "o") 'nico/dired-open-files)
+  (local-set-key (kbd "C-x C-a") 'gnus-dired-attach))
 
 (global-set-key (kbd "C-x C-j") 'dired-jump)
 

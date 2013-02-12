@@ -188,6 +188,25 @@
 
 (add-hook 'notmuch-hello-refresh-hook 'nico/notmuch-refresh-status-message)
 
+;;  message-mode and dired
+(require 'gnus-dired)
+
+;; make the `gnus-dired-mail-buffers' function also work on
+;; message-mode derived modes
+(defun gnus-dired-mail-buffers ()
+  "Return a list of active message buffers."
+  (let (buffers)
+    (save-current-buffer
+      (dolist (buffer (buffer-list t))
+     	(set-buffer buffer)
+     	(when (and (derived-mode-p 'message-mode)
+		   (null message-sent-message-via))
+     	  (push (buffer-name buffer) buffers))))
+    (nreverse buffers)))
+
+(setq gnus-dired-mail-mode 'message-mode)
+(add-hook 'dired-mode-hook 'turn-on-gnus-dired-mode)
+
 ;; ASynK
 (defun asynk ()
   (interactive)

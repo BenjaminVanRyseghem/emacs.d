@@ -33,4 +33,16 @@
 ;; (global-undo-tree-mode)
 ;; (global-set-key (kbd "C-c u") 'undo-tree-visualize)
 
+
+;; multiple cursors
+(global-set-key (kbd "C-<return>") 'mc/edit-lines)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+;; drag-stuff
+(drag-stuff-global-mode t)
+(add-to-list 'drag-stuff-except-modes 'org-mode)
+(add-to-list 'drag-stuff-except-modes 'rebase-mode)
+
 (provide 'nico-misc)

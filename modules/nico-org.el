@@ -81,6 +81,12 @@
 			   ("~/org/home.org" :maxlevel . 3)
 			   ("~/org/someday.org" :level . 1)))
 
+;; Next todo actions agenda view
+(add-to-list 'org-agenda-custom-commands 
+	     '("c" "Next TODO" tags-todo "" ;; (1) (2) (3) (4)
+	       ((org-agenda-files '("~/org/work.org"))
+		(org-agenda-sorting-strategy '(todo-state-down)))))
+
 ;; Open notes (notes.org) file
 (global-set-key (kbd "C-M-n") 'nico/find-notes-file)
 
@@ -121,8 +127,8 @@
 ;; Export TODO items in iCal too
 (setq org-icalendar-include-todo t)
 
-(add-hook 'after-save-hook 'nico/automatic-org-export-as-html)
 ;; Disabled as I don't use it currently
+;; (add-hook 'after-save-hook 'nico/automatic-org-export-as-html)
 ;; (add-hook 'after-save-hook 'automatic-org-export-as-ical)
 
 ;; My blog settings. Jekyll + org-mode
