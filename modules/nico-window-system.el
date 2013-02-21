@@ -7,8 +7,7 @@
 
 (defun set-font ()
   (interactive)
-  ;; (set-face-attribute 'default nil :font "Monaco-12")
-  )
+  (set-face-attribute 'default nil :font "Monaco-12"))
 
 (defun setup-color-theme ()
   (interactive)

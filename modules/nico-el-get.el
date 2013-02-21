@@ -14,7 +14,6 @@
 			    bbdb
 			    browse-kill-ring 
 			    dired-details
-			    emacs-jabber
 			    epresent
 			    expand-region
 			    google-maps

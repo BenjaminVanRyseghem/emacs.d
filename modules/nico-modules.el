@@ -1,3 +1,4 @@
+(require 'nico-darwin)
 (require 'nico-el-get)
 (require 'nico-package)
 (require 'nico-backups)
@@ -7,7 +8,7 @@
 (require 'nico-eshell)
 (require 'nico-gnus)
 (require 'nico-notmuch)
-(require 'nico-jabber)
+;; (require 'nico-jabber)
 (require 'nico-js)
 (require 'nico-latex)
 (require 'nico-smalltalk)
