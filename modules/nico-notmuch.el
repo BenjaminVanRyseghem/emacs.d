@@ -210,10 +210,7 @@
 ;; ASynK
 (defun asynk ()
   (interactive)
-  (async-shell-command 
-   (concat 
-    "python ~/builds/ASynK/asynk.py --op=sync --pwd=" 
-    (read-passwd "Password: "))))
+  (async-shell-command "python ~/builds/ASynK/asynk.py --op=sync" ))
 
 (provide 'nico-notmuch)
 

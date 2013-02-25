@@ -31,7 +31,7 @@
 (global-set-key [f11] 'toggle-fullscreen)
 
 ;; (global-undo-tree-mode)
-;; (global-set-key (kbd "C-c u") 'undo-tree-visualize)
+(global-set-key (kbd "C-c u") 'undo-tree-visualize)
 
 
 ;; multiple cursors

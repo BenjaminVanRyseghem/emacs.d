@@ -7,7 +7,7 @@
 (require 'nico-erc)
 (require 'nico-eshell)
 (require 'nico-gnus)
-(require 'nico-notmuch)
+;; (require 'nico-notmuch)
 ;; (require 'nico-jabber)
 (require 'nico-js)
 (require 'nico-latex)

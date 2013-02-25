@@ -1,5 +1,5 @@
-(require 'nyan-mode)
-(nyan-mode)
+;; (require 'nyan-mode)
+;; (nyan-mode)
 ;;(display-time-mode)
 
 (setq-default

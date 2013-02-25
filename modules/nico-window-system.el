@@ -7,7 +7,8 @@
 
 (defun set-font ()
   (interactive)
-  (set-face-attribute 'default nil :font "Monaco-12"))
+  (if (system-type-is-darwin)
+      (set-face-attribute 'default nil :font "Menlo-13")))
 
 (defun setup-color-theme ()
   (interactive)

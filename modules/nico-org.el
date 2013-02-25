@@ -1,10 +1,19 @@
 (require 'org)
 (require 'org-mobile)
+(require 'org-capture)
+(require 'org-mac-link-grabber)
+
+(add-hook 'org-mode-hook 
+	  (lambda () 
+	    (define-key org-mode-map (kbd "C-c g") 'omlg-grab-link)))
 
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
-(setq org-log-done t)
+(define-key global-map "\C-cb" 'org-iswitchb)
+(define-key global-map "\C-cc" 'org-capture)
+(define-key global-map "\C-cg" 'omlg-grab-link)
+
 
 ;; MobileOrg
 (setq org-mobile-directory "~/Dropbox/MobileOrg")
@@ -28,37 +37,11 @@
 		(if (string= (expand-file-name (car file)) (buffer-file-name))
 		    (org-mobile-push-with-delay 30))))))
 
-(run-at-time nil 3600 '(lambda () (org-mobile-push-with-delay 1)))
 
-(defun install-monitor (file secs)
-  (run-with-timer
-   0 secs
-   (lambda (f p)
-     (unless (< p (second (time-since (elt (file-attributes f) 5))))
-       (org-mobile-pull)))
-   file secs))
-
-(install-monitor (file-truename
-                  (concat
-                   (file-name-as-directory org-mobile-directory)
-		   org-mobile-capture-file))
-                 5)
-
-;; Do a pull every 5 minutes to circumvent problems with timestamping
-;; (ie. dropbox bugs)
-(run-with-timer 0 (* 5 60) 'org-mobile-pull)
-
-
-;; Org-contacts
-;; (require 'org-contacts)
-;; (setq org-contacts-files '("~/org/contacts.org")
-;;       org-contacts-vcard-file "~/org/contacts.vcf")
+(run-with-timer 0 360 'org-mobile-pull)
 
 ;;Org-notmuch
-(require 'org-notmuch)
-
-;; Org-capture
-(define-key global-map "\C-cc" 'org-capture)
+;; (require 'org-notmuch)
 
 (setf org-default-notes-file "~/org/inbox.org")
 (defvar nico/org-email-file "~/org/emails.org")
@@ -80,12 +63,6 @@
 (setq org-refile-targets '(("~/org/work.org" :maxlevel . 3) 
 			   ("~/org/home.org" :maxlevel . 3)
 			   ("~/org/someday.org" :level . 1)))
-
-;; Next todo actions agenda view
-(add-to-list 'org-agenda-custom-commands 
-	     '("c" "Next TODO" tags-todo "" ;; (1) (2) (3) (4)
-	       ((org-agenda-files '("~/org/work.org"))
-		(org-agenda-sorting-strategy '(todo-state-down)))))
 
 ;; Open notes (notes.org) file
 (global-set-key (kbd "C-M-n") 'nico/find-notes-file)
@@ -116,10 +93,6 @@
 
 (defun nico/org-export-agenda ()
   (org-agenda-write "~/Public/org/agenda.html"))
-
-;; Agenda custom commands
-(setq org-agenda-custom-commands
-      '(("X" agenda "" nil ("~/Public/org/agenda.html"))))
 
 ;; Export the agenda
 ;; (run-at-time nil 3600 'nico/org-export-agenda)
@@ -156,7 +129,7 @@
 	       "* %i %?   \n  %a\n"))
 (add-to-list 'org-capture-templates
 	     '("a" "Action [email]" entry (file+headline nico/org-email-file "Actions")
-	       "* TODO %i %?   \n  %a\n  %U"))
+	       "* TODO %i %?   \n  %a\n"))
 (add-to-list 'org-capture-templates
 	     '("i" "Tickler [email]" entry (file+headline nico/org-email-file "Tickler")
 	       "* %i %?   \n  %a"))
@@ -186,7 +159,6 @@
       calendar-holidays (append french-holiday)
       calendar-mark-holidays-flag t)
 
-
 ;; Org-agenda and Emacs appointments
 
 (defun nico/notify-appt (time-to-appt new-time msg)
@@ -205,6 +177,8 @@
 (run-at-time nil 3600 'nico/check-appt)
 (appt-activate t)
 
+;; Pomodoro timer
+(setq org-timer-default-timer 25)
 
 ;; Use Google-weather in agenda view
 ;; (require 'google-weather)
