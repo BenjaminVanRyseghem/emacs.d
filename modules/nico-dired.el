@@ -20,7 +20,7 @@
 (defun nico/dired-set-keys ()
   (local-set-key (kbd "M-s") 'find-name-dired)
   (local-set-key (kbd "K") 'dired-kill-subdir)
-  ;;(local-set-key (kbd "o") 'nico/dired-open-files)
+  (local-set-key (kbd "o") 'nico/dired-open-file)
   (local-set-key (kbd "C-x C-a") 'gnus-dired-attach))
 
 (global-set-key (kbd "C-x C-j") 'dired-jump)
@@ -28,17 +28,26 @@
 (defun nico/dired-open-files () 
   (interactive)
   (dolist (each (dired-get-marked-files t current-prefix-arg)
-		(dired-smart-shell-command (concat "xdg-open " each)))))
-;;  (dired-do-shell-command "o" nil (dired-get-marked-files t current-prefix-arg)))
+		(message (concat "open " each))
+		(dired-smart-shell-command (concat "open " each)))))
+;;(dired-do-shell-command "o" nil (dired-get-marked-files t current-prefix-arg)))
+
+(defun nico/dired-open-file ()
+  "In dired, open the file named on this line."
+  (interactive)
+  (let* ((file (dired-get-filename nil t)))
+    (message "Opening %s..." file)
+    (call-process "open" nil 0 nil file)
+    (message "Opening %s done" file)))
 
 
 ;; faces
-(set-face-attribute 'dired-directory nil
-		    :foreground "SkyBlue")
+;; (set-face-attribute 'dired-directory nil
+;; 		    :foreground "SkyBlue")
 
-(set-face-attribute 'dired-header nil
-		    :weight 'bold
-		    :foreground "SkyBlue")
+;; (set-face-attribute 'dired-header nil
+;; 		    :weight 'bold
+;; 		    :foreground "SkyBlue")
 
 (let ((dired-guessing '(("\\.docx?" "libreoffice")
 			("\\.flv" "vlc")

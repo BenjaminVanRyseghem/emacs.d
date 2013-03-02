@@ -10,7 +10,8 @@
 
 (push "~/.emacs.d/el-get-recipes" el-get-recipe-path)
 
-(defvar nico/get-packages '(drag-stuff
+(defvar nico/get-packages '(auctex
+			    drag-stuff
 			    bbdb
 			    browse-kill-ring 
 			    dired-details
@@ -26,6 +27,7 @@
 			    nyan-mode
 			    offlineimap
 			    paredit 
+			    powerline
 			    pcomplete-plugins
 			    rainbow-mode
 			    shell-switcher

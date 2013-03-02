@@ -1,4 +1,0 @@
-(:name solarized-theme
-       :description "Solarized theme"
-       :type github
-       :pkgname "bbatsov/solarized-emacs")

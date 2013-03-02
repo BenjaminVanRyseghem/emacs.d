@@ -1,4 +1,0 @@
-(:name undo-tree
-       :description "Undo tree"
-       :type elpa
-       :pkgname "undo-tree")

@@ -5,11 +5,6 @@
   (set-frame-parameter nil 'fullscreen
 		       (if (frame-parameter nil 'fullscreen) nil 'fullboth)))
 
-(defun set-font ()
-  (interactive)
-  (if (system-type-is-darwin)
-      (set-face-attribute 'default nil :font "Menlo-13")))
-
 (defun setup-color-theme ()
   (interactive)
   (load-theme 'twilight t))
@@ -20,8 +15,8 @@
 			(tooltip-mode -1)
 			(mouse-wheel-mode t)
 			(blink-cursor-mode -1)
-			(set-font)
-			(setup-color-theme))))
+			;; (setup-color-theme)
+			)))
 
 (setup-window-system)
 

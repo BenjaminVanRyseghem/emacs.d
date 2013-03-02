@@ -1,19 +1,16 @@
 (require 'org)
 (require 'org-mobile)
-(require 'org-capture)
 (require 'org-mac-link-grabber)
 
-(add-hook 'org-mode-hook 
-	  (lambda () 
-	    (define-key org-mode-map (kbd "C-c g") 'omlg-grab-link)))
-
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (define-key global-map "\C-cb" 'org-iswitchb)
 (define-key global-map "\C-cc" 'org-capture)
 (define-key global-map "\C-cg" 'omlg-grab-link)
 
+(define-key org-mode-map (kbd "C-c g") 'omlg-grab-link)
 
 ;; MobileOrg
 (setq org-mobile-directory "~/Dropbox/MobileOrg")
@@ -28,29 +25,22 @@
     (cancel-timer org-mobile-push-timer))
   (setq org-mobile-push-timer
         (run-with-idle-timer
-         (* 1 secs) nil 'org-mobile-push)))
+         secs nil 'org-mobile-push)))
 
 (add-hook 'after-save-hook 
 	  (lambda () 
 	    (when (eq major-mode 'org-mode)
 	      (dolist (file (org-mobile-files-alist))
 		(if (string= (expand-file-name (car file)) (buffer-file-name))
-		    (org-mobile-push-with-delay 30))))))
-
+		    (org-mobile-push-with-delay 60))))))
 
 (run-with-timer 0 360 'org-mobile-pull)
 
-;;Org-notmuch
-;; (require 'org-notmuch)
 
 (setf org-default-notes-file "~/org/inbox.org")
 (defvar nico/org-email-file "~/org/emails.org")
 (defvar nico/org-calendar-file "~/org/calendar.org")
-
-
 (setq org-directory "~/org")
-;; (setq org-mobile-inbox-for-pull "~/org/flagged.org")
-;; (setq org-mobile-directory "~/Dropbox/MobileOrg")
 
 (setq org-agenda-files (list
 			nico/org-email-file
@@ -71,22 +61,14 @@
   (interactive)
   (find-file org-default-notes-file))
 
-;; My own todo keywords and their shortcuts
-(setq org-todo-keywords
-      '((sequence "TODO(t)" "|" "DONE(d)")
-	(sequence "FEATURE(f)" "|" "COMPLETED(c)")
-	(sequence "BUG(b)" "|" "FIXED(x)")
-	(sequence "APPT(p)" "|" "CANCELED(a)")
-	(sequence "WAITING(w)" "|")))
-
 ;; Automatic export in ~/Public for org files. 
-(defun nico/automatic-org-export-as-html ()
-  (if (string-match "^/home/nico/org/.*" (buffer-file-name))
+(defun nico/org-export-as-html ()
+  (if (string-match "^/Users/nico/org/.*" (buffer-file-name))
       (org-export-as-html 3 nil nil nil nil "~/Public/org/")))
 
 ;; Automatic iCal export
-(defun nico/automatic-org-export-as-ical ()
-  (if (string-match "^/home/nico/org/.*" (buffer-file-name))
+(defun nico/org-export-as-ical ()
+  (if (string-match "^/Users/nico/org/.*" (buffer-file-name))
       (progn
 	(org-export-icalendar-this-file)
 	(org-export-icalendar-all-agenda-files))))
@@ -94,30 +76,18 @@
 (defun nico/org-export-agenda ()
   (org-agenda-write "~/Public/org/agenda.html"))
 
-;; Export the agenda
-;; (run-at-time nil 3600 'nico/org-export-agenda)
-
 ;; Export TODO items in iCal too
 (setq org-icalendar-include-todo t)
 
-;; Disabled as I don't use it currently
-;; (add-hook 'after-save-hook 'nico/automatic-org-export-as-html)
-;; (add-hook 'after-save-hook 'automatic-org-export-as-ical)
-
 ;; My blog settings. Jekyll + org-mode
-(defun nico/automatic-org-blog-export-as-html ()
-  (if (string-match "^/home/nico/work/nicolas-petton.fr/org/.*" (buffer-file-name))
+(defun nico/org-blog-export-as-html ()
+  (if (string-match "^/Users/nico/work/nicolas-petton.fr/org/.*" (buffer-file-name))
       (org-export-as-html 3 nil nil nil t "~/work/nicolas-petton.fr/jekyll/_posts/")))
 
-(add-hook 'after-save-hook 'nico/automatic-org-blog-export-as-html)
+(add-hook 'after-save-hook 'nico/org-blog-export-as-html)
 
 ;; org-capture
 (setq org-capture-templates '())
-             ;; '(("c" "Contacts" entry (file (car org-contacts-files))
-             ;;   "* %(org-contacts-template-name)
-             ;;      :PROPERTIES:
-             ;;      :EMAIL: %(org-contacts-template-email)
-             ;;      :END:")))
 (add-to-list 'org-capture-templates
 	     '("t" "Todo [inbox]" entry (file+headline org-default-notes-file "Tasks")
 	       "* TODO %i %? \n  %a"))
@@ -156,11 +126,10 @@
         (holiday-easter-etc 50 "Lundi de Pentecôte")))
 
 (setq calendar-date-style 'european
-      calendar-holidays (append french-holiday)
+      calendar-holidays french-holiday
       calendar-mark-holidays-flag t)
 
 ;; Org-agenda and Emacs appointments
-
 (defun nico/notify-appt (time-to-appt new-time msg)
   (notify "Appt. Reminder" msg))
 
@@ -180,16 +149,46 @@
 ;; Pomodoro timer
 (setq org-timer-default-timer 25)
 
-;; Use Google-weather in agenda view
-;; (require 'google-weather)
-;; (require 'org-google-weather)
-;; (setq org-google-weather-icon-directory "~/.emacs.d/icons")
+;; Display the agenda
+(defun nico/jump-to-org-agenda ()
+  (interactive)
+  (let ((buffer (get-buffer "*Org Agenda*")))
+    (if buffer
+	(switch-to-buffer buffer)
+      (org-agenda-list))
+    (delete-other-windows)))
 
-;; Icons for categories
-;; (setq org-agenda-category-icon-alist
-;;       '(("notes" "~/.emacs.d/icons/notes.png" nil nil :ascent center)
-;; 	("work" "~/.emacs.d/icons/work.png" nil nil :ascent center)
-;; 	("contacts" "~/.emacs.d/icons/cake.png" nil nil :ascent center)
-;; 	("calendar" "~/.emacs.d/icons/calendar.png" nil nil :ascent center)))
+;; Go to the agenda buffer after 5' idle
+(run-with-idle-timer 300 t 'nico/jump-to-org-agenda)
+
+;; GDT next actions
+(defun nico/org-gtd-next ()
+  "Switch the next undone heading to NEXT state (if not at the last one)."
+  (interactive)
+  (save-excursion
+    (widen)
+    (org-back-to-heading)
+    (let ((level (outline-level))
+	  (found-next))
+      (outline-next-heading)
+      (while (and (= level (outline-level))
+		  (not found-next))
+	(if (org-entry-is-todo-p)
+	    (progn
+	      (setq found-next t)
+	      (org-todo "NEXT"))
+	  (outline-next-heading))))))
+
+(defun nico/org-gtd-mark-next (changes-plist)
+  (let ((from (plist-get change-plist :from))
+	(to (plist-get change-plist :to)))
+    (when (and (string-equal from "NEXT") 
+	       (member to org-done-keywords))
+      (nico/org-gtd-next))))
+
+(setq org-trigger-hook nil)
+(add-hook 'org-trigger-hook 'nico/org-gtd-mark-next)
+
+(nico/jump-to-org-agenda)
 
 (provide 'nico-org)
