@@ -159,7 +159,7 @@
     (delete-other-windows)))
 
 ;; Go to the agenda buffer after 5' idle
-(run-with-idle-timer 300 t 'nico/jump-to-org-agenda)
+;; (run-with-idle-timer 300 t 'nico/jump-to-org-agenda)
 
 ;; GDT next actions
 (defun nico/org-gtd-next ()

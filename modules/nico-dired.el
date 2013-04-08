@@ -1,5 +1,4 @@
 (require 'dired-x)
-(require 'dired-details)
 
 ;;Enable some commands
 (put 'dired-find-alternate-file 'disabled nil)

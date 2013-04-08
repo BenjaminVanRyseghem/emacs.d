@@ -30,7 +30,7 @@
 (global-set-key (kbd "C-c j") 'bookmark-jump)
 (global-set-key [f11] 'toggle-fullscreen)
 
-(global-set-key (kbd "C-c u") 'undo-tree-visualize)
+(global-set-key (kbd "C-x u") 'undo-tree-visualize)
 
 (global-set-key (kbd "C-=") 'er/expand-region)
 
@@ -45,8 +45,4 @@
 (add-to-list 'drag-stuff-except-modes 'org-mode)
 (add-to-list 'drag-stuff-except-modes 'rebase-mode)
 
-(global-set-key (kbd "M-m") 'iy-go-to-char)
-(global-set-key (kbd "C-M-m") 'iy-go-to-char-backward)
-
-;; shell switcher. Use ansi-term
 (provide 'nico-misc)
