@@ -55,7 +55,7 @@
 			   ("~/org/someday.org" :level . 1)))
 
 ;; Open notes (notes.org) file
-(global-set-key (kbd "C-M-n") 'nico/find-notes-file)
+;; (global-set-key (kbd "C-M-n") 'nico/find-notes-file)
 
 (defun nico/find-notes-file ()
   (interactive)

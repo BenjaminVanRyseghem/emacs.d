@@ -18,6 +18,7 @@
 (require 'nico-pharo-get)
 (require 'nico-smalltalk)
 (require 'nico-tramp)
+(require 'nico-undotree)
 (require 'nico-w3m)
 (require 'nico-whitespace)
 (require 'nico-window-system)

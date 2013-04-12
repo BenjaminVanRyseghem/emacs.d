@@ -1,5 +1,9 @@
 (require 'dired-x)
 
+;; auto-update dired buffers
+(setq global-auto-revert-non-file-buffers t
+      auto-revert-verbose nil)
+
 ;;Enable some commands
 (put 'dired-find-alternate-file 'disabled nil)
 

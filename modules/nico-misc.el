@@ -29,7 +29,6 @@
 (global-set-key (kbd "C-c C-s") 'sudo-edit)
 (global-set-key (kbd "C-c j") 'bookmark-jump)
 (global-set-key [f11] 'toggle-fullscreen)
-
 (global-set-key (kbd "C-x u") 'undo-tree-visualize)
 
 (global-set-key (kbd "C-=") 'er/expand-region)
