@@ -30,8 +30,9 @@
 (global-set-key (kbd "C-c j") 'bookmark-jump)
 (global-set-key [f11] 'toggle-fullscreen)
 (global-set-key (kbd "C-x u") 'undo-tree-visualize)
-
+(global-set-key (kbd "S-SPC") 'dabbrev-expand)
 (global-set-key (kbd "C-=") 'er/expand-region)
+(global-set-key (kbd "C-c y") 'browse-kill-ring)
 
 ;; multiple cursors
 (global-set-key (kbd "C-<return>") 'mc/edit-lines)
