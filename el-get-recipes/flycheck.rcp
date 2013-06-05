@@ -1,0 +1,4 @@
+(:name flycheck
+       :description "Flycheck"
+       :type github
+       :pkgname "lunaryorn/flycheck")

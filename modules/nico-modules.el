@@ -1,3 +1,4 @@
+(require 'nico-ace-jump)
 (require 'nico-apg)
 (require 'nico-backups)
 (require 'nico-darwin)

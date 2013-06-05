@@ -10,15 +10,19 @@
 
 (push "~/.emacs.d/el-get-recipes" el-get-recipe-path)
 
-(defvar nico/get-packages '(auctex
+(defvar nico/get-packages '(ace-jump-mode
+			    auctex
 			    drag-stuff
 			    bbdb
 			    browse-kill-ring 
 			    dired-details
 			    epresent
 			    expand-region
+			    flycheck
 			    google-maps
 			    htmlize 
+			    js2-mode
+			    js2-refactor s ;; s is required by js2-refactor
 			    ido-ubiquitous
 			    magit 
 			    multiple-cursors
@@ -34,7 +38,8 @@
 			    slime 
 			    switch-window
 			    twilight-anti-bright-theme
-			    undo-tree)
+			    undo-tree
+			    yasnippet)
   "A list of packages to ensure are installed at launch.")
 
 (el-get 'sync nico/get-packages)

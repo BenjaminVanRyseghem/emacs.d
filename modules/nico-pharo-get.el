@@ -10,7 +10,7 @@
   "Download and unzip a new pharo image, then open a dired buffer on the directory"
   (interactive (list 
 		(read-string "Name: " "")
-		(completing-read "Version :" '("14" "20" "30"))))
+		(completing-read "Version: " '("14" "20" "30"))))
   (let* ((filename "pharo.zip")
 	 (directory (concat pharo-images-directory name))
 	 (path (concat directory "/" filename)))
@@ -18,8 +18,10 @@
 	(error "Path already exists. Choose another name"))
     (make-directory directory t)
     (url-copy-file (concat pharo-image-url version "/latest.zip") path t)
-    (dired directory)
     (shell-command (concat "unzip " filename))
-    (revert-buffer)))
+    (if (not noninteractive)
+	(progn 
+	  (dired directory)
+	  (revert-buffer)))))
 
 (provide 'nico-pharo-get)
