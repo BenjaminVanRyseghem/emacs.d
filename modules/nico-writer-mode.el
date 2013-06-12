@@ -18,7 +18,6 @@
     (disable-writer-mode)))
 
 (defun enable-writer-mode ()
-  (ns-toggle-fullscreen)
   (auto-fill-mode t)
   (set-window-margins (selected-window)
 		      writer-mode-left-margin
@@ -26,7 +25,6 @@
   (writer-set-faces))
 
 (defun disable-writer-mode ()
-  (ns-toggle-fullscreen)
   (auto-fill-mode -1)
   (set-window-margins (selected-window)
 		      left-margin-width
