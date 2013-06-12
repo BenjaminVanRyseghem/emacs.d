@@ -9,14 +9,81 @@
 				    user-login-name
 				    "!\n       _\n     _|_|_\n     (o o)\n ooO--(_)--Ooo-\n\n Oh, Nice hat.\n\n"))
 
+
 ;; Prompt
-(setq eshell-prompt-function
-      (lambda ()
-	(concat
-	 "[" user-login-name "] "
-	 (format-time-string "%H:%M " (current-time))
-	 (abbreviate-file-name (eshell/pwd))
-	 (if (= (user-uid) 0) " # " " $ "))))
+;; Taken and adapted from Damien Cassou's prompt
+
+(defvar nico:prompt-inserted nil)
+
+(defun nico:color (type)
+  (case type
+    ('arrow "white")
+    ('prompt "#CF6A4C")
+    ('folder "sky blue")
+    ('alert "red")
+    ('good "lime green")
+    ('warning "dark orange")
+    (t "black")))
+
+(defun nico:mprint (obj &optional color)
+  (if color
+      (insert (propertize obj 'face `(:foreground ,(nico:color color))))
+    (insert obj)))
+
+(defun nico:insert-value (value &optional color)
+  (nico:mprint value color)
+  (setq nico:prompt-inserted (not (string= value ""))))
+
+(defun nico:insert-separator (&optional separator)
+  (let ((sep (or separator ":")))
+    (if nico:prompt-inserted
+	(nico:mprint sep))))
+
+(defun nico:insert-pwd ()
+  (let ((pwd (abbreviate-file-name (eshell/pwd))))
+    (nico:insert-value pwd 'folder)))
+
+(defun nico:git-color ()
+  "Returns a color code based on the current repository status"
+  (if (zerop (magit-git-exit-code "diff" "--quiet"))
+      ;; nothing to commit because nothing changed
+      (if (zerop (length (magit-git-string
+			  "rev-list" (concat "origin/"
+					     (magit-get-current-branch)
+					     ".."
+					     (magit-get-current-branch)))))
+	  ;; nothing to push as well
+	  'good
+	;; nothing to commit, but some commits must be pushed
+	'warning)
+    'alert))
+
+(defun nico:insert-branch ()
+  (let ((branch (magit-get-current-branch)))
+    (if branch
+	(nico:mprint (concat " <" branch ">") (nico:git-color)))))
+
+(defun nico:insert-hostname (&optional color)
+  (nico:insert-value (substring (shell-command-to-string "hostname") 0 -1) color))
+(defun nico:eshell-prompt ()
+  (with-temp-buffer
+    (nico:insert-value "\n☼ " 'arrow)
+    (nico:insert-separator "[")
+    (nico:insert-value (user-login-name) 'prompt)
+    (nico:insert-separator "@")
+    (nico:insert-hostname 'prompt)
+    (nico:insert-separator "] ")
+    (nico:insert-pwd)
+    (nico:insert-branch)
+    (nico:insert-value " ☼\n" 'arrow)
+    (nico:insert-value (if (= (user-uid) 0) "# " "(♫) $ "))
+    (buffer-substring (point-min) (point-max))))
+
+(eval-after-load "em-prompt"
+  '(progn
+     (setq eshell-highlight-prompt nil)
+     (setq eshell-prompt-function 'nico:eshell-prompt)))
+
 
 
 (setq eshell-cmpl-cycle-completions nil

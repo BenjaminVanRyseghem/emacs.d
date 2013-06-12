@@ -31,3 +31,15 @@
 ;;  '(linum ((t (:inherit (shadow default)))) t)
 ;;  '(mode-line ((t (:background "OliveDrab3" :foreground "black" :box nil :height 120))))
 ;;  '(writer-mode-default-face ((t (:inherit default :background "gray94" :foreground "Black" :weight semi-light :height 1.8 :width expanded :family "Baskerville")))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(dired-directory ((t (:inherit font-lock-function-name-face :foreground "sky blue" :weight bold))))
+ '(dired-header ((t (:inherit font-lock-type-face :background "dark red" :foreground "white"))))
+ '(eshell-prompt ((t (:background "dark slate gray" :foreground "gray100" :weight bold))))
+ '(magit-branch ((t (:inherit magit-header :background "dark blue"))))
+ '(magit-item-highlight ((t (:inherit highlight :background "dark slate gray"))))
+ '(magit-section-title ((t (:inherit magit-header :background "dark red"))))
+ '(org-todo ((t (:foreground "red" :weight bold)))))
