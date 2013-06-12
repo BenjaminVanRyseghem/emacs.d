@@ -15,7 +15,8 @@
 			(tooltip-mode -1)
 			(mouse-wheel-mode t)
 			(blink-cursor-mode -1)
-			;; (setup-color-theme)
+			(setup-color-theme)
+			(powerline-default-theme)
 			)))
 
 (setup-window-system)

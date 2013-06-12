@@ -30,6 +30,7 @@
 			    notmuch-labeler
 			    nyan-mode
 			    offlineimap
+			    org-mode
 			    paredit 
 			    powerline
 			    pcomplete-plugins

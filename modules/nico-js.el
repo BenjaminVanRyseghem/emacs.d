@@ -5,8 +5,7 @@
  
 (add-hook 'js2-mode-hook '(lambda ()
 			    (flycheck-mode t)
-			    (setq tab-width 4)
-			    (setq indent-tabs-mode nil)))
+			    (setq tab-width 4)))
 
 ;; js2-refactor
 (js2r-add-keybindings-with-prefix "C-c C-r")

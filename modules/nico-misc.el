@@ -21,8 +21,12 @@
 (defun htop ()
   (interactive)
   (term "htop"))
-  
+ 
+;; Use tabs instead of spaces for indenting by default
+(setq-default indent-tabs-mode t)
+ 
 ;; Custom keybindings
+(global-set-key (kbd "M-i") 'imenu)
 (global-set-key (kbd "C-M-y") 'clipboard-yank)
 (global-set-key (kbd "C-M-k") 'clipboard-kill-region)
 (global-set-key (kbd "C-c C-f") 'sudo-file)
