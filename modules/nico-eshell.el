@@ -91,9 +91,10 @@
       eshell-buffer-shorthand t
       eshell-cmpl-dir-ignore "\\`\\(\\.\\.?\\|CVS\\|\\.svn\\|\\.git\\)/\\'")
 
+
 ;; Normal scrolling
-(setq eshell-scroll-show-maximum-output nil)
-(setq eshell-scroll-to-bottom-on-output nil)
+;; (setq eshell-scroll-show-maximum-output nil)
+;; (setq eshell-scroll-to-bottom-on-output nil)
 
 
 (eval-after-load 'esh-opt
@@ -101,10 +102,14 @@
      (require 'em-prompt)
      (require 'em-term)
      (require 'em-cmpl)
+     (require 'em-smart)
      (setenv "PAGER" "cat")
      (set-face-attribute 'eshell-prompt nil :foreground "green2")
      (add-hook 'eshell-mode-hook ;; for some reason this needs to be a hook
                '(lambda () (define-key eshell-mode-map "\C-a" 'eshell-bol)))
+
+     ;; Plan9 coolness
+     (add-hook 'eshell-mode-hook 'eshell-smart-initialize)
 
      (add-to-list 'eshell-visual-commands "ssh")
      (add-to-list 'eshell-visual-commands "htop")
