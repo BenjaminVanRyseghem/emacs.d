@@ -12,43 +12,23 @@
 
 (define-key org-mode-map (kbd "C-c g") 'omlg-grab-link)
 
+(setf org-default-notes-file "~/org/inbox.org")
+(defvar nico/org-email-file "~/org/emails.org")
+(defvar nico/org-calendar-file "~/org/calendar.org")
+(defvar nico/org-log-file "~/org/log.org")
+(setq org-directory "~/org")
+
 ;; MobileOrg
 (setq org-mobile-directory "~/Dropbox/MobileOrg")
 (org-mobile-pull) ;; run org-mobile-pull at startup
 
-
-(defvar org-mobile-push-timer nil
-  "Timer that `org-mobile-push-timer' used to reschedule itself, or nil.")
-
-(defun org-mobile-push-with-delay (secs)
-  (when org-mobile-push-timer
-    (cancel-timer org-mobile-push-timer))
-  (setq org-mobile-push-timer
-        (run-with-idle-timer
-         secs nil 'org-mobile-push)))
-
-(add-hook 'after-save-hook 
-	  (lambda () 
-	    (when (eq major-mode 'org-mode)
-	      (dolist (file (org-mobile-files-alist))
-		(if (string= (expand-file-name (car file)) (buffer-file-name))
-		    (org-mobile-push-with-delay 60))))))
-
-(run-with-timer 0 360 'org-mobile-pull)
-
-
-(setf org-default-notes-file "~/org/inbox.org")
-(defvar nico/org-email-file "~/org/emails.org")
-(defvar nico/org-calendar-file "~/org/calendar.org")
-(setq org-directory "~/org")
-
-(setq org-agenda-files (list
-			nico/org-email-file
-			org-default-notes-file
-			nico/org-calendar-file
-			"~/org/work.org"
-			"~/org/home.org"
-			"~/org/stuff.org"))
+(setq org-agenda-files `(,nico/org-email-file
+			 ,org-default-notes-file
+			 ,nico/org-calendar-file
+			 ,nico/org-log-file
+			 "~/org/work.org"
+			 "~/org/home.org"
+			 "~/org/stuff.org"))
 
 (setq org-refile-targets '(("~/org/work.org" :maxlevel . 3) 
 			   ("~/org/home.org" :maxlevel . 3)
@@ -90,27 +70,29 @@
 (setq org-capture-templates '())
 (add-to-list 'org-capture-templates
 	     '("t" "Todo [inbox]" entry (file+headline org-default-notes-file "Tasks")
-	       "* TODO %i %? \n  %a"))
+	       "* TODO %i%?"))
 (add-to-list 'org-capture-templates
-	     '("h" "Home" entry (file "~/org/home.org")
-	       "* %i %?  \n  %a\n"))
+	     '("l" "Todo with link [inbox]" entry (file+headline org-default-notes-file "Tasks")
+	       "* TODO %i%? \n  %a"))
+;; taken from http://doc.norang.ca/org-mode.html
+(add-to-list 'org-capture-templates 
+	      '("r" "Respond to Phone" entry (file+headline org-default-notes-file "Tasks")
+		"* DONE %? :PHONE:\n%U" :clock-in t :clock-resume t))
 (add-to-list 'org-capture-templates
 	     '("s" "Cool stuff" entry (file+headline org-default-notes-file "Cool stuff")
-	       "* %i %?   \n  %a\n"))
+	       "* %i%?"))
 (add-to-list 'org-capture-templates
 	     '("a" "Action [email]" entry (file+headline nico/org-email-file "Actions")
-	       "* TODO %i %?   \n  %a\n"))
+	       "* TODO %i%?"))
 (add-to-list 'org-capture-templates
 	     '("i" "Tickler [email]" entry (file+headline nico/org-email-file "Tickler")
-	       "* %i %?   \n  %a"))
+	       "* %i%?"))
 (add-to-list 'org-capture-templates
 	     '("w" "Waiting Answer [email]" entry (file+headline nico/org-email-file "Waiting")
-	       "* WAITING %i %?   \n  %a\n  %U"))
-
+	       "* WAITING %i%? \n %U"))
 (add-to-list 'org-capture-templates
-	     '("p" "Appointment" entry (file+headline nico/org-calendar-file "Appointment")
-	       "* APPT %i %?   \n  %a\n  %U"))
-
+	     '("p" "Appointment" entry (file+datetree+prompt nico/org-calendar-file "Appointment")
+	       "* APPT %i%? \n %U"))
 
 (defvar french-holiday
       '((holiday-fixed 1 1 "Jour de l'an")
@@ -158,8 +140,8 @@
       (org-agenda-list))
     (delete-other-windows)))
 
-;; Go to the agenda buffer after 5' idle
-;; (run-with-idle-timer 300 t 'nico/jump-to-org-agenda)
+;; Go to the agenda buffer after 10' idle
+(run-with-idle-timer 600 t 'nico/jump-to-org-agenda)
 
 ;; GDT next actions
 (defun nico/org-gtd-next ()
@@ -188,6 +170,13 @@
 
 (setq org-trigger-hook nil)
 (add-hook 'org-trigger-hook 'nico/org-gtd-mark-next)
+
+(add-hook
+
+;; Archive all DONE entries
+(defun nico/org-archive-done-subtree ()
+  (interactive)
+  (org-map-entries 'org-archive-subtree "/DONE" 'tree))
 
 (nico/jump-to-org-agenda)
 

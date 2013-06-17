@@ -38,8 +38,10 @@
  ;; If there is more than one, they won't work right.
  '(dired-directory ((t (:inherit font-lock-function-name-face :foreground "sky blue" :weight bold))))
  '(dired-header ((t (:inherit font-lock-type-face :background "dark red" :foreground "white"))))
- '(eshell-prompt ((t (:background "dark slate gray" :foreground "gray100" :weight bold))))
+ '(eshell-prompt ((t (:background "dark slate gray" :foreground "gray100" :weight bold))) t)
  '(magit-branch ((t (:inherit magit-header :background "dark blue"))))
  '(magit-item-highlight ((t (:inherit highlight :background "dark slate gray"))))
  '(magit-section-title ((t (:inherit magit-header :background "dark red"))))
- '(org-todo ((t (:foreground "red" :weight bold)))))
+ '(org-column ((t (:background "black" :strike-through nil :underline nil :slant normal :weight normal :height 120 :family "Menlo"))))
+ '(org-todo ((t (:foreground "red" :weight bold))))
+ '(org-warning ((t (:inherit font-lock-warning-face :foreground "dark red")))))
