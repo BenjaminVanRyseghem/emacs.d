@@ -1,6 +1,7 @@
 (require 'org)
 (require 'org-mobile)
 (require 'org-mac-link-grabber)
+(require 'org-pomodoro)
 
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 
@@ -127,9 +128,6 @@
 
 (run-at-time nil 3600 'nico/check-appt)
 (appt-activate t)
-
-;; Pomodoro timer
-(setq org-timer-default-timer 25)
 
 ;; Display the agenda
 (defun nico/jump-to-org-agenda ()

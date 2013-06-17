@@ -11,6 +11,8 @@
 (push "~/.emacs.d/el-get-recipes" el-get-recipe-path)
 
 (defvar nico/get-packages '(ace-jump-mode
+			    ;; required by org-pomodoro
+			    alert
 			    auctex
 			    drag-stuff
 			    bbdb
@@ -31,6 +33,7 @@
 			    nyan-mode
 			    offlineimap
 			    org-mode
+			    org-pomodoro
 			    paredit 
 			    powerline
 			    pcomplete-plugins
