@@ -9,6 +9,7 @@
 (define-key global-map "\C-ca" 'org-agenda)
 (define-key global-map "\C-cb" 'org-iswitchb)
 (define-key global-map "\C-cc" 'org-capture)
+(define-key global-map "\C-cp" 'org-pomodoro)
 (define-key global-map "\C-cg" 'omlg-grab-link)
 
 (define-key org-mode-map (kbd "C-c g") 'omlg-grab-link)
@@ -26,14 +27,14 @@
 (setq org-agenda-files `(,nico/org-email-file
 			 ,org-default-notes-file
 			 ,nico/org-calendar-file
-			 ,nico/org-log-file
 			 "~/org/work.org"
 			 "~/org/home.org"
 			 "~/org/stuff.org"))
 
-(setq org-refile-targets '(("~/org/work.org" :maxlevel . 3) 
+(setq org-refile-targets `(("~/org/work.org" :maxlevel . 3) 
 			   ("~/org/home.org" :maxlevel . 3)
-			   ("~/org/someday.org" :level . 1)))
+			   ("~/org/someday.org" :level . 1)
+			   (,nico/org-calendar-file :level . 1)))
 
 ;; Open notes (notes.org) file
 ;; (global-set-key (kbd "C-M-n") 'nico/find-notes-file)
@@ -92,7 +93,7 @@
 	     '("w" "Waiting Answer [email]" entry (file+headline nico/org-email-file "Waiting")
 	       "* WAITING %i%? \n %U"))
 (add-to-list 'org-capture-templates
-	     '("p" "Appointment" entry (file+datetree+prompt nico/org-calendar-file "Appointment")
+	     '("p" "Appointment" entry (file+headline nico/org-calendar-file "Appointment")
 	       "* APPT %i%? \n %U"))
 
 (defvar french-holiday
@@ -168,8 +169,6 @@
 
 (setq org-trigger-hook nil)
 (add-hook 'org-trigger-hook 'nico/org-gtd-mark-next)
-
-(add-hook
 
 ;; Archive all DONE entries
 (defun nico/org-archive-done-subtree ()
