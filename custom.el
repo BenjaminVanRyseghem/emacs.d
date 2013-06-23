@@ -10,7 +10,7 @@
  '(locate-command "mdfind")
  '(magit-repo-dirs (quote ("/Users/nico/config/" "/Users/nico/work/")))
  '(notmuch-hello-sections (quote (ignore notmuch-hello-insert-saved-searches notmuch-hello-insert-search notmuch-hello-insert-recent-searches notmuch-hello-insert-alltags notmuch-hello-insert-footer)))
- '(org-agenda-custom-commands (quote (("w" . "Work TODO") ("wf" "Foretagsplatsen" tags-todo "+ftgp" nil) ("wb" "Business (objectfusion)" tags-todo "+business" nil) ("wo" "Objectfusion (all)" tags-todo "+objectfusion" nil) ("wa" "Amber" tags-todo "+amber" nil) ("wr" "Resilience" tags-todo "+resilience" nil) ("wi" "RMoD" tags-todo "+rmod" nil) ("wh" "SmalltalkHub" tags-todo "+smalltalkhub" nil) ("n" "Next Actions" todo "NEXT" nil) ("n" . "Next Actions") ("h" "Waiting/hold" ((todo "WAITING" ((org-agenda-overriding-header "Waiting for others"))) (tags "hold" ((org-agenda-overriding-header "On Hold")))) nil) ("d" "30 days deadlines" agenda "" ((org-agenda-entry-types (quote (:deadline))) (org-agenda-overriding-header "Month deadlines") (org-agenda-span (quote month)) (org-agenda-overriding-header ""))) ("." "Short tasks (< 2 min)" tags "short" ((org-agenda-overriding-header "Less than 2 minutes tasks"))))))
+ '(org-agenda-custom-commands (quote (("w" . "Work TODO") ("wf" "Foretagsplatsen" tags-todo "+ftgp" nil) ("wb" "Business (objectfusion)" tags-todo "+business" nil) ("wo" "Objectfusion (all)" tags-todo "+objectfusion" nil) ("wa" "Amber" tags-todo "+amber" nil) ("wr" "Resilience" tags-todo "+resilience" nil) ("wi" "RMoD" tags-todo "+rmod" nil) ("wh" "SmalltalkHub" tags-todo "+smalltalkhub" nil) ("n" "Next Actions" todo "NEXT" nil) ("n" . "Next Actions") ("h" "Waiting/hold" ((todo "WAITING" ((org-agenda-overriding-header "Waiting for others"))) (tags "hold" ((org-agenda-overriding-header "On Hold")))) nil) ("d" "30 days deadlines" agenda "" ((org-agenda-entry-types (quote (:deadline))) (org-agenda-overriding-header "Month deadlines") (org-agenda-span (quote month)) (org-agenda-overriding-header ""))) ("." "Short tasks (< 2 min)" tags "short" ((org-agenda-overriding-header "Less than 2 minutes tasks"))) ("W" "Work agenda" agenda "" ((org-agenda-files (quote ("~/org/work.org"))) (org-agenda-overriding-header "Work agenda"))) ("H" "Home agenda" agenda "Home agenda" ((org-agenda-overriding-header "Home Agenda") (org-agenda-files (quote ("~/org/home.org"))))))))
  '(org-agenda-default-appointment-duration 60)
  '(org-agenda-span (quote week))
  '(org-export-taskjuggler-target-version 3)
@@ -38,7 +38,7 @@
  ;; If there is more than one, they won't work right.
  '(dired-directory ((t (:inherit font-lock-function-name-face :foreground "sky blue" :weight bold))))
  '(dired-header ((t (:inherit font-lock-type-face :background "dark red" :foreground "white"))))
- '(eshell-prompt ((t (:background "dark slate gray" :foreground "gray100" :weight bold))) t)
+ '(eshell-prompt ((t (:background "dark slate gray" :foreground "gray100" :weight bold))))
  '(magit-branch ((t (:inherit magit-header :background "dark blue"))))
  '(magit-item-highlight ((t (:inherit highlight :background "dark slate gray"))))
  '(magit-section-title ((t (:inherit magit-header :background "dark red"))))
