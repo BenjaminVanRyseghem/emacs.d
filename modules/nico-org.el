@@ -15,7 +15,6 @@
 (define-key org-mode-map (kbd "C-c g") 'omlg-grab-link)
 
 (setf org-default-notes-file "~/org/inbox.org")
-(defvar nico/org-email-file "~/org/emails.org")
 (defvar nico/org-calendar-file "~/org/calendar.org")
 (defvar nico/org-log-file "~/org/log.org")
 (setq org-directory "~/org")
@@ -24,8 +23,7 @@
 (setq org-mobile-directory "~/Dropbox/MobileOrg")
 (org-mobile-pull) ;; run org-mobile-pull at startup
 
-(setq org-agenda-files `(,nico/org-email-file
-			 ,org-default-notes-file
+(setq org-agenda-files `(,org-default-notes-file
 			 ,nico/org-calendar-file
 			 "~/org/work.org"
 			 "~/org/home.org"
@@ -83,15 +81,6 @@
 (add-to-list 'org-capture-templates
 	     '("s" "Cool stuff" entry (file+headline org-default-notes-file "Cool stuff")
 	       "* %i%?"))
-(add-to-list 'org-capture-templates
-	     '("a" "Action [email]" entry (file+headline nico/org-email-file "Actions")
-	       "* TODO %i%?"))
-(add-to-list 'org-capture-templates
-	     '("i" "Tickler [email]" entry (file+headline nico/org-email-file "Tickler")
-	       "* %i%?"))
-(add-to-list 'org-capture-templates
-	     '("w" "Waiting Answer [email]" entry (file+headline nico/org-email-file "Waiting")
-	       "* WAITING %i%? \n %U"))
 (add-to-list 'org-capture-templates
 	     '("p" "Appointment" entry (file+headline nico/org-calendar-file "Appointment")
 	       "* APPT %i%? \n %U"))
@@ -174,6 +163,16 @@
 (defun nico/org-archive-done-subtree ()
   (interactive)
   (org-map-entries 'org-archive-subtree "/DONE" 'tree))
+
+;; Custom agenda function, see customized 'org-agenda-custom-commands.
+;; Open the agenda in org-agenda-log-mode, with the archive file, and
+;; for the previous week. To work well, 'org-log-done should be set to
+;; 't, to ensure that everything is in the agenda.
+(defun nico/org-agenda-log (arg)
+  (let ((org-agenda-files (add-to-list 'org-agenda-files "~/org/work.org_archive")))
+  (org-agenda-list arg)
+  (org-agenda-log-mode)
+  (org-agenda-earlier 1)))
 
 (nico/jump-to-org-agenda)
 
