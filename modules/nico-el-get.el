@@ -23,10 +23,12 @@
 			    flycheck
 			    google-maps
 			    htmlize 
+			    js-comint
 			    js2-mode
 			    js2-refactor s ;; s is required by js2-refactor
 			    ido-ubiquitous
 			    magit 
+			    markdown-mode
 			    multiple-cursors
 			    notify
 			    notmuch-labeler

@@ -169,10 +169,12 @@
 ;; for the previous week. To work well, 'org-log-done should be set to
 ;; 't, to ensure that everything is in the agenda.
 (defun nico/org-agenda-log (arg)
-  (let ((org-agenda-files (add-to-list 'org-agenda-files "~/org/work.org_archive")))
-  (org-agenda-list arg)
-  (org-agenda-log-mode)
-  (org-agenda-earlier 1)))
+  (let ((org-agenda-files org-agenda-files))
+    (add-to-list 'org-agenda-files "~/org/work.org_archive")
+    (add-to-list 'org-agenda-files "~/org/calendar.org_archive")
+    (org-agenda-list arg)
+    (org-agenda-log-mode)
+    (org-agenda-earlier 1)))
 
 (nico/jump-to-org-agenda)
 

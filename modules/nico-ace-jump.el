@@ -10,6 +10,6 @@
 
 ;; each non-empty line will be marked, select the highlighted key to move to it.
 
-(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+(define-key global-map (kbd "C-z") 'ace-jump-mode)
 
 (provide 'nico-ace-jump)
