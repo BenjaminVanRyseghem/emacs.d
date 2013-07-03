@@ -27,7 +27,8 @@
 			 ,nico/org-calendar-file
 			 "~/org/work.org"
 			 "~/org/home.org"
-			 "~/org/stuff.org"))
+			 "~/org/stuff.org"
+			 "~/org/someday.org"))
 
 (setq org-refile-targets `(("~/org/work.org" :maxlevel . 3) 
 			   ("~/org/home.org" :maxlevel . 3)
