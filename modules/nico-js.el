@@ -2,11 +2,12 @@
 
 (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+
+;; disable warnings. Add them on demand with C-c C-w
+(js2-mode-hide-warnings-and-errors)
  
 (add-hook 'js2-mode-hook '(lambda ()
 			    (flycheck-mode t)
-			    ;; disable warnings. Add them on demand with C-c C-w
-			    (js2-mode-toggle-warnings-and-errors)
 			    (setq tab-width 4)))
 
 ;; js2-refactor
@@ -21,5 +22,6 @@
 			    (local-set-key "\C-cb" 'js-send-buffer)
 			    (local-set-key "\C-c\C-b" 'js-send-buffer-and-go)
 			    (local-set-key "\C-cl" 'js-load-file-and-go)))
+
 
 (provide 'nico-js)

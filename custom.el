@@ -61,4 +61,4 @@
  '(org-scheduled ((t nil)))
  '(org-scheduled-today ((t nil)))
  '(org-todo ((t (:foreground "red" :weight bold))))
- '(org-warning ((t (:inherit font-lock-warning-face :foreground "black")))))
+ '(org-warning ((t (:inherit nil :foreground "red")))))
