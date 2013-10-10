@@ -1,4 +1,4 @@
-;; window system
+(require 'powerline)
 
 (defun toggle-fullscreen ()
   (interactive)
@@ -7,17 +7,17 @@
 
 (defun setup-color-theme ()
   (interactive)
-  (load-theme 'twilight t))
+  (load-theme 'solarized-light))
 
 (defun setup-window-system ()
   (if (window-system) (progn 
 			(setq frame-title-format '(buffer-file-name "%f" ("%b")))
 			(tooltip-mode -1)
 			(mouse-wheel-mode t)
-			(blink-cursor-mode -1)
-			(setup-color-theme)
 			(powerline-default-theme)
-			)))
+			(blink-cursor-mode -1)
+			(setup-color-theme))))
+
 
 (setup-window-system)
 

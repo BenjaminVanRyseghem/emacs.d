@@ -9,6 +9,7 @@
 ;; "C-u C-u C-c SPC" ==> ace-jump-line-mode
 
 ;; each non-empty line will be marked, select the highlighted key to move to it.
+(require 'ace-jump-mode)
 
 (define-key global-map (kbd "C-z") 'ace-jump-mode)
 

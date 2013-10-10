@@ -4,8 +4,9 @@
   (url-retrieve
    "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
    (lambda (s)
+     (let (el-get-master-branch)
      (goto-char (point-max))
-     (eval-print-last-sexp))))
+     (eval-print-last-sexp)))))
 
 
 (push "~/.emacs.d/el-get-recipes" el-get-recipe-path)
@@ -13,11 +14,11 @@
 (defvar nico/get-packages '(ace-jump-mode
 			    ;; required by org-pomodoro
 			    alert
-			    auctex
+			    ;; auctex
 			    drag-stuff
-			    bbdb
+			    ;; bbdb
 			    browse-kill-ring 
-			    dired-details
+			    ;; dired-details
 			    epresent
 			    expand-region
 			    flycheck
@@ -29,19 +30,21 @@
 			    ido-ubiquitous
 			    magit 
 			    markdown-mode
+			    ;; mu4e installed with apt-get
 			    multiple-cursors
 			    notify
-			    notmuch-labeler
+			    ;; notmuch
+			    ;; notmuch-labeler
 			    nyan-mode
 			    offlineimap
 			    org-mode
 			    org-pomodoro
 			    paredit 
-			    powerline
 			    pcomplete-plugins
 			    rainbow-mode
 			    shell-switcher
-			    slime 
+			    solarized-theme
+			    sr-speedbar
 			    switch-window
 			    twilight-anti-bright-theme
 			    undo-tree

@@ -13,9 +13,9 @@
 ;; Prompt
 ;; Taken and adapted from Damien Cassou's prompt
 
-(defvar nico:prompt-inserted nil)
+(defvar nico/eshell-prompt-inserted nil)
 
-(defun nico:color (type)
+(defun nico/eshell-color (type)
   (case type
     ('arrow "white")
     ('prompt "#CF6A4C")
@@ -25,25 +25,25 @@
     ('warning "dark orange")
     (t "black")))
 
-(defun nico:mprint (obj &optional color)
+(defun nico/eshell-mprint (obj &optional color)
   (if color
-      (insert (propertize obj 'face `(:foreground ,(nico:color color))))
+      (insert (propertize obj 'face `(:foreground ,(nico/eshell-color color))))
     (insert obj)))
 
-(defun nico:insert-value (value &optional color)
-  (nico:mprint value color)
-  (setq nico:prompt-inserted (not (string= value ""))))
+(defun nico/eshell-insert-value (value &optional color)
+  (nico/eshell-mprint value color)
+  (setq nico/eshell-prompt-inserted (not (string= value ""))))
 
-(defun nico:insert-separator (&optional separator)
+(defun nico/eshell-insert-separator (&optional separator)
   (let ((sep (or separator ":")))
-    (if nico:prompt-inserted
-	(nico:mprint sep))))
+    (if nico/eshell-prompt-inserted
+	(nico/eshell-mprint sep))))
 
-(defun nico:insert-pwd ()
+(defun nico/eshell-insert-pwd ()
   (let ((pwd (abbreviate-file-name (eshell/pwd))))
-    (nico:insert-value pwd 'folder)))
+    (nico/eshell-insert-value pwd 'folder)))
 
-(defun nico:git-color ()
+(defun nico/eshell-git-color ()
   "Returns a color code based on the current repository status"
   (if (zerop (magit-git-exit-code "diff" "--quiet"))
       ;; nothing to commit because nothing changed
@@ -58,31 +58,31 @@
 	'warning)
     'alert))
 
-(defun nico:insert-branch ()
+(defun nico/eshell-insert-branch ()
   (let ((branch (magit-get-current-branch)))
     (if branch
-	(nico:mprint (concat " <" branch ">") (nico:git-color)))))
+	(nico/eshell-mprint (concat " <" branch ">") (nico/eshell-git-color)))))
 
-(defun nico:insert-hostname (&optional color)
-  (nico:insert-value (substring (shell-command-to-string "hostname") 0 -1) color))
-(defun nico:eshell-prompt ()
+(defun nico/eshell-insert-hostname (&optional color)
+  (nico/eshell-insert-value (substring (shell-command-to-string "hostname") 0 -1) color))
+(defun nico/eshell-eshell-prompt ()
   (with-temp-buffer
-    (nico:insert-value "\n☼ " 'arrow)
-    (nico:insert-separator "[")
-    (nico:insert-value (user-login-name) 'prompt)
-    (nico:insert-separator "@")
-    (nico:insert-hostname 'prompt)
-    (nico:insert-separator "] ")
-    (nico:insert-pwd)
-    (nico:insert-branch)
-    (nico:insert-value " ☼\n" 'arrow)
-    (nico:insert-value (if (= (user-uid) 0) "# " "(♫) $ "))
+    (nico/eshell-insert-value "\n" 'arrow)
+    (nico/eshell-insert-separator "[")
+    (nico/eshell-insert-value (user-login-name) 'prompt)
+    (nico/eshell-insert-separator "@")
+    (nico/eshell-insert-hostname 'prompt)
+    (nico/eshell-insert-separator "] ")
+    (nico/eshell-insert-pwd)
+    (nico/eshell-insert-branch)
+    (nico/eshell-insert-value " \n" 'arrow)
+    (nico/eshell-insert-value (if (= (user-uid) 0) "# " "(♫) $ "))
     (buffer-substring (point-min) (point-max))))
 
 (eval-after-load "em-prompt"
   '(progn
      (setq eshell-highlight-prompt nil)
-     (setq eshell-prompt-function 'nico:eshell-prompt)))
+     (setq eshell-prompt-function 'nico/eshell-eshell-prompt)))
 
 
 

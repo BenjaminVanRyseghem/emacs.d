@@ -71,16 +71,6 @@
 	  (:eval (propertize (format-mode-line minor-mode-alist)
 			     'face 'mode-line-minor-mode-face))
 	  "  "
-	  (:propertize mode-line-process
-		       face mode-line-process-face)
-	  "  ["
-	  (:propertize (:eval (eshell-previous-input-string 0))
-		       face mode-line-process-face)
-	  "] "
-
-	  (:eval (propertize (concat user-login-name "@" system-name)
-			     'face 'mode-line-system-face))
-	  ""
 	  (global-mode-string global-mode-string))))
 
 
@@ -111,51 +101,41 @@
 (make-face 'mode-line-mode-face)
 (make-face 'mode-line-minor-mode-face)
 (make-face 'mode-line-process-face)
-(make-face 'mode-line-system-face)
 (make-face 'mode-line-80col-face)
 
 (set-face-attribute 'mode-line nil
-		    :foreground "gray80" :background "gray0"
+		    :foreground "#fdf6e3" :background "#062b36"
 		    :inverse-video nil
-		    :box '(:line-width 2 :color "gray20" :style nil))
+		    :box '(:line-width 1 :color "#062b36" :style nil))
 (set-face-attribute 'mode-line-inactive nil
-		    :foreground "gray80" :background "gray40"
+		    :foreground "#fdf6e3" :background "#0d4758"
 		    :inverse-video nil
-		    :box '(:line-width 2 :color "gray40" :style nil))
+		    :box '(:line-width 1 :color "#0d4758" :style nil))
 
 (set-face-attribute 'mode-line-read-only-face nil
 		    :inherit 'mode-line-face
 		    :foreground "#4271ae"
-		    :box '(:line-width 2 :color "#4271ae"))
+		    :box '(:line-width 1 :color "#4271ae"))
 (set-face-attribute 'mode-line-modified-face nil
 		    :inherit 'mode-line-face
 		    :foreground "#c82829"
 		    :background "#ffffff"
-		    :box '(:line-width 2 :color "#c82829"))
+		    :box '(:line-width 1 :color "#c82829"))
 (set-face-attribute 'mode-line-folder-face nil
 		    :inherit 'mode-line-face
 		    :foreground "gray60")
 (set-face-attribute 'mode-line-filename-face nil
 		    :inherit 'mode-line-face
-		    :foreground "#eab700"
-		    :weight 'bold)
-(set-face-attribute 'mode-line-system-face nil
-		    :inherit 'mode-line-face
-		    :foreground "green"
+		    :foreground "#cb4a15"
 		    :weight 'bold)
 (set-face-attribute 'mode-line-position-face nil
-		    :inherit 'mode-line-face
-		    :family "Monospace" :height 100)
+		    :inherit 'mode-line-face)
 (set-face-attribute 'mode-line-mode-face nil
 		    :inherit 'mode-line-face
-		    :foreground "gray80")
+		    :foreground "#268bd2")
 (set-face-attribute 'mode-line-minor-mode-face nil
 		    :inherit 'mode-line-mode-face
-		    :foreground "gray40"
-		    :height 110)
-(set-face-attribute 'mode-line-process-face nil
-		    :inherit 'mode-line-face
-		    :foreground "#718c00")
+		    :foreground "#2aa198")
 (set-face-attribute 'mode-line-80col-face nil
 		    :inherit 'mode-line-position-face
 		    :foreground "black" :background "#eab700")

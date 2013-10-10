@@ -1,6 +1,6 @@
 ;; Hide toolbar, menubar and scrollbar, just because I don't like them
 (tool-bar-mode 0)
-;; (menu-bar-mode 0) ;; the menubar on OSX is ok
+(menu-bar-mode 0) ;; the menubar on OSX is ok
 (scroll-bar-mode 0)
 
 (setq inhibit-startup-screen t)
@@ -22,7 +22,7 @@
 (add-to-list 'load-path site-lisp-dir)
 
 (let ((default-directory site-lisp-dir))
-      (normal-top-level-add-subdirs-to-load-path))
+  (normal-top-level-add-subdirs-to-load-path))
 
 (require 'package)
 (require 'nico-modules)
@@ -32,10 +32,15 @@
 
 (icomplete-mode 99)
 (ido-mode)
-;; (cua-selection-mode 1)
+
+;; use ibuffer instead of the default buffer-list
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;; Change the behavior of M-f and co to properly handle camel case
 (global-subword-mode 1)
+
+(delete-selection-mode 1)
+;; (global-hl-line-mode 1)
 
 ;; Start server
 (server-start)
@@ -60,3 +65,4 @@
 
 ;; Paren mode
 (show-paren-mode t)
+(put 'narrow-to-region 'disabled nil)

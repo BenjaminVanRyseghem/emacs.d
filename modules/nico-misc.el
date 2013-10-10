@@ -1,4 +1,5 @@
 ;; misc functions and keybindings
+(require 'switch-window)
 
 (defun sudo-file ()
   (interactive)
@@ -24,9 +25,17 @@
  
 ;; Use tabs instead of spaces for indenting by default
 (setq-default indent-tabs-mode t)
+
+;; sr-speedbar global-shortcut
+(global-set-key (kbd "C-.") 'sr-speedbar-toggle)
+;; sr-speedbar global-shortcut
+(global-set-key (kbd "M-i") 'imenu)
+
+;; switch-window
+(global-set-key (kbd "C-x o") 'switch-window)
  
 ;; Custom keybindings
-(global-set-key (kbd "M-i") 'imenu)
+;; (global-set-key (kbd "M-i") 'imenu)
 (global-set-key (kbd "C-M-y") 'clipboard-yank)
 (global-set-key (kbd "C-M-k") 'clipboard-kill-region)
 (global-set-key (kbd "C-c C-f") 'sudo-file)

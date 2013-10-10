@@ -1,4 +1,6 @@
 (require 'reftex)
+(require 'auctex-evince-sync)
+
 (add-hook 'LaTeX-mode-hook 'tex-pdf-mode)
 
 (eval-after-load "LaTeX"
@@ -19,8 +21,8 @@
 			 (buffer-file-name)))
 
 (setq TeX-view-program-list
-      '(("Skim" "/Applications/Skim.app/Contents/SharedSupport/displayline %q")))
+      '(("evince" "evince %o")))
 
-(setq TeX-view-program-selection '((output-pdf "Skim")))
+(setq TeX-view-program-selection '((output-pdf "evince")))
 
 (provide 'nico-latex)

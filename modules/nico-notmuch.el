@@ -1,6 +1,7 @@
 (require 'notmuch)
 
 (define-key global-map (kbd "M-N") 'notmuch)
+(setq notmuch-command "~/bin/notmuch")
 
 (setq send-mail-function 'smtpmail-send-it
       sendmail-program "msmtp"
@@ -153,8 +154,9 @@
 				 ("sent" . "from:petton.nicolas@gmail.com or from:nico@objectfusion.fr")
 				 ("Pharo" . "folder:Smalltalk.Pharo AND tag:unread") 
 				 ("Amber" . "folder:Smalltalk.Amber AND tag:unread") 
-				 ("RMoD" . "folder:rmod AND tag:unread")
+				 ("RMoD" . "to:rmod AND tag:unread")
 				 ("Launchpad" . "from:launchpad AND tag:unread")
+				 ("stef" . "from:ducasse AND tag:unread")
 				 ("smalltalkhub" . "smalltalkhub and tag:unread")
 				 ("gst" . "from:help-smalltalk@gnu.org and tag:unread")
 				 ("squeak" . "to:squeak-dev@lists.squeakfoundation.org and tag:unread") 
@@ -210,7 +212,7 @@
 ;; ASynK
 (defun asynk ()
   (interactive)
-  (async-shell-command "python ~/builds/ASynK/asynk.py --op=sync" ))
+  (async-shell-command "~/builds/ASynK/asynk.py --op=sync --name gmail" ))
 
 (provide 'nico-notmuch)
 

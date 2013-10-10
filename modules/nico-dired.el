@@ -10,6 +10,9 @@
 ;; ls flags
 (setq dired-listing-switches "-ahl")
 
+;; hide details
+;; (dired-details-install)
+
 ;; Try to guess the target directory for copying
 (setq dired-dwim-target t)
 
@@ -31,47 +34,36 @@
 (defun nico/dired-open-files () 
   (interactive)
   (dolist (each (dired-get-marked-files t current-prefix-arg)
-		(message (concat "open " each))
-		(dired-smart-shell-command (concat "open " each)))))
-;;(dired-do-shell-command "o" nil (dired-get-marked-files t current-prefix-arg)))
+		(message (concat "xdg-open " each))
+		(dired-smart-shell-command (concat "xdg-open " each)))))
 
 (defun nico/dired-open-file ()
   "In dired, open the file named on this line."
   (interactive)
   (let* ((file (dired-get-filename nil t)))
     (message "Opening %s..." file)
-    (call-process "open" nil 0 nil file)
+    (call-process "xdg-open" nil 0 nil file)
     (message "Opening %s done" file)))
 
-
-;; faces
-;; (set-face-attribute 'dired-directory nil
-;; 		    :foreground "SkyBlue")
-
-;; (set-face-attribute 'dired-header nil
-;; 		    :weight 'bold
-;; 		    :foreground "SkyBlue")
-
 (let ((dired-guessing '(("\\.docx?" "libreoffice")
-			("\\.flv" "vlc")
+			("\\.flv" "totem")
 			("\\.html?" "chrome")
 			("\\.image" "pharo-vm")
 			("\\.jar" "java -jar")
 			("\\.jpg" "eog")
-			("\\.mkv" "vlc")
-			("\\.mp4" "vlc")
+			("\\.mkv" "totem")
+			("\\.mp4" "totem")
 			("\\.od[pt]" "libreoffice")
-			("\\.ogv" "vlc")
-			("\\.pdf" "acroread")
+			("\\.ogv" "totem")
+			("\\.pdf" "evince")
 			("\\.png" "eog")
 			("\\.pptx?" "libreoffice")
 			("\\.sh" "bash")
 			("\\.svg" "inkscape")
 			("\\.ttf" "gnome-font-viewer")
-			("\\.uxf" "~/Downloads/Umlet/umlet.sh")
-			("\\.webm" "vlc")
+			("\\.webm" "totem")
 			("\\.xlsx?" "libreoffice")
-			("\\.avi" "vlc"))))
+			("\\.avi" "totem"))))
   (dolist (pair dired-guessing)
     (add-to-list 'dired-guess-shell-alist-user pair)))
 

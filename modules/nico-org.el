@@ -1,7 +1,7 @@
 (require 'org)
 (require 'org-mobile)
-(require 'org-mac-link-grabber)
 (require 'org-pomodoro)
+(require 'google-maps)
 
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 
@@ -10,9 +10,6 @@
 (define-key global-map "\C-cb" 'org-iswitchb)
 (define-key global-map "\C-cc" 'org-capture)
 (define-key global-map "\C-cp" 'org-pomodoro)
-(define-key global-map "\C-cg" 'omlg-grab-link)
-
-(define-key org-mode-map (kbd "C-c g") 'omlg-grab-link)
 
 (setf org-default-notes-file "~/org/inbox.org")
 (defvar nico/org-calendar-file "~/org/calendar.org")
@@ -21,7 +18,8 @@
 
 ;; MobileOrg
 (setq org-mobile-directory "~/Dropbox/MobileOrg")
-(org-mobile-pull) ;; run org-mobile-pull at startup
+;; run org-mobile-pull at startup
+(org-mobile-pull)
 
 (setq org-agenda-files `(,org-default-notes-file
 			 ,nico/org-calendar-file
@@ -55,6 +53,7 @@
 	(org-export-icalendar-all-agenda-files))))
 
 (defun nico/org-export-agenda ()
+  (interactive)
   (org-agenda-write "~/Public/org/agenda.html"))
 
 ;; Export TODO items in iCal too
@@ -73,8 +72,8 @@
 	     '("t" "Todo [inbox]" entry (file+headline org-default-notes-file "Tasks")
 	       "* TODO %i%?"))
 (add-to-list 'org-capture-templates
-	     '("l" "Todo with link [inbox]" entry (file+headline org-default-notes-file "Tasks")
-	       "* TODO %i%? \n  %a"))
+	     '("l" "Todo [inbox]" entry (file+headline org-default-notes-file "Tasks")
+	       "* TODO %a"))
 ;; taken from http://doc.norang.ca/org-mode.html
 (add-to-list 'org-capture-templates 
 	      '("r" "Respond to Phone" entry (file+headline org-default-notes-file "Tasks")
@@ -103,10 +102,14 @@
       calendar-holidays french-holiday
       calendar-mark-holidays-flag t)
 
-;; Org-agenda and Emacs appointments
+;; Org-agenda notify appointements
 (defun nico/notify-appt (time-to-appt new-time msg)
-  (notify "Appt. Reminder" msg))
+  (notify 
+   (format "Appointement in %s minute(s)" min-to-app)
+   msg
+   :icon "/usr/share/icons/gnome/32x32/status/appointment-soon.png"))
 
+;; Keep the next 2
 (setq appt-audible nil
       appt-message-warning-time 30
       appt-display-format 'window
@@ -115,10 +118,11 @@
 ;; Run once, activate and schedule refresh
 (defun nico/check-appt ()
   (org-agenda-to-appt t '((headline "APPT"))))
+
+(appt-activate t)
 (nico/check-appt)
 
 (run-at-time nil 3600 'nico/check-appt)
-(appt-activate t)
 
 ;; Display the agenda
 (defun nico/jump-to-org-agenda ()
