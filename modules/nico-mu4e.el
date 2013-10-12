@@ -1,4 +1,5 @@
 (require 'mu4e)
+(require 'notify)
 (require 'smtpmail)
 (require 'org-mu4e)
 
@@ -17,8 +18,18 @@
 ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
 (setq mu4e-sent-messages-behavior 'delete)
 
-(setq mu4e-msg2pdf "/usr/bin/msg2pdf")
-(setq mu4e-get-mail-command "offlineimap")
+(setq mu4e-msg2pdf "/usr/bin/msg2pdf"
+      mu4e-get-mail-command "offlineimap"
+      mu4e-update-interval 300)
+
+
+(defun nico/notify-new-email ()
+  (notify 
+   "New mail!"
+   "You have unread emails"
+   :icon "/usr/share/icons/gnome/32x32/status/mail-unread.png"))
+
+(add-hook 'mu4e-index-updated-hook 'nico/notify-new-email)
 
 (setq message-send-mail-function 'smtpmail-send-it
       user-full-name "Nicolas Petton"
