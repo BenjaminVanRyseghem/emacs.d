@@ -11,46 +11,35 @@
 (define-key global-map "\C-cc" 'org-capture)
 (define-key global-map "\C-cp" 'org-pomodoro)
 
-(setf org-default-notes-file "~/org/inbox.org")
-(defvar nico/org-calendar-file "~/org/calendar.org")
-(defvar nico/org-log-file "~/org/log.org")
-(setq org-directory "~/org")
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((ditaa . t)))
+
+(setf org-default-notes-file "~/org/gtd/inbox.org")
+(defvar nico/org-calendar-file "~/org/gtd/calendar.org")
+(defvar nico/org-log-file "~/org/gtd/log.org")
+(setq org-directory "~/org/gtd")
 
 ;; MobileOrg
-(setq org-mobile-directory "~/Dropbox/MobileOrg")
+(setq org-mobile-directory "~/Ubuntu One/MobileOrg")
 ;; run org-mobile-pull at startup
 (org-mobile-pull)
 
 (setq org-agenda-files `(,org-default-notes-file
 			 ,nico/org-calendar-file
-			 "~/org/work.org"
-			 "~/org/home.org"
-			 "~/org/stuff.org"
-			 "~/org/someday.org"))
+			 "~/org/gtd/work.org"
+			 "~/org/gtd/home.org"
+			 "~/org/gtd/stuff.org"
+			 "~/org/gtd/someday.org"))
 
-(setq org-refile-targets `(("~/org/work.org" :maxlevel . 3) 
-			   ("~/org/home.org" :maxlevel . 3)
-			   ("~/org/someday.org" :level . 1)
+(setq org-refile-targets `(("~/org/gtd/work.org" :maxlevel . 3)
+			   ("~/org/gtd/home.org" :maxlevel . 3)
+			   ("~/org/gtd/someday.org" :level . 1)
 			   (,nico/org-calendar-file :level . 1)))
-
-;; Open notes (notes.org) file
-;; (global-set-key (kbd "C-M-n") 'nico/find-notes-file)
 
 (defun nico/find-notes-file ()
   (interactive)
   (find-file org-default-notes-file))
-
-;; Automatic export in ~/Public for org files. 
-(defun nico/org-export-as-html ()
-  (if (string-match "^/Users/nico/org/.*" (buffer-file-name))
-      (org-export-as-html 3 nil nil nil nil "~/Public/org/")))
-
-;; Automatic iCal export
-(defun nico/org-export-as-ical ()
-  (if (string-match "^/Users/nico/org/.*" (buffer-file-name))
-      (progn
-	(org-export-icalendar-this-file)
-	(org-export-icalendar-all-agenda-files))))
 
 (defun nico/org-export-agenda ()
   (interactive)
@@ -58,13 +47,6 @@
 
 ;; Export TODO items in iCal too
 (setq org-icalendar-include-todo t)
-
-;; My blog settings. Jekyll + org-mode
-(defun nico/org-blog-export-as-html ()
-  (if (string-match "^/Users/nico/work/nicolas-petton.fr/org/.*" (buffer-file-name))
-      (org-export-as-html 3 nil nil nil t "~/work/nicolas-petton.fr/jekyll/_posts/")))
-
-(add-hook 'after-save-hook 'nico/org-blog-export-as-html)
 
 ;; org-capture
 (setq org-capture-templates '())
@@ -75,7 +57,7 @@
 	     '("l" "Todo [inbox]" entry (file+headline org-default-notes-file "Tasks")
 	       "* TODO %a"))
 ;; taken from http://doc.norang.ca/org-mode.html
-(add-to-list 'org-capture-templates 
+(add-to-list 'org-capture-templates
 	      '("r" "Respond to Phone" entry (file+headline org-default-notes-file "Tasks")
 		"* DONE %? :PHONE:\n%U" :clock-in t :clock-resume t))
 (add-to-list 'org-capture-templates
@@ -104,7 +86,7 @@
 
 ;; Org-agenda notify appointements
 (defun nico/notify-appt (time-to-appt new-time msg)
-  (notify 
+  (notify
    (format "Appointement in %s minute(s)" min-to-app)
    msg
    :icon "/usr/share/icons/gnome/32x32/status/appointment-soon.png"))
@@ -157,7 +139,7 @@
 (defun nico/org-gtd-mark-next (changes-plist)
   (let ((from (plist-get change-plist :from))
 	(to (plist-get change-plist :to)))
-    (when (and (string-equal from "NEXT") 
+    (when (and (string-equal from "NEXT")
 	       (member to org-done-keywords))
       (nico/org-gtd-next))))
 
@@ -175,8 +157,8 @@
 ;; 't, to ensure that everything is in the agenda.
 (defun nico/org-agenda-log (arg)
   (let ((org-agenda-files org-agenda-files))
-    (add-to-list 'org-agenda-files "~/org/work.org_archive")
-    (add-to-list 'org-agenda-files "~/org/calendar.org_archive")
+    (add-to-list 'org-agenda-files "~/org/gtd/work.org_archive")
+    (add-to-list 'org-agenda-files "~/org/gtd/calendar.org_archive")
     (org-agenda-list arg)
     (org-agenda-log-mode)
     (org-agenda-earlier 1)))

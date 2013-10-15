@@ -16,6 +16,7 @@
 (require 'nico-mu4e)
 ;;(require 'nico-notmuch)
 (require 'nico-org)
+(require 'nico-org-publish)
 (require 'nico-pharo-get)
 (require 'nico-smalltalk)
 (require 'nico-tramp)

@@ -2,6 +2,7 @@
 
 (let ((sources '(("gnu" . "http://elpa.gnu.org/packages/")
 		("elpa" . "http://tromey.com/elpa/")
+		("org"       . "http://orgmode.org/elpa/")
 		("melpa" . "http://melpa.milkbox.net/packages/")
 		("marmalade" . "http://marmalade-repo.org/packages/"))))
   (dolist (source sources)
