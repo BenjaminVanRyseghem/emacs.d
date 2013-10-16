@@ -33,7 +33,7 @@ Built with %c.
 
 (setq org-publish-project-alist
       `(("org"
-	 :base-directory "~/org/website/"
+	 :base-directory "~/work/nicolas-petton.fr/"
 	 :base-extension "org"
 	 :publishing-directory "~/Public/nicolas-petton.fr/"
 	 :publishing-function org-html-publish-to-html
@@ -44,7 +44,7 @@ Built with %c.
 	 :html-postamble ,nico-website-html-postamble)
 
 	("blog"
-	 :base-directory "~/org/website/blog"
+	 :base-directory "~/work/nicolas-petton.fr/blog"
 	 :base-extension "org"
 	 :publishing-directory "~/Public/nicolas-petton.fr/blog/"
 	 :publishing-function org-html-publish-to-html
@@ -59,29 +59,29 @@ Built with %c.
 	 :html-postamble ,nico-website-html-postamble)
 
 	("images"
-	 :base-directory "~/org/website/images/"
+	 :base-directory "~/work/nicolas-petton.fr/images/"
 	 :base-extension "jpg\\|gif\\|png"
 	 :publishing-directory "~/Public/nicolas-petton.fr/images/"
 	 :publishing-function org-publish-attachment)
 
 	("js"
-	 :base-directory "~/org/website/js/"
+	 :base-directory "~/work/nicolas-petton.fr/js/"
 	 :base-extension "js"
 	 :publishing-directory "~/Public/nicolas-petton.fr/js/"
 	 :publishing-function org-publish-attachment)
 
 	("css"
-	 :base-directory "~/org/website/css/"
+	 :base-directory "~/work/nicolas-petton.fr/css/"
 	 :base-extension "css"
 	 :publishing-directory "~/Public/nicolas-petton.fr/css/"
 	 :publishing-function org-publish-attachment)
 
 	("rss"
-	 :base-directory "~/org/website/blog"
+	 :base-directory "~/work/nicolas-petton.fr/blog/"
 	 :base-extension "org"
-	 :publishing-directory "~/Public/nicolas-petton.fr/blog"
+	 :publishing-directory "~/Public/nicolas-petton.fr/blog/"
 	 :publishing-function (org-rss-publish-to-rss)
-	 :html-link-home "http://nicolas-petton.fr/"
+	 :html-link-home "http://nicolas-petton.fr/blog/"
 	 :html-link-use-abs-url t)
 
 	("website" :components ("org" "blog" "images" "js" "css" "rss"))))

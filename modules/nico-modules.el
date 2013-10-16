@@ -3,6 +3,7 @@
 (require 'nico-ace-jump)
 (require 'nico-apg)
 (require 'nico-backups)
+(require 'nico-css)
 (require 'nico-darwin)
 (require 'nico-dired)
 (require 'nico-elisp)

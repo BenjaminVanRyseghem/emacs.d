@@ -15,27 +15,27 @@
  'org-babel-load-languages
  '((ditaa . t)))
 
-(setf org-default-notes-file "~/org/gtd/inbox.org")
-(defvar nico/org-calendar-file "~/org/gtd/calendar.org")
-(defvar nico/org-log-file "~/org/gtd/log.org")
-(setq org-directory "~/org/gtd")
+(setq org-default-notes-file "~/org/inbox.org")
+(defvar nico/org-calendar-file "~/org/calendar.org")
+(defvar nico/org-log-file "~/org/log.org")
+
+(setq org-agenda-files `(,org-default-notes-file
+			 ,nico/org-calendar-file
+			 "~/org/work.org"
+			 "~/org/home.org"
+			 "~/org/stuff.org"
+			 "~/org/someday.org"))
+
+(setq org-refile-targets `(("~/org/work.org" :maxlevel . 3)
+			   ("~/org/home.org" :maxlevel . 3)
+			   ("~/org/someday.org" :level . 1)
+			   (,nico/org-calendar-file :level . 1)))
 
 ;; MobileOrg
 (setq org-mobile-directory "~/Ubuntu One/MobileOrg")
 ;; run org-mobile-pull at startup
 (org-mobile-pull)
 
-(setq org-agenda-files `(,org-default-notes-file
-			 ,nico/org-calendar-file
-			 "~/org/gtd/work.org"
-			 "~/org/gtd/home.org"
-			 "~/org/gtd/stuff.org"
-			 "~/org/gtd/someday.org"))
-
-(setq org-refile-targets `(("~/org/gtd/work.org" :maxlevel . 3)
-			   ("~/org/gtd/home.org" :maxlevel . 3)
-			   ("~/org/gtd/someday.org" :level . 1)
-			   (,nico/org-calendar-file :level . 1)))
 
 (defun nico/find-notes-file ()
   (interactive)
@@ -157,8 +157,8 @@
 ;; 't, to ensure that everything is in the agenda.
 (defun nico/org-agenda-log (arg)
   (let ((org-agenda-files org-agenda-files))
-    (add-to-list 'org-agenda-files "~/org/gtd/work.org_archive")
-    (add-to-list 'org-agenda-files "~/org/gtd/calendar.org_archive")
+    (add-to-list 'org-agenda-files "~/org/work.org_archive")
+    (add-to-list 'org-agenda-files "~/org/calendar.org_archive")
     (org-agenda-list arg)
     (org-agenda-log-mode)
     (org-agenda-earlier 1)))
