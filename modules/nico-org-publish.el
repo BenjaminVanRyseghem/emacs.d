@@ -1,7 +1,6 @@
 (require 'org)
 (require 'ox-rss)
 
-
 (defvar nico-website-html-head
 "<link href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic' rel='stylesheet' type='text/css'>
 <link rel='stylesheet' href='css/site.css' type='text/css'/>

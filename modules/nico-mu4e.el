@@ -20,7 +20,7 @@
 
 (setq mu4e-msg2pdf "/usr/bin/msg2pdf"
       mu4e-get-mail-command "offlineimap"
-      mu4e-update-interval 300)
+      mu4e-update-interval 600)
 
 
 (defun nico/notify-new-email ()

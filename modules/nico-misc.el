@@ -27,12 +27,13 @@
 (setq-default indent-tabs-mode t)
 
 ;; sr-speedbar global-shortcut
-(global-set-key (kbd "C-.") 'sr-speedbar-toggle)
-;; sr-speedbar global-shortcut
 (global-set-key (kbd "M-i") 'imenu)
 
 ;; switch-window
 (global-set-key (kbd "C-x o") 'switch-window)
+
+;; browse-url
+(global-set-key (kbd "C-c C-l") 'browse-url)
  
 ;; Custom keybindings
 ;; (global-set-key (kbd "M-i") 'imenu)
@@ -48,7 +49,7 @@
 (global-set-key (kbd "C-c y") 'browse-kill-ring)
 
 ;; multiple cursors
-(global-set-key (kbd "C-<return>") 'mc/edit-lines)
+(global-set-key (kbd "M-RET") 'mc/edit-lines)
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)

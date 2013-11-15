@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: gs
+# key: gs
+# --
+
+that.get${1:$(capitalize yas-text)} = function() {
+	return $1;
+};
+
+that.set${1:$(capitalize yas-text)} = function($2) {
+	$1 = $2;
+};

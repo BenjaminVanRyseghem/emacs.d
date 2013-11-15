@@ -22,6 +22,7 @@
 			  epresent
 			  expand-region
 			  flycheck
+			  guide-key
 			  google-maps
 			  htmlize 
 			  js-comint
@@ -36,6 +37,7 @@
 			  offlineimap
 			  org
 			  org-pomodoro
+			  ox-reveal
 			  paredit 
 			  rainbow-mode
 			  shell-switcher
@@ -45,6 +47,7 @@
 			  twilight-anti-bright-theme
 			  undo-tree
 			  yasnippet
+			  zeitgeist
 			  zenburn)))
   (dolist (package packages-to-load)
     (when (not (package-installed-p package))

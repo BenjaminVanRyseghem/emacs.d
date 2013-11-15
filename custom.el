@@ -19,7 +19,6 @@
  '(mu4e-compose-complete-addresses t)
  '(mu4e-compose-dont-reply-to-self t)
  '(mu4e-headers-skip-duplicates t)
- '(mu4e-update-interval nil)
  '(mu4e-use-fancy-chars t)
  '(mu4e-user-mail-address-list (quote ("petton.nicolas@gmail.com" "nico@objectfusion.fr")))
  '(notmuch-hello-sections (quote (ignore notmuch-hello-insert-saved-searches notmuch-hello-insert-search notmuch-hello-insert-recent-searches notmuch-hello-insert-alltags notmuch-hello-insert-footer)))
