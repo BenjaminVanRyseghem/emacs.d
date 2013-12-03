@@ -57,22 +57,11 @@ Built with %c.
 	 :html-preamble ,nico-website-html-preamble
 	 :html-postamble ,nico-website-html-postamble)
 
-	("images"
-	 :base-directory "~/work/nicolas-petton.fr/images/"
-	 :base-extension "jpg\\|gif\\|png"
-	 :publishing-directory "~/Public/nicolas-petton.fr/images/"
-	 :publishing-function org-publish-attachment)
-
-	("js"
-	 :base-directory "~/work/nicolas-petton.fr/js/"
-	 :base-extension "js"
-	 :publishing-directory "~/Public/nicolas-petton.fr/js/"
-	 :publishing-function org-publish-attachment)
-
-	("css"
-	 :base-directory "~/work/nicolas-petton.fr/css/"
-	 :base-extension "css"
-	 :publishing-directory "~/Public/nicolas-petton.fr/css/"
+	("ressources"
+	 :base-directory "~/work/nicolas-petton.fr/"
+	 :base-extension "jpg\\|gif\\|png\\|js\\|html\\|css"
+	 :recursive t
+	 :publishing-directory "~/Public/nicolas-petton.fr/"
 	 :publishing-function org-publish-attachment)
 
 	("rss"
@@ -83,6 +72,6 @@ Built with %c.
 	 :html-link-home "http://nicolas-petton.fr/blog/"
 	 :html-link-use-abs-url t)
 
-	("website" :components ("org" "blog" "images" "js" "css" "rss"))))
+	("website" :components ("org" "blog" "rss" "ressource"))))
 
 (provide 'nico-org-publish)

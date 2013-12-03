@@ -24,6 +24,7 @@
 			  flycheck
 			  guide-key
 			  google-maps
+			  google-translate
 			  htmlize 
 			  js-comint
 			  js2-mode
@@ -39,6 +40,7 @@
 			  org-pomodoro
 			  ox-reveal
 			  paredit 
+			  projectile
 			  rainbow-mode
 			  shell-switcher
 			  solarized-theme

@@ -21,6 +21,7 @@
 (require 'nico-org-publish)
 (require 'nico-org-reveal)
 (require 'nico-pharo-get)
+(require 'nico-projectile)
 (require 'nico-smalltalk)
 (require 'nico-tramp)
 (require 'nico-undotree)

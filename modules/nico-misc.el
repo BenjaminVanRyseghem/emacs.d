@@ -33,7 +33,7 @@
 (global-set-key (kbd "C-x o") 'switch-window)
 
 ;; browse-url
-(global-set-key (kbd "C-c C-l") 'browse-url)
+(global-set-key (kbd "C-c C-o") 'browse-url)
  
 ;; Custom keybindings
 ;; (global-set-key (kbd "M-i") 'imenu)
