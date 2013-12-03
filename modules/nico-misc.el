@@ -48,16 +48,4 @@
 (global-set-key (kbd "C-=") 'er/expand-region)
 (global-set-key (kbd "C-c y") 'browse-kill-ring)
 
-;; multiple cursors
-(global-set-key (kbd "M-RET") 'mc/edit-lines)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
-
-;; drag-stuff
-(drag-stuff-global-mode t)
-(add-to-list 'drag-stuff-except-modes 'org-mode)
-(add-to-list 'drag-stuff-except-modes 'rebase-mode)
-(add-to-list 'drag-stuff-except-modes 'emacs-lisp-mode)
-
 (provide 'nico-misc)
