@@ -1,6 +1,10 @@
 ;; misc functions and keybindings
 (require 'switch-window)
 
+;; Workaround for french accents
+;; https://bugs.launchpad.net/emacs-snapshot/+bug/1251176
+(require 'iso-transl)
+
 (defun sudo-file ()
   (interactive)
   (find-file (concat "/sudo:root@localhost:" (ido-read-file-name "Sudo file: "))))
