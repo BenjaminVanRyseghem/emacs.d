@@ -83,34 +83,8 @@
 (nico/setup-mail-account "Gmail")
 (add-hook 'mu4e-compose-pre-hook 'nico/mu4e-set-account)
 
-
-;;  message-mode and dired
-(require 'gnus-dired)
-
-;; make the `gnus-dired-mail-buffers' function also work on
-;; message-mode derived modes
-(defun gnus-dired-mail-buffers ()
-  "Return a list of active message buffers."
-  (let (buffers)
-    (save-current-buffer
-      (dolist (buffer (buffer-list t))
-     	(set-buffer buffer)
-     	(when (and (derived-mode-p 'message-mode)
-		   (null message-sent-message-via))
-     	  (push (buffer-name buffer) buffers))))
-    (nreverse buffers)))
-
-(setq gnus-dired-mail-mode 'message-mode)
-(add-hook 'dired-mode-hook 'turn-on-gnus-dired-mode)
-
-
 (add-to-list 'mu4e-view-actions
    '("View in browser" . mu4e-action-view-in-browser) t)
-
-;; ASynK
-;; (defun asynk ()
-;;   (interactive)
-;;   (async-shell-command "python ~/build/ASynK/asynk.py --op=sync --name 'gmail'" ))
 
 ;; Attach files with dired
 ;; make the `gnus-dired-mail-buffers' function also work on
