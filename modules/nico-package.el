@@ -40,6 +40,7 @@
 			  org-pomodoro
 			  ox-reveal
 			  paredit 
+			  powerline
 			  projectile
 			  rainbow-mode
 			  shell-switcher
