@@ -2,6 +2,7 @@
 (require 'org-mobile)
 (require 'org-pomodoro)
 (require 'google-maps)
+(require 'org-gnome)
 
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 
@@ -29,6 +30,7 @@
 (setq org-refile-targets `(("~/org/work.org" :maxlevel . 3)
 			   ("~/org/home.org" :maxlevel . 3)
 			   ("~/org/someday.org" :level . 1)
+			   ("~/org/reading-list.org" :level . 1)
 			   (,nico/org-calendar-file :level . 1)))
 
 ;; MobileOrg

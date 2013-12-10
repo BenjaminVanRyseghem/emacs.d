@@ -1,6 +1,10 @@
 ;; misc functions and keybindings
 (require 'switch-window)
 
+;; Go back to the previous windows configuation with C-c left
+(winner-mode)
+(global-set-key (kbd "C-|") #'winner-undo)
+
 ;; Workaround for french accents
 ;; https://bugs.launchpad.net/emacs-snapshot/+bug/1251176
 (require 'iso-transl)
@@ -44,12 +48,15 @@
 (global-set-key (kbd "C-M-y") 'clipboard-yank)
 (global-set-key (kbd "C-M-k") 'clipboard-kill-region)
 (global-set-key (kbd "C-c C-f") 'sudo-file)
-(global-set-key (kbd "C-c C-s") 'sudo-edit)
 (global-set-key (kbd "C-c j") 'bookmark-jump)
 (global-set-key [f11] 'toggle-fullscreen)
 (global-set-key (kbd "C-x u") 'undo-tree-visualize)
 (global-set-key (kbd "S-SPC") 'dabbrev-expand)
 (global-set-key (kbd "C-=") 'er/expand-region)
 (global-set-key (kbd "C-c y") 'browse-kill-ring)
+(global-set-key (kbd "C-c C-f") 'windmove-right)
+(global-set-key (kbd "C-c C-b") 'windmove-left)
+(global-set-key (kbd "C-c C-n") 'windmove-down)
+(global-set-key (kbd "C-c C-p") 'windmove-up)
 
 (provide 'nico-misc)

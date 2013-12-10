@@ -22,7 +22,7 @@
  '(mu4e-use-fancy-chars t)
  '(mu4e-user-mail-address-list (quote ("petton.nicolas@gmail.com" "nico@objectfusion.fr")))
  '(notmuch-hello-sections (quote (ignore notmuch-hello-insert-saved-searches notmuch-hello-insert-search notmuch-hello-insert-recent-searches notmuch-hello-insert-alltags notmuch-hello-insert-footer)))
- '(org-agenda-custom-commands (quote (("w" . "Work TODO") ("wf" "Foretagsplatsen" tags-todo "+ftgp-hold" nil) ("wb" "Business (objectfusion)" tags-todo "+business-hold" nil) ("wo" "Objectfusion (all)" tags-todo "+objectfusion-hold" nil) ("wa" "Amber" tags-todo "+amber-hold" nil) ("wr" "Resilience" tags-todo "+resilience-hold" nil) ("wi" "RMoD" tags-todo "rmod|inria-hold" nil) ("wh" "SmalltalkHub" tags-todo "+smalltalkhub-hold" nil) ("n" "Next actions (current buffer)" tags-tree "TODO=\"NEXT\"" nil) ("h" "Waiting/stuck" ((todo "WAITING" ((org-agenda-overriding-header "Waiting for others"))) (tags "stuck" ((org-agenda-overriding-header "Marked Stuck")))) nil) ("d" "30 days deadlines" agenda "" ((org-agenda-entry-types (quote (:deadline))) (org-agenda-overriding-header "Month deadlines") (org-agenda-span (quote month)) (org-agenda-overriding-header ""))) ("." "Short tasks (< 2 min)" tags "short-hold" ((org-agenda-overriding-header "Less than 2 minutes tasks"))) ("W" "Work agenda" agenda "" ((org-agenda-files (quote ("~/org/work.org"))) (org-agenda-overriding-header "Work agenda"))) ("H" "Home agenda" agenda "Home agenda" ((org-agenda-overriding-header "Home Agenda") (org-agenda-files (quote ("~/org/home.org"))))) ("l" "Logbook" nico/org-agenda-log "" ((org-agenda-overriding-header "Logbook"))) ("p" "@ Phone" tags "@phone" ((org-agenda-overriding-header "@ Phone"))))))
+ '(org-agenda-custom-commands (quote (("w" . "Work TODO") ("wf" "Foretagsplatsen" tags-todo "+ftgp-hold" nil) ("wb" "Business (objectfusion)" tags-todo "+business-hold" nil) ("wo" "Objectfusion (all)" tags-todo "+objectfusion-hold" nil) ("wa" "Amber" tags-todo "+amber-hold" nil) ("wr" "Resilience" tags-todo "+resilience-hold" nil) ("wi" "RMoD" tags-todo "rmod|inria-hold" nil) ("wh" "SmalltalkHub" tags-todo "+smalltalkhub-hold" nil) ("n" "Next actions (current buffer)" tags-tree "TODO=\"NEXT\"" nil) ("h" "Waiting/stuck" ((todo "WAITING" ((org-agenda-overriding-header "Waiting for others"))) (tags "stuck" ((org-agenda-overriding-header "Marked Stuck")))) nil) ("d" "30 days deadlines" agenda "" ((org-agenda-entry-types (quote (:deadline))) (org-agenda-overriding-header "Month deadlines") (org-agenda-span (quote month)) (org-agenda-overriding-header ""))) ("." "Short tasks (< 2 min)" tags "short-hold" ((org-agenda-overriding-header "Less than 2 minutes tasks"))) ("W" "Work agenda" agenda "" ((org-agenda-files (quote ("~/org/work.org"))) (org-agenda-overriding-header "Work agenda"))) ("H" "Home agenda" agenda "Home agenda" ((org-agenda-overriding-header "Home Agenda") (org-agenda-files (quote ("~/org/home.org"))))) ("l" "Logbook" nico/org-agenda-log "" ((org-agenda-overriding-header "Logbook"))) ("@p" "@ Phone" tags "@phone" ((org-agenda-overriding-header "@ Phone"))) ("@e" "@ Email" tags "@email" ((org-agenda-overriding-header "@ Email"))))))
  '(org-agenda-default-appointment-duration 60)
  '(org-agenda-restore-windows-after-quit t)
  '(org-agenda-span (quote week))
@@ -58,7 +58,9 @@
  '(solarized-use-variable-pitch nil)
  '(speedbar-use-images t)
  '(speedbar-verbosity-level 0)
- '(tool-bar-mode nil))
+ '(tool-bar-mode nil)
+ '(winner-boring-buffers (quote ("*Completions* *Messages*")))
+ '(winner-mode t))
 ;; (custom-set-faces
 ;;  ;; custom-set-faces was added by Custom.
 ;;  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -75,7 +77,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-button ((t (:background "#eee8d5" :foreground "#586e75" :box (:line-width 2 :style released-button)))))
  '(dired-directory ((t (:foreground "DeepSkyBlue3" :weight bold))))
- '(eshell-prompt ((t (:background "dark slate gray" :foreground "gray100" :weight bold))) t)
+ '(eshell-prompt ((t (:background "dark slate gray" :foreground "gray100" :weight bold))))
  '(mu4e-unread-face ((t (:inherit font-lock-keyword-face :weight normal))))
  '(org-agenda-date ((t (:inherit org-agenda-structure :background "#eee8d5" :box (:line-width 2 :color "grey75") :weight bold))) t)
  '(org-agenda-done ((t (:strike-through t))))

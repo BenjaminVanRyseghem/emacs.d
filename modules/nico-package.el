@@ -15,6 +15,7 @@
 ;; Default packages to load
 (let ((packages-to-load '(less-css-mode
 			  ace-jump-mode
+			  ack-and-a-half
 			  alert
 			  auctex
 			  drag-stuff
@@ -30,7 +31,8 @@
 			  js2-mode
 			  js2-refactor s ;; s is required by js2-refactor
 			  ido-ubiquitous
-			  magit 
+			  magit
+			  magit-svn
 			  markdown-mode
 			  multiple-cursors
 			  notify
@@ -43,10 +45,12 @@
 			  powerline
 			  projectile
 			  rainbow-mode
+			  runner
 			  shell-switcher
 			  solarized-theme
 			  sr-speedbar
 			  switch-window
+			  telepathy
 			  twilight-anti-bright-theme
 			  undo-tree
 			  yasnippet

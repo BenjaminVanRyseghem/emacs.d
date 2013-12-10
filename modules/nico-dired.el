@@ -1,4 +1,7 @@
 (require 'dired-x)
+(require 'runner)
+
+(setq runner-run-in-background t)
 
 ;; auto-update dired buffers
 (setq global-auto-revert-non-file-buffers t
@@ -16,6 +19,14 @@
 ;; Try to guess the target directory for copying
 (setq dired-dwim-target t)
 
+;; Enhanced RET
+(defun nico/dired-return (&optional prefix)
+  "When used with the C-u (universal argument), find the file in other window"
+  (interactive "p")
+  (if (> prefix 1)
+      (dired-find-file-other-window)
+    (dired-find-file)))
+
 ;; Hide hidden files
 (setq dired-omit-files "^\\...+$")
 
@@ -27,6 +38,7 @@
   (local-set-key (kbd "M-s") 'find-name-dired)
   (local-set-key (kbd "K") 'dired-kill-subdir)
   (local-set-key (kbd "o") 'nico/dired-open-file)
+  (local-set-key (kbd "RET") 'nico/dired-return)
   (local-set-key (kbd "C-x C-a") 'gnus-dired-attach))
 
 (global-set-key (kbd "C-x C-j") 'dired-jump)
@@ -44,29 +56,6 @@
     (message "Opening %s..." file)
     (call-process "xdg-open" nil 0 nil file)
     (message "Opening %s done" file)))
-
-(let ((dired-guessing '(("\\.docx?" "libreoffice")
-			("\\.flv" "mplayer")
-			("\\.html?" "chrome")
-			("\\.image" "pharo-vm")
-			("\\.jar" "java -jar")
-			("\\.jpg" "eog")
-			("\\.mkv" "mplayer")
-			("\\.mp4" "mplayer")
-			("\\.od[pt]" "libreoffice")
-			("\\.ogv" "mplayer")
-			("\\.pdf" "evince")
-			("\\.png" "eog")
-			("\\.pptx?" "libreoffice")
-			("\\.sh" "bash")
-			("\\.svg" "inkscape")
-			("\\.ttf" "gnome-font-viewer")
-			("\\.webm" "mplayer")
-			("\\.xlsx?" "libreoffice")
-			("\\.avi" "mplayer"))))
-  (dolist (pair dired-guessing)
-    (add-to-list 'dired-guess-shell-alist-user pair)))
-
 
 
 (provide 'nico-dired)

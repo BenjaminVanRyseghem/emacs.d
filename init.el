@@ -33,6 +33,7 @@
 
 (icomplete-mode 99)
 (ido-mode)
+(ido-everywhere)
 (setq ido-enable-flex-matching t)
 
 ;; use ibuffer instead of the default buffer-list

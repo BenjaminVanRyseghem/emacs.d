@@ -1,6 +1,7 @@
 (require 'nico-package)
 
 (require 'nico-ace-jump)
+(require 'nico-ack-and-a-half)
 (require 'nico-apg)
 (require 'nico-backups)
 (require 'nico-css)
