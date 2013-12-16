@@ -1,6 +1,3 @@
-;; misc functions and keybindings
-(require 'switch-window)
-
 ;; Go back to the previous windows configuation with C-c left
 (winner-mode)
 (global-set-key (kbd "C-|") #'winner-undo)
@@ -13,10 +10,21 @@
   (interactive)
   (find-file (concat "/sudo:root@localhost:" (ido-read-file-name "Sudo file: "))))
 
-
 (defun sudo-edit ()
   (interactive)
   (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name)))
+
+(defun eval-and-replace ()
+  "Replace the preceding sexp with its value."
+  (interactive)
+  (backward-kill-sexp)
+  (condition-case nil
+      (prin1 (eval (read (current-kill 0)))
+             (current-buffer))
+    (error (message "Invalid expression")
+           (insert (current-kill 0)))))
+
+(global-set-key (kbd "C-c C-e") #'eval-and-replace)
 
 (defun tunnel (port host)
   (interactive "sPort: \nsHost: ")
@@ -37,8 +45,12 @@
 ;; sr-speedbar global-shortcut
 (global-set-key (kbd "M-i") 'imenu)
 
-;; switch-window
-(global-set-key (kbd "C-x o") 'switch-window)
+;; switch-window and shrinking
+(global-set-key (kbd "C-<tab>") 'other-window)
+(global-set-key (kbd "C-M-s-<left>") 'shrink-window-horizontally)
+(global-set-key (kbd "C-M-s-<right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "C-M-s-<down>") 'shrink-window)
+(global-set-key (kbd "C-M-s-<up>") 'enlarge-window)
 
 ;; browse-url
 (global-set-key (kbd "C-c C-o") 'browse-url)

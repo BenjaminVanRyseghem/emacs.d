@@ -49,7 +49,7 @@
 			  shell-switcher
 			  solarized-theme
 			  sr-speedbar
-			  switch-window
+			  ;; switch-window
 			  telepathy
 			  twilight-anti-bright-theme
 			  undo-tree
