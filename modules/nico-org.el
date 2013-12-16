@@ -4,6 +4,8 @@
 (require 'google-maps)
 (require 'org-gnome)
 
+(global-org-gnome-minor-mode)
+
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 
 (define-key global-map "\C-cl" 'org-store-link)
@@ -85,28 +87,6 @@
 (setq calendar-date-style 'european
       calendar-holidays french-holiday
       calendar-mark-holidays-flag t)
-
-;; Org-agenda notify appointements
-(defun nico/notify-appt (time-to-appt new-time msg)
-  (notify
-   (format "Appointement in %s minute(s)" min-to-app)
-   msg
-   :icon "/usr/share/icons/gnome/32x32/status/appointment-soon.png"))
-
-;; Keep the next 2
-(setq appt-audible nil
-      appt-message-warning-time 30
-      appt-display-format 'window
-      appt-disp-window-function 'nico/notify-appt)
-
-;; Run once, activate and schedule refresh
-(defun nico/check-appt ()
-  (org-agenda-to-appt t '((headline "APPT"))))
-
-(appt-activate t)
-(nico/check-appt)
-
-(run-at-time nil 3600 'nico/check-appt)
 
 ;; Display the agenda
 (defun nico/jump-to-org-agenda ()
