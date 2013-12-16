@@ -46,7 +46,7 @@
 (global-set-key (kbd "M-i") 'imenu)
 
 ;; switch-window and shrinking
-(global-set-key (kbd "C-<tab>") 'other-window)
+(global-set-key (kbd "C-;") 'other-window)
 (global-set-key (kbd "C-M-s-<left>") 'shrink-window-horizontally)
 (global-set-key (kbd "C-M-s-<right>") 'enlarge-window-horizontally)
 (global-set-key (kbd "C-M-s-<down>") 'shrink-window)
