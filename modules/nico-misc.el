@@ -40,7 +40,8 @@
   (term "htop"))
  
 ;; Use tabs instead of spaces for indenting by default
-(setq-default indent-tabs-mode t)
+(setq-default tab-width 4
+      indent-tabs-mode t)
 
 ;; sr-speedbar global-shortcut
 (global-set-key (kbd "M-i") 'imenu)

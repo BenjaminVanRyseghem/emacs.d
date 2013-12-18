@@ -78,7 +78,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-button ((t (:background "#eee8d5" :foreground "#586e75" :box (:line-width 2 :style released-button)))))
  '(dired-directory ((t (:foreground "DeepSkyBlue3" :weight bold))))
- '(eshell-prompt ((t (:background "dark slate gray" :foreground "gray100" :weight bold))))
+ '(eshell-prompt ((t (:background "dark slate gray" :foreground "gray100" :weight bold))) t)
  '(mu4e-unread-face ((t (:inherit font-lock-keyword-face :weight normal))))
  '(org-agenda-date ((t (:inherit org-agenda-structure :background "#eee8d5" :box (:line-width 2 :color "grey75") :weight bold))) t)
  '(org-agenda-done ((t (:strike-through t))))
