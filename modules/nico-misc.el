@@ -43,8 +43,12 @@
 (setq-default tab-width 4
       indent-tabs-mode t)
 
-;; sr-speedbar global-shortcut
-(global-set-key (kbd "M-i") 'imenu)
+;; Use C-SPC to cycle through the mark ring after the first return
+(setq set-mark-command-repeat-pop t)
+
+;; uniquify
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
 
 ;; switch-window and shrinking
 (global-set-key (kbd "C-;") 'other-window)
