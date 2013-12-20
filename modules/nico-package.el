@@ -54,7 +54,6 @@
 			  twilight-anti-bright-theme
 			  undo-tree
 			  yasnippet
-			  zeitgeist
 			  zenburn)))
   (dolist (package packages-to-load)
     (when (not (package-installed-p package))

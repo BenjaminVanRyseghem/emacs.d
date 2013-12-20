@@ -28,7 +28,6 @@
 (require 'nico-modules)
 (require 'ido)
 (require 'icomplete)
-(require 'zeitgeist)
 
 (icomplete-mode 99)
 (ido-mode)
