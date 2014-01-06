@@ -8,6 +8,7 @@
 		ace-jump-mode
 		ace-jump-move
 		artist-forward-char
+		backward-sentence
 		eval-and-replace
 		indent-for-tab-command
 		org-beginning-of-line
@@ -26,9 +27,9 @@
 
 (setq mc/cmds-to-run-once
       '(
-		js2r-extract-var
 		edebug-step-mode
 		end-of-buffer
+		js2r-extract-var
 		kill-region
 		mu4e
 		paredit-semicolon
