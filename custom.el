@@ -13,7 +13,7 @@
  '(js2-global-externs (quote ("define" "require" "app")))
  '(js2-include-node-externs t)
  '(line-number-mode nil)
- '(locate-command "locate")
+ '(locate-ls-subdir-switches "-lhl")
  '(magit-repo-dirs (quote ("/home/nico/config/" "/home/nico/work/")))
  '(mu4e-attachment-dir "~/")
  '(mu4e-bookmarks (quote (("flag:unread AND NOT flag:trashed" "Unread messages" 117) ("date:today..now" "Today's messages" 116) ("date:7d..now" "Last 7 days" 119) ("amber AND flag:unread" "Amber" 97) ("pharo AND flag:unread" "Pharo" 112) ("rmod AND flag:unread" "RMoD" 114) ("from:ducasse AND flag:unread" "Stef" 115) ("from:vanryseghem AND flag:unread" "Ben" 98) ("from:aurelia AND flag:unread" "Aurelia" 101) ("nico AND flag:unread" "Nico" 110))))

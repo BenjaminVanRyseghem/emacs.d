@@ -18,12 +18,12 @@
 			  ack-and-a-half
 			  alert
 			  auctex
+			  discover
 			  drag-stuff
 			  browse-kill-ring 
 			  epresent
 			  expand-region
 			  flycheck
-			  guide-key
 			  google-maps
 			  google-translate
 			  htmlize 
