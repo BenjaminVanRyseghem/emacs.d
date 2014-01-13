@@ -14,6 +14,16 @@
   (interactive)
   (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name)))
 
+
+;; locate. see $HOME/.profile
+(defun updatedb ()
+  (interactive)
+  (async-shell-command "updatedb -l 0 -o $HOME/var/mlocate.db -U $HOME"))
+
+(defun nico/locate-make-command-line (str)
+  (list locate-command "-d" "/home/nico/var/mlocate.db" str))
+(setq locate-make-command-line 'nico/locate-make-command-line)
+
 (defun eval-and-replace ()
   "Replace the preceding sexp with its value."
   (interactive)
@@ -25,6 +35,22 @@
            (insert (current-kill 0)))))
 
 (global-set-key (kbd "C-c C-e") #'eval-and-replace)
+
+(defun space2underscore-region (start end)
+  "Replace space by underscore in region."
+  (interactive "r")
+  (save-restriction
+    (narrow-to-region start end)
+    (goto-char (point-min))
+    (while (search-forward " " nil t) (replace-match "_")) ) )
+
+(defun underscore2space-region (start end)
+  "Replace underscore by space in region."
+  (interactive "r")
+  (save-restriction
+    (narrow-to-region start end)
+    (goto-char (point-min))
+    (while (search-forward "_" nil t) (replace-match " ")) ))
 
 (defun tunnel (port host)
   (interactive "sPort: \nsHost: ")
