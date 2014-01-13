@@ -26,7 +26,7 @@
 
 (defvar nico-website-html-postamble 
   "<div class='footer'>
-Copyright 2013 %a (%v HTML).<br>
+Copyright 2014 %a (%v HTML).<br>
 Last updated %C. <br>
 Built with %c.
 </div>")
@@ -61,7 +61,7 @@ Built with %c.
 
 	("ressources"
 	 :base-directory "~/work/nicolas-petton.fr/"
-	 :base-extension "jpg\\|gif\\|png\\|js\\|html\\|css"
+	 :base-extension "jpg\\|gif\\|png\\|js\\|html\\|css\\|ogv"
 	 :recursive t
 	 :publishing-directory "~/Public/nicolas-petton.fr/"
 	 :publishing-function org-publish-attachment)
