@@ -83,5 +83,5 @@
  '(linum ((t (:inherit (shadow default) :background "gray20"))) t)
  '(org-agenda-done ((t (:strike-through t))))
  '(org-done ((t (:strike-through t))))
- '(powerline-active1 ((t (:inherit mode-line :background "grey22"))))
+ '(powerline-active1 ((t (:inherit mode-line :background "forest green"))))
  '(writer-mode-default-face ((t (:inherit FontAwesome)))))

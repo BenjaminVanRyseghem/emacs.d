@@ -123,6 +123,15 @@
                   '("tar" "\\(\\.tar|\\.tgz\\|\\.tar\\.gz\\)\\'"))))
 
 
+;; Fix completion with sudo
+(defun pcomplete/sudo ()
+  (let ((prec (pcomplete-arg 'first)))
+    (cond ((string= "sudo" prec)
+           (while (pcomplete-here*
+                    (funcall pcomplete-command-completion-function)
+                    (pcomplete-arg 'last) t))))))
+
+
 ;;;###autoload
 (when (not (functionp 'eshell/rgrep))
   (defun eshell/rgrep (&rest args)

@@ -1,5 +1,6 @@
 (require 'js2-mode)
 (require 'js2-refactor)
+(require 'discover-js2-refactor)
 
 (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))

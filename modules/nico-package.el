@@ -18,7 +18,6 @@
 			  ack-and-a-half
 			  alert
 			  auctex
-			  discover
 			  drag-stuff
 			  browse-kill-ring 
 			  epresent
@@ -27,6 +26,8 @@
 			  google-maps
 			  google-translate
 			  htmlize 
+			  ido-ubiquitous
+			  ido-vertical-mode
 			  js-comint
 			  js2-mode
 			  js2-refactor s ;; s is required by js2-refactor
@@ -42,6 +43,7 @@
 			  org-pomodoro
 			  ox-reveal
 			  paredit 
+			  pcmpl-git
 			  powerline
 			  projectile
 			  rainbow-mode
