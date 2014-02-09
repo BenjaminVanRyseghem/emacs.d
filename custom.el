@@ -78,7 +78,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-button ((t (:background "#eee8d5" :foreground "#586e75" :box (:line-width 2 :style released-button)))))
  '(dired-directory ((t (:foreground "DeepSkyBlue3" :weight bold))))
- '(eshell-prompt ((t (:background "dark slate gray" :foreground "gray100" :weight bold))))
+ '(eshell-prompt ((t (:background "dark slate gray" :foreground "gray100" :weight bold))) t)
  '(linum ((t (:inherit (shadow default) :background "gray20"))) t)
  '(mode-line ((t (:background "#ffffff" :foreground "#005F69" :box (:line-width -1 :style released-button)))))
  '(org-agenda-done ((t (:strike-through t))))

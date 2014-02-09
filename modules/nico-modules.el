@@ -12,6 +12,7 @@
 (require 'nico-elisp)
 (require 'nico-erc)
 (require 'nico-eshell)
+(require 'nico-flyspell)
 (require 'nico-ido)
 (require 'nico-js)
 (require 'nico-latex)
