@@ -1,7 +1,9 @@
 (require 'flyspell)
 
 (defun nico/setup-flymake ()
-  (define-key flyspell-mode-map (kbd "C-;") nil))
+  ;; C-; is bound to 'other-window already
+  (define-key flyspell-mode-map (kbd "C-;") nil)
+  (define-key flyspell-mode-map (kbd "C-M-i") 'ispell-change-dictionary))
 
 (dolist (mode-hook '(text-mode-hook 
 					 LaTeX-mode-hook))
