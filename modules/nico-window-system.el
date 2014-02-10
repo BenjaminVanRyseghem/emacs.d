@@ -7,7 +7,7 @@
 
 (defun setup-color-theme ()
   (interactive)
-  (load-theme 'wombat))
+  (load-theme 'solarized-dark))
 
 (defun setup-window-system ()
   (if (window-system) (progn 
