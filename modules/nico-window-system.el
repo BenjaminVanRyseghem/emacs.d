@@ -7,7 +7,7 @@
 
 (defun setup-color-theme ()
   (interactive)
-  (load-theme 'solarized-dark))
+  (load-theme 'solarized-light))
 
 (defun setup-window-system ()
   (if (window-system) (progn 

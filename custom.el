@@ -78,11 +78,12 @@
  ;; If there is more than one, they won't work right.
  '(custom-button ((t (:background "#eee8d5" :foreground "#586e75" :box (:line-width 2 :style released-button)))))
  '(dired-directory ((t (:foreground "DeepSkyBlue3" :weight bold))))
- '(eshell-prompt ((t (:background "dark slate gray" :foreground "gray100" :weight bold))) t)
+ '(eshell-prompt ((t (:background "dark slate gray" :foreground "gray100" :weight bold))))
  '(linum ((t (:inherit (shadow default) :background "gray20"))) t)
  '(mode-line ((t (:background "#ffffff" :foreground "#005F69" :box (:line-width -1 :style released-button)))))
  '(org-agenda-done ((t (:strike-through t))))
  '(org-done ((t (:strike-through t))))
  '(powerline-active1 ((t (:inherit mode-line :background "#0087AF" :foreground "#ffffff"))))
  '(powerline-active2 ((t (:inherit mode-line :background "#005F87"))))
+ '(show-paren-match ((t (:foreground "#d33682" :inverse-video t))))
  '(writer-mode-default-face ((t (:inherit FontAwesome)))))
