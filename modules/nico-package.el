@@ -49,6 +49,7 @@
 			  rainbow-mode
 			  runner
 			  shell-switcher
+			  smex
 			  solarized-theme
 			  sr-speedbar
 			  ;; switch-window

@@ -26,16 +26,6 @@
 
 (require 'package)
 (require 'nico-modules)
-(require 'ido)
-(require 'icomplete)
-
-(icomplete-mode 99)
-(ido-mode)
-(ido-everywhere)
-(setq ido-enable-flex-matching t)
-
-;; use ibuffer instead of the default buffer-list
-(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;; Change the behavior of M-f and co to properly handle camel case
 (global-subword-mode 1)
