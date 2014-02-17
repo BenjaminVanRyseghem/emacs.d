@@ -1,6 +1,7 @@
 (require 'nico-package)
 
 (require 'nico-ace-jump)
+(require 'nico-auto-complete)
 (require 'nico-ack-and-a-half)
 (require 'nico-apg)
 (require 'nico-backups)

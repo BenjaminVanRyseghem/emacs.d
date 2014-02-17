@@ -12,3 +12,4 @@ auto-save-list
 jump-bookmarks.el
 /projectile-bookmarks.eld
 .cask
+/ac-comphist.dat

@@ -1,14 +1,16 @@
 (require 'js2-mode)
 (require 'js2-refactor)
+(require 'ac-js2)
 (require 'discover-js2-refactor)
 
 (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
  
 (add-hook 'js2-mode-hook '(lambda ()
-			    ;; (flycheck-mode t)
-			    (setq tab-width 4
-				  indent-tabs-mode t)))
+							;; (flycheck-mode t)
+							(ac-js2-mode)
+							(setq tab-width 4
+								  indent-tabs-mode t)))
 
 ;; js2-refactor
 (js2r-add-keybindings-with-prefix "C-c C-r")
