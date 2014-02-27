@@ -7,12 +7,13 @@
 
 (defun setup-color-theme ()
   (interactive)
-  (load-theme 'solarized-light))
+  (load-theme 'subatomic))
 
 (defun setup-window-system ()
   (if (window-system) (progn 
 			(setq frame-title-format '(buffer-file-name "%f" ("%b")))
 			(tooltip-mode -1)
+			(set-default-font "UbuntuMono-12")
 			(mouse-wheel-mode t)
 			(powerline-default-theme)
 			(blink-cursor-mode -1)
