@@ -24,6 +24,7 @@
 						  browse-kill-ring 
 						  epresent
 						  expand-region
+						  fic-mode
 						  flycheck
 						  google-maps
 						  google-translate
@@ -52,8 +53,10 @@
 						  rainbow-mode
 						  runner
 						  shell-switcher
+						  slime
 						  smex
 						  solarized-theme
+						  subatomic-theme
 						  sr-speedbar
 						  ;; switch-window
 						  telepathy
