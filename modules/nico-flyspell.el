@@ -22,9 +22,9 @@
   (add-hook mode-hook (lambda () 
 						(flyspell-mode))))
 
-(dolist (mode-hook '(prog-mode-hook))
-  (add-hook mode-hook (lambda () 
-						(flyspell-prog-mode))))
+;; (dolist (mode-hook '(prog-mode-hook))
+;;   (add-hook mode-hook (lambda () 
+;; 						(flyspell-prog-mode))))
 
 (nico/setup-flymake)
 
