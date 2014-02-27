@@ -5,7 +5,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes (quote ("73fe242ddbaf2b985689e6ec12e29fab2ecd59f765453ad0e93bc502e6e478d6" "e16a771a13a202ee6e276d06098bc77f008b73bbac4d526f160faa2d76c1dd0e" "f3ceb7a30f6501c1093bc8ffdf755fe5ddff3a85437deebf3ee8d7bed8991711" "f32dd8e7b3a508874eded03d5be43d2bdfffe81c199eea72de06ce3e653db720" "427234e4b45350b4159575f1ac72860c32dce79bb57a29a196b9cfb9dd3554d9" "1f3304214265481c56341bcee387ef1abb684e4efbccebca0e120be7b1a13589" "d2622a2a2966905a5237b54f35996ca6fda2f79a9253d44793cfe31079e3c92b" "159bb8f86836ea30261ece64ac695dc490e871d57107016c09f286146f0dae64" "5a0522c0959f3b694ffd06ce620ee3868b2da14723c75e76939940971fc84e3b" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "6cfe5b2f818c7b52723f3e121d1157cf9d95ed8923dbc1b47f392da80ef7495d" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "d6a00ef5e53adf9b6fe417d2b4404895f26210c52bb8716971be106550cea257" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" default)))
+ '(custom-safe-themes (quote ("65385d67a1711d06a04e0cc5830e24ff7d016bdb4f9876a5d538308400024c4c" "0c2ca285c4aedb6d3333e861ccee41edde2afc7efe0f1d347e0133d04f11ab1f" "73fe242ddbaf2b985689e6ec12e29fab2ecd59f765453ad0e93bc502e6e478d6" "e16a771a13a202ee6e276d06098bc77f008b73bbac4d526f160faa2d76c1dd0e" "f3ceb7a30f6501c1093bc8ffdf755fe5ddff3a85437deebf3ee8d7bed8991711" "f32dd8e7b3a508874eded03d5be43d2bdfffe81c199eea72de06ce3e653db720" "427234e4b45350b4159575f1ac72860c32dce79bb57a29a196b9cfb9dd3554d9" "1f3304214265481c56341bcee387ef1abb684e4efbccebca0e120be7b1a13589" "d2622a2a2966905a5237b54f35996ca6fda2f79a9253d44793cfe31079e3c92b" "159bb8f86836ea30261ece64ac695dc490e871d57107016c09f286146f0dae64" "5a0522c0959f3b694ffd06ce620ee3868b2da14723c75e76939940971fc84e3b" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "6cfe5b2f818c7b52723f3e121d1157cf9d95ed8923dbc1b47f392da80ef7495d" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "d6a00ef5e53adf9b6fe417d2b4404895f26210c52bb8716971be106550cea257" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" default)))
  '(flycheck-check-syntax-automatically (quote (save new-line mode-enabled)))
  '(flycheck-idle-change-delay 5)
  '(imenu-eager-completion-buffer nil)
@@ -77,13 +77,5 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-button ((t (:background "#eee8d5" :foreground "#586e75" :box (:line-width 2 :style released-button)))))
- '(dired-directory ((t (:foreground "DeepSkyBlue3" :weight bold))))
- '(eshell-prompt ((t (:background "dark slate gray" :foreground "gray100" :weight bold))))
- '(mode-line ((t (:background "#ffffff" :foreground "#005F69" :box (:line-width -1 :style released-button)))))
- '(mode-line-inactive ((t (:inherit mode-line :background "#cccccc" :foreground "#93a1a1" :box (:line-width 1 :color "#eee8d5" :style unspecified) :weight light))))
- '(org-agenda-done ((t (:strike-through t))))
- '(org-done ((t (:strike-through t))))
- '(powerline-active1 ((t (:inherit mode-line :background "#0087AF" :foreground "#ffffff"))))
- '(powerline-active2 ((t (:inherit mode-line :background "#005F87"))))
- '(show-paren-match ((t (:foreground "#d33682" :inverse-video t))))
+ '(font-lock-fic-face ((t (:stipple nil :foreground "lime green" :slant italic :weight bold))) t)
  '(writer-mode-default-face ((t (:inherit FontAwesome)))))
